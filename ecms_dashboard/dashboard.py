@@ -17,6 +17,9 @@ from admin_tools.utils import get_admin_site_name  # needs 0.4.0
 from ecms_dashboard.modules import EcmsAppIconList
 
 
+ADMINISTRATION_APPS = ('django.contrib.*', 'registration.*',)
+
+
 class EcmsIndexDashboard(Dashboard):
     """
     Custom index dashboard for ECMS
@@ -43,13 +46,13 @@ class EcmsIndexDashboard(Dashboard):
 
         apps = EcmsAppIconList(
             _('CMS'),
-            exclude=('django.contrib.*',),
+            exclude=ADMINISTRATION_APPS,
             collapsible=False
         )
 
         administration = EcmsAppIconList(
             _('Administration'),
-            models=('django.contrib.*',),
+            models=ADMINISTRATION_APPS,
             collapsible=False
         )
 

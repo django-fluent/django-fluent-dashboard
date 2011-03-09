@@ -22,6 +22,7 @@ APP_ICONS = {
     'auth/user':  MEDIA_PREFIX + 'system-users.png',
     'auth/group': MEDIA_PREFIX + 'resource-group.png',
     'sites/site': MEDIA_PREFIX + 'applications-internet.png',
+    'registration/registrationprofile': MEDIA_PREFIX + 'list-add-user.png'
 }
 
 APP_ICONS.update(getattr(settings, 'ECMS_DASHBOARD_APP_ICONS', {}))
