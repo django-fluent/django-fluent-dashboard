@@ -13,7 +13,8 @@ from admin_tools.dashboard import modules
 from django.conf import settings
 
 # Get settings
-MEDIA_PREFIX = settings.MEDIA_URL + "ecms_dashboard/oxygen/"
+# Allow old Django 1.2 MEDIA_URL, but prefer STATIC_URL if it's set.
+MEDIA_PREFIX = getattr(settings, 'STATIC_URL', settings.MEDIA_URL) + "ecms_dashboard/oxygen/"
 
 APP_ICONS = {
     'ecms/cmsobject': MEDIA_PREFIX + 'internet-web-browser.png',
