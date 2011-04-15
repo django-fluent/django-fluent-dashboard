@@ -17,6 +17,10 @@ from django.conf import settings
 MEDIA_PREFIX = getattr(settings, 'STATIC_URL', settings.MEDIA_URL) + "ecms_dashboard/oxygen/"
 
 APP_ICONS = {
+    'fiber/page': MEDIA_PREFIX + 'internet-web-browser.png',
+    'fiber/contentitem': MEDIA_PREFIX + 'folder-txt.png',
+    'fiber/image': MEDIA_PREFIX + 'folder-image.png',
+    'fiber/file': MEDIA_PREFIX + 'folder.png',
     'ecms/cmsobject': MEDIA_PREFIX + 'internet-web-browser.png',
     'ecms/cmslayout': MEDIA_PREFIX + 'view-choose.png',
     'ecms/cmssite':   MEDIA_PREFIX + 'preferences-system-network.png',
