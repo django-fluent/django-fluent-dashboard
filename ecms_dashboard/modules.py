@@ -25,6 +25,20 @@ APP_ICONS = {
     'registration/registrationprofile': MEDIA_PREFIX + 'list-add-user.png'
 }
 
+CMS_APP_NAMES = (
+    'cms',    # DjangoCMS
+    'pages',  # FeinCMS
+    'fiber',  # Django-Fiber
+)
+
+CMS_MODEL_ORDER = {
+    'page': 1,
+    'object': 2,
+    'layout': 3,
+    'content': 4,
+    'site': 99
+}
+
 APP_ICONS.update(getattr(settings, 'ECMS_DASHBOARD_APP_ICONS', {}))
 
 DEFAULT_ICON = MEDIA_PREFIX + 'unknown.png'
@@ -71,32 +85,35 @@ class AppIconList(modules.AppList):
 
 class EcmsAppIconList(AppIconList):
     """
-    An icon list of applications, with a strong bias towards sorting ECMS apps.
+    An icon list of applications, with a strong bias towards sorting CMS apps.
     """
-    ecms_order = {
-        'cmsobject': 1,
-        'cmslayout': 2,
-        'cmssite': 99
-    }
-
-
     def init_with_context(self, context):
         super(EcmsAppIconList, self).init_with_context(context)
         apps = self.children
 
-        # Add icons
-        ecms = [a for a in apps if a['name'] == 'ecms']
-        if ecms:
-            ecms[0]['models'].sort(key=lambda model: (self.ecms_order.get(model['name'], 90),
-                                                      model['title']))
+        # Sort CMS apps
+        cms_apps = [a for a in apps if self._is_cms_app(a['name'])]
+        for app in apps:
+            app['models'].sort(key=lambda model: (self._get_model_order(app['name'], model['name']), model['title']))
 
-        # put ECMS on top
-        self.children.sort(key=lambda a: (0 if a['name'] == 'ecms' else 1, a['title']))
+        # Put CMS apps on top
+        self.children.sort(key=lambda a: (self._get_app_order(a['name']), a['title']))
 
 
-    def get_icon_for_model(self, app_name, model_name):
-        """
-        Return the icon for the given model.
-        """
-        key = "%s/%s" % (app_name, model_name)
-        return APP_ICONS.get(key, None)
+    def _is_cms_app(self, app_name):
+        return app_name in CMS_APP_NAMES or 'cms' in app_name
+
+
+    def _get_app_order(self, app_name):
+        if self._is_cms_app(app_name):
+            return 0
+        else:
+            return 1
+
+
+    def _get_model_order(self, app_name, model_name):
+        if app_name in CMS_APP_NAMES or 'cms' in app_name:
+            for name, order in CMS_MODEL_ORDER.iteritems():
+                if name in model_name:
+                    return order
+        return 99
