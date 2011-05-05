@@ -18,6 +18,8 @@ from ecms_dashboard.modules import EcmsAppIconList
 
 
 ADMINISTRATION_APPS = ('django.contrib.*', 'registration.*',)
+DEVELOPER_APPS = ()
+ALL_KNOWN_APPS = ADMINISTRATION_APPS + DEVELOPER_APPS
 
 
 class EcmsIndexDashboard(Dashboard):
@@ -46,7 +48,7 @@ class EcmsIndexDashboard(Dashboard):
 
         apps = EcmsAppIconList(
             _('CMS'),
-            exclude=ADMINISTRATION_APPS,
+            exclude=ALL_KNOWN_APPS,
             collapsible=False
         )
 
@@ -56,11 +58,21 @@ class EcmsIndexDashboard(Dashboard):
             collapsible=False
         )
 
+        if DEVELOPER_APPS:
+            development = EcmsAppIconList(
+                _('Developer tools'),
+                models=DEVELOPER_APPS,
+                collapsible=True
+            )
+
         recent_actions = modules.RecentActions(_('Recent Actions'), 5, enabled=False, collapsible=False)
 
         self.children.append(quick_links)
         self.children.append(apps)
         self.children.append(administration)
+        if DEVELOPER_APPS:
+            self.children.append(development)
+
         self.children.append(recent_actions)
 
 
