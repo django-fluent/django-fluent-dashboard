@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from admin_tools.utils import get_admin_site_name  # needs 0.4.0
 
-from ecms_dashboard.modules import EcmsAppIconList
+from ecms_dashboard.modules import CmsAppIconList, AppIconList
 
 
 ADMINISTRATION_APPS = ('django.contrib.*', 'registration.*',)
@@ -46,20 +46,20 @@ class EcmsIndexDashboard(Dashboard):
             ]
         )
 
-        apps = EcmsAppIconList(
+        apps = CmsAppIconList(
             _('CMS'),
             exclude=ALL_KNOWN_APPS,
             collapsible=False
         )
 
-        administration = EcmsAppIconList(
+        administration = AppIconList(
             _('Administration'),
             models=ADMINISTRATION_APPS,
             collapsible=False
         )
 
         if DEVELOPER_APPS:
-            development = EcmsAppIconList(
+            development = AppIconList(
                 _('Developer tools'),
                 models=DEVELOPER_APPS,
                 collapsible=True

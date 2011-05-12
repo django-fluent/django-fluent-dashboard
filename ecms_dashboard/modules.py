@@ -89,12 +89,12 @@ class AppIconList(modules.AppList):
         return APP_ICONS.get(key, None)
 
 
-class EcmsAppIconList(AppIconList):
+class CmsAppIconList(AppIconList):
     """
     An icon list of applications, with a strong bias towards sorting CMS apps.
     """
     def init_with_context(self, context):
-        super(EcmsAppIconList, self).init_with_context(context)
+        super(CmsAppIconList, self).init_with_context(context)
         apps = self.children
 
         # Sort CMS apps
