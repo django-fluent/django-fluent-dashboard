@@ -11,6 +11,7 @@ These dashboard modules display the application list as icon view.
 
 from admin_tools.dashboard import modules
 from django.conf import settings
+from ecms_dashboard.appsettings import ECMS_DASHBOARD_APP_ICONS
 
 # Get settings
 # Allow old Django 1.2 MEDIA_URL, but prefer STATIC_URL if it's set.
@@ -44,7 +45,7 @@ CMS_MODEL_ORDER = {
     'site': 99
 }
 
-APP_ICONS.update(getattr(settings, 'ECMS_DASHBOARD_APP_ICONS', {}))
+APP_ICONS.update(ECMS_DASHBOARD_APP_ICONS)
 
 DEFAULT_ICON = MEDIA_PREFIX + 'unknown.png'
 
