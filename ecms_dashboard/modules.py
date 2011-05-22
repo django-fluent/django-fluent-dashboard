@@ -25,6 +25,7 @@ APP_ICONS = {
     'ecms/cmsobject': MEDIA_PREFIX + 'internet-web-browser.png',
     'ecms/cmslayout': MEDIA_PREFIX + 'view-choose.png',
     'ecms/cmssite':   MEDIA_PREFIX + 'preferences-system-network.png',
+    'ecms_media/file': MEDIA_PREFIX + 'folder.png',
     'auth/user':  MEDIA_PREFIX + 'system-users.png',
     'auth/group': MEDIA_PREFIX + 'resource-group.png',
     'sites/site': MEDIA_PREFIX + 'applications-internet.png',
@@ -42,6 +43,7 @@ CMS_MODEL_ORDER = {
     'object': 2,
     'layout': 3,
     'content': 4,
+    'file': 5,
     'site': 99
 }
 
@@ -97,13 +99,19 @@ class CmsAppIconList(AppIconList):
         super(CmsAppIconList, self).init_with_context(context)
         apps = self.children
 
-        # Sort CMS apps
-        cms_apps = [a for a in apps if self._is_cms_app(a['name'])]
-        for app in apps:
-            app['models'].sort(key=lambda model: (self._get_model_order(app['name'], model['name']), model['title']))
+        cms_apps     = [a for a in apps if self._is_cms_app(a['name'])]
+        non_cms_apps = [a for a in apps if a not in cms_apps]
 
-        # Put CMS apps on top
-        self.children.sort(key=lambda a: (self._get_app_order(a['name']), a['title']))
+        # Sort and combine all CMS apps
+        if cms_apps:
+            cms_models = []
+            for app in cms_apps:
+                cms_models += app['models']
+
+            cms_models.sort(key=lambda model: (self._get_cms_model_order(model['name']), model['title']))
+            single_cms_app = {'name': "Modules", 'title': "Modules", 'url': "", 'models': cms_models}
+
+            self.children = [single_cms_app] + non_cms_apps
 
 
     def _is_cms_app(self, app_name):
@@ -117,9 +125,8 @@ class CmsAppIconList(AppIconList):
             return 1
 
 
-    def _get_model_order(self, app_name, model_name):
-        if app_name in CMS_APP_NAMES or 'cms' in app_name:
-            for name, order in CMS_MODEL_ORDER.iteritems():
-                if name in model_name:
-                    return order
+    def _get_cms_model_order(self, model_name):
+        for name, order in CMS_MODEL_ORDER.iteritems():
+            if name in model_name:
+                return order
         return 99
