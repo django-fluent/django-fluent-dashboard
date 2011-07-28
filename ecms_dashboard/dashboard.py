@@ -15,11 +15,7 @@ from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from admin_tools.utils import get_admin_site_name  # needs 0.4.0
 
 from ecms_dashboard.modules import CmsAppIconList, AppIconList
-
-
-ADMINISTRATION_APPS = ('django.contrib.*', 'registration.*',)
-DEVELOPER_APPS = ()
-ALL_KNOWN_APPS = ADMINISTRATION_APPS + DEVELOPER_APPS
+from ecms_dashboard.utils import get_application_groups
 
 
 class EcmsIndexDashboard(Dashboard):
@@ -46,32 +42,14 @@ class EcmsIndexDashboard(Dashboard):
             ]
         )
 
-        apps = CmsAppIconList(
-            _('CMS'),
-            exclude=ALL_KNOWN_APPS,
-            collapsible=False
-        )
-
-        administration = AppIconList(
-            _('Administration'),
-            models=ADMINISTRATION_APPS,
-            collapsible=False
-        )
-
-        if DEVELOPER_APPS:
-            development = AppIconList(
-                _('Developer tools'),
-                models=DEVELOPER_APPS,
-                collapsible=True
-            )
-
+        appgroups = get_application_groups()
         recent_actions = modules.RecentActions(_('Recent Actions'), 5, enabled=False, collapsible=False)
 
+        # Add all items
         self.children.append(quick_links)
-        self.children.append(apps)
-        self.children.append(administration)
-        if DEVELOPER_APPS:
-            self.children.append(development)
+
+        for title, kwargs in appgroups:
+            self.children.append(CmsAppIconList(title, **kwargs))
 
         self.children.append(recent_actions)
 
