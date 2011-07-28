@@ -9,12 +9,11 @@ And to activate the app index dashboard::
 """
 
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from admin_tools.utils import get_admin_site_name  # needs 0.4.0
 
-from ecms_dashboard.modules import CmsAppIconList, AppIconList
+from ecms_dashboard.modules import CmsAppIconList, AppIconList, PersonalModule
 from ecms_dashboard.utils import get_application_groups
 
 
@@ -26,20 +25,11 @@ class EcmsIndexDashboard(Dashboard):
         css = ("ecms_dashboard/dashboard.css",)
 
     def init_with_context(self, context):
-        site_name = get_admin_site_name(context)
-
-        quick_links = modules.LinkList(
-            _('Quick links'),
+        quick_links = PersonalModule(
             layout='inline',
             draggable=False,
             deletable=False,
             collapsible=False,
-            children=[
-                [_('Return to site'), '/'],
-                [_('Change password'),
-                 reverse('%s:password_change' % site_name)],
-                [_('Log out'), reverse('%s:logout' % site_name)],
-            ]
         )
 
         appgroups = get_application_groups()

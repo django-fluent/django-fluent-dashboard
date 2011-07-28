@@ -8,10 +8,39 @@ This package adds the following classes:
 
 These dashboard modules display the application list as icon view.
 """
-
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
+from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
 from ecms_dashboard import appsettings
-from ecms_dashboard.utils import is_cms_app, get_cms_model_order, sort_cms_models
+from ecms_dashboard.utils import is_cms_app, sort_cms_models
+
+
+class PersonalModule(modules.LinkList):
+    title = _('Welcome,')
+    draggable = False
+    deletable = False
+    collapsible = False
+    template = 'ecms_dashboard/modules/personal.html'
+
+    def init_with_context(self, context):
+        super(PersonalModule, self).init_with_context(context)
+
+        current_user = context['request'].user
+        site_name = get_admin_site_name(context)
+
+        # Personalize
+        self.title = _('Welcome,') + ' ' + (current_user.first_name or current_user.username)
+
+        # Expose links
+        self.pages_link = reverse('%s:ecms_cmsobject_changelist' % site_name)
+        self.password_link = reverse('%s:password_change' % site_name)
+        self.logout_link = reverse('%s:logout' % site_name)
+
+    def is_empty(self):
+        return False
+
+
 
 
 class AppIconList(modules.AppList):
