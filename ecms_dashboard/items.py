@@ -2,9 +2,11 @@
 Custom menu items
 """
 from admin_tools.menu import items
+from django.core import urlresolvers
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
 from ecms_dashboard.utils import sort_cms_models
+from ecms.admin.utils import get_current_edited_page
 
 
 class CmsModelList(items.ModelList):
@@ -39,3 +41,10 @@ class ReturnToSiteItem(items.MenuItem):
     url = '/'
     css_classes = ['ecms-menu-item-tosite']
 
+    def init_with_context(self, context):
+        super(ReturnToSiteItem, self).init_with_context(context)
+
+        # See if the current page is being edited, update URL accordingly.
+        edited_page = get_current_edited_page(context['request'])
+        if edited_page:
+            self.url = edited_page.url
