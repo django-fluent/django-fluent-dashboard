@@ -6,7 +6,13 @@ from django.core import urlresolvers
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
 from ecms_dashboard.utils import sort_cms_models
-from ecms.admin.utils import get_current_edited_page
+
+# For now, just allow this package to be used outside the main ECMS module
+# Later, this could use a registry or backend system to support other modules.
+try:
+    from ecms.admin.utils import get_current_edited_page
+except ImportError:
+    get_current_edited_page = lambda r: None
 
 
 class CmsModelList(items.ModelList):
