@@ -8,7 +8,7 @@ This package adds the following classes:
 
 These dashboard modules display the application list as icon view.
 """
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext as _
 from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
@@ -33,9 +33,13 @@ class PersonalModule(modules.LinkList):
         self.title = _('Welcome,') + ' ' + (current_user.first_name or current_user.username)
 
         # Expose links
-        self.pages_link = reverse('%s:ecms_cmsobject_changelist' % site_name)
         self.password_link = reverse('%s:password_change' % site_name)
         self.logout_link = reverse('%s:logout' % site_name)
+
+        try:
+            self.pages_link = reverse('%s:ecms_cmsobject_changelist' % site_name)
+        except NoReverseMatch:
+            self.pages_link = None
 
     def is_empty(self):
         return False
