@@ -8,6 +8,9 @@ from django.utils.translation import ugettext as _
 MEDIA_PREFIX = getattr(settings, 'STATIC_URL', settings.MEDIA_URL) + "ecms_dashboard/oxygen/"
 
 ECMS_DASHBOARD_APP_ICONS = {
+    'cms/page': MEDIA_PREFIX + 'internet-web-browser.png',
+    'snippet/snippet': MEDIA_PREFIX + 'folder-txt.png',
+    'filer/folder': MEDIA_PREFIX + 'folder.png',
     'fiber/page': MEDIA_PREFIX + 'internet-web-browser.png',
     'fiber/contentitem': MEDIA_PREFIX + 'folder-txt.png',
     'fiber/image': MEDIA_PREFIX + 'folder-image.png',
