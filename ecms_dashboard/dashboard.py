@@ -11,9 +11,8 @@ And to activate the app index dashboard::
 from django.utils.translation import ugettext_lazy as _
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
-from admin_tools.utils import get_admin_site_name  # needs 0.4.0
 
-from ecms_dashboard.modules import CmsAppIconList, AppIconList, PersonalModule
+from ecms_dashboard.modules import CmsAppIconList, PersonalModule
 from ecms_dashboard.utils import get_application_groups
 
 
