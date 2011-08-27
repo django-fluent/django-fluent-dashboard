@@ -18,6 +18,7 @@ ECMS_DASHBOARD_APP_ICONS = {
     'ecms_media/file': MEDIA_PREFIX + 'folder.png',
     'auth/user':  MEDIA_PREFIX + 'system-users.png',
     'auth/group': MEDIA_PREFIX + 'resource-group.png',
+    'google_analytics/analytics': MEDIA_PREFIX + 'view-statistics.png',
     'sites/site': MEDIA_PREFIX + 'applications-internet.png',
     'registration/registrationprofile': MEDIA_PREFIX + 'list-add-user.png'
 }
@@ -29,6 +30,6 @@ ECMS_DASHBOARD_APP_ICONS.update(getattr(settings, 'ECMS_DASHBOARD_APP_ICONS', {}
 
 ECMS_DASHBOARD_APP_GROUPS = getattr(settings, 'ECMS_DASHBOARD_APP_GROUPS', (
     (_('CMS'), ('*',)),
-    (_('Administration'), ('django.contrib.*', 'registration.*',)),
+    (_('Administration'), ('django.contrib.*', 'registration.*', 'google_analytics.*',)),
     #(_('Developer tools'), ()),
 ))
