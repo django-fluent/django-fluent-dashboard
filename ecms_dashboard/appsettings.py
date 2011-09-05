@@ -19,6 +19,11 @@ ECMS_DASHBOARD_APP_ICONS = {
     'ecms/cmslayout': MEDIA_PREFIX + 'view-choose.png',
     'ecms/cmssite':   MEDIA_PREFIX + 'preferences-system-network.png',
     'ecms_media/file': MEDIA_PREFIX + 'folder.png',
+    'zinnia/entry': MEDIA_PREFIX + 'view-calendar-journal.png',
+    'zinnia/category': MEDIA_PREFIX + 'folder-bookmark.png',
+    'comments/comment': MEDIA_PREFIX + 'kde-telepathy.png', #'irc-voice.png',
+    'tagging/tag': MEDIA_PREFIX + 'feed-subscribe.png',
+    'tagging/taggeditem': MEDIA_PREFIX + 'feed-subscribe.png',
     'auth/user':  MEDIA_PREFIX + 'system-users.png',
     'auth/group': MEDIA_PREFIX + 'resource-group.png',
     'google_analytics/analytics': MEDIA_PREFIX + 'view-statistics.png',
@@ -33,6 +38,7 @@ ECMS_DASHBOARD_APP_ICONS.update(getattr(settings, 'ECMS_DASHBOARD_APP_ICONS', {}
 
 ECMS_DASHBOARD_APP_GROUPS = getattr(settings, 'ECMS_DASHBOARD_APP_GROUPS', (
     (_('CMS'), ('*',)),
-    (_('Administration'), ('django.contrib.*', 'registration.*', 'google_analytics.*',)),
+    (_('Blog'), ('zinnia.*', 'django.contrib.comments.*',)),
+    (_('Administration'), ('django.contrib.auth.*', 'django.contrib.sites.*', 'registration.*', 'google_analytics.*',)),
     #(_('Developer tools'), ()),
 ))
