@@ -19,6 +19,8 @@ ECMS_DASHBOARD_APP_ICONS = {
     'ecms/cmslayout': MEDIA_PREFIX + 'view-choose.png',
     'ecms/cmssite':   MEDIA_PREFIX + 'preferences-system-network.png',
     'ecms_media/file': MEDIA_PREFIX + 'folder.png',
+    'form_designer/formdefinition': MEDIA_PREFIX + 'mail-mark-task.png',
+    'form_designer/formlog': MEDIA_PREFIX + 'view-calendar-journal.png',
     'zinnia/entry': MEDIA_PREFIX + 'view-calendar-journal.png',
     'zinnia/category': MEDIA_PREFIX + 'folder-bookmark.png',
     'comments/comment': MEDIA_PREFIX + 'kde-telepathy.png', #'irc-voice.png',
@@ -38,7 +40,7 @@ ECMS_DASHBOARD_APP_ICONS.update(getattr(settings, 'ECMS_DASHBOARD_APP_ICONS', {}
 
 ECMS_DASHBOARD_APP_GROUPS = getattr(settings, 'ECMS_DASHBOARD_APP_GROUPS', (
     (_('CMS'), ('*',)),
-    (_('Blog'), ('zinnia.*', 'django.contrib.comments.*',)),
+    (_('Interactivity'), ('zinnia.*', 'django.contrib.comments.*', 'form_designer.*')),
     (_('Administration'), ('django.contrib.auth.*', 'django.contrib.sites.*', 'registration.*', 'google_analytics.*',)),
     #(_('Developer tools'), ()),
 ))
