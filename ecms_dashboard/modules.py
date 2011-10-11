@@ -59,6 +59,7 @@ class AppIconList(modules.AppList):
     def init_with_context(self, context):
         super(AppIconList, self).init_with_context(context)
         apps = self.children
+        path_levels = context['request'].META['SCRIPT_NAME'].rstrip('/').count('/')
 
         # Add icons
         for app in apps:
@@ -67,7 +68,7 @@ class AppIconList(modules.AppList):
 
             for model in app['models']:
                 try:
-                    model_name = model['change_url'].strip('/').split('/')[2]   # admin/ecms/cmssite
+                    model_name = model['change_url'].strip('/').split('/')[2 + path_levels]   # admin/ecms/cmssite
                     model['name'] = model_name
                     model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.ECMS_DASHBOARD_DEFAULT_ICON
                 except ValueError:
