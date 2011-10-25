@@ -4,8 +4,7 @@ Overview of all settings which can be customized.
 from django.conf import settings
 from django.utils.translation import ugettext as _
 
-# Allow old Django 1.2 MEDIA_URL, but prefer STATIC_URL if it's set.
-MEDIA_PREFIX = getattr(settings, 'STATIC_URL', settings.MEDIA_URL) + "ecms_dashboard/oxygen/"
+MEDIA_PREFIX = "ecms_dashboard/oxygen/"
 
 ECMS_DASHBOARD_APP_ICONS = {
     'cms/page': MEDIA_PREFIX + 'internet-web-browser.png',

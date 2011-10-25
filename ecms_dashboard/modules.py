@@ -8,6 +8,7 @@ This package adds the following classes:
 
 These dashboard modules display the application list as icon view.
 """
+from django.conf import settings
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext as _
 from admin_tools.utils import get_admin_site_name
@@ -61,6 +62,9 @@ class AppIconList(modules.AppList):
         apps = self.children
         path_levels = context['request'].META['SCRIPT_NAME'].rstrip('/').count('/')
 
+        # Allow old Django 1.2 MEDIA_URL, but prefer STATIC_URL if it's set.
+        media_root = getattr(settings, 'STATIC_URL', settings.MEDIA_URL)
+
         # Add icons
         for app in apps:
             app_name = app['url'].strip('/').split('/')[-1]   # /admin/ecms/
@@ -73,6 +77,12 @@ class AppIconList(modules.AppList):
                     model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.ECMS_DASHBOARD_DEFAULT_ICON
                 except ValueError:
                     model['icon'] = appsettings.ECMS_DASHBOARD_DEFAULT_ICON
+
+                # Automatically add STATIC_URL before relative icon paths.
+                if not model['icon'].startswith('/') \
+                and not model['icon'].startswith('http://') \
+                and not model['icon'].startswith('https://'):
+                    model['icon'] = media_root + model['icon']
 
         # put ECMS on top
         self.children.sort(key=lambda a: (0 if a['name'] == 'ecms' else 1, a['title']))
