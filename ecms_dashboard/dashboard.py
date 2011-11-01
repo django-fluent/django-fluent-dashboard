@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 
 from ecms_dashboard.modules import CmsAppIconList, PersonalModule
-from ecms_dashboard.utils import get_application_groups
+from ecms_dashboard.appgroups import get_application_groups
 
 
 class EcmsIndexDashboard(Dashboard):

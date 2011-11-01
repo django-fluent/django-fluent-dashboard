@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from admin_tools.menu import items, Menu
 from admin_tools.utils import get_admin_site_name
 from ecms_dashboard.items import CmsModelList, ReturnToSiteItem
-from ecms_dashboard.utils import get_application_groups
+from ecms_dashboard.appgroups import get_application_groups
 
 
 class EcmsMenu(Menu):

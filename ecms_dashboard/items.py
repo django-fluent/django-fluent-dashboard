@@ -5,7 +5,7 @@ from admin_tools.menu import items
 from django.core import urlresolvers
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
-from ecms_dashboard.utils import sort_cms_models
+from ecms_dashboard.appgroups import sort_cms_models
 
 # For now, just allow this package to be used outside the main ECMS module
 # Later, this could use a registry or backend system to support other modules.

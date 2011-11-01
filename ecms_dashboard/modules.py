@@ -14,7 +14,7 @@ from django.utils.translation import ugettext as _
 from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
 from ecms_dashboard import appsettings
-from ecms_dashboard.utils import is_cms_app, sort_cms_models
+from ecms_dashboard.appgroups import is_cms_app, sort_cms_models
 
 
 class PersonalModule(modules.LinkList):
