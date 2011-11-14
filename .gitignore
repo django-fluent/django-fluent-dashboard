@@ -1,0 +1,7 @@
+*.pyc
+*.pyo
+*.mo
+.project
+.pydevproject
+.idea/workspace.xml
+docs/_build/

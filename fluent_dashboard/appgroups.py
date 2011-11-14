@@ -1,10 +1,10 @@
 """
 Internal split of applications
 """
-from ecms_dashboard import appsettings
+from fluent_dashboard import appsettings
 import itertools
 
-_groups = [group[1] for group in appsettings.ECMS_DASHBOARD_APP_GROUPS]
+_groups = [group[1] for group in appsettings.FLUENT_DASHBOARD_APP_GROUPS]
 
 ALL_KNOWN_APPS = list(itertools.chain(*_groups))
 if '*' in ALL_KNOWN_APPS:
@@ -35,7 +35,7 @@ def get_application_groups():
     """
 
     groups = []
-    for title, patterns in appsettings.ECMS_DASHBOARD_APP_GROUPS:
+    for title, patterns in appsettings.FLUENT_DASHBOARD_APP_GROUPS:
         if '*' in patterns:
             groups += (title, dict(exclude=ALL_KNOWN_APPS, collapsible=False)),
         else:

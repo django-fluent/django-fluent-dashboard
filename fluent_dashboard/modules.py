@@ -4,7 +4,7 @@ Custom modules for the admin dashboard.
 This package adds the following classes:
 
  * AppIconList
- * EcmsAppIconList
+ * CmsAppIconList
 
 These dashboard modules display the application list as icon view.
 """
@@ -13,8 +13,8 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext as _
 from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
-from ecms_dashboard import appsettings
-from ecms_dashboard.appgroups import is_cms_app, sort_cms_models
+from fluent_dashboard import appsettings
+from fluent_dashboard.appgroups import is_cms_app, sort_cms_models
 
 
 class PersonalModule(modules.LinkList):
@@ -22,7 +22,7 @@ class PersonalModule(modules.LinkList):
     draggable = False
     deletable = False
     collapsible = False
-    template = 'ecms_dashboard/modules/personal.html'
+    template = 'fluent_dashboard/modules/personal.html'
 
     def init_with_context(self, context):
         super(PersonalModule, self).init_with_context(context)
@@ -52,14 +52,14 @@ class AppIconList(modules.AppList):
     """
     The list of applications, icon style.
 
-    It uses the ``ECMS_DASHBOARD_APP_ICONS`` setting to find application icons.
+    It uses the ``FLUENT_DASHBOARD_APP_ICONS`` setting to find application icons.
     Icons for the common contrib apps are already defined.
     """
-    template = 'ecms_dashboard/modules/app_icon_list.html'
+    template = 'fluent_dashboard/modules/app_icon_list.html'
 
     # Allow old Django 1.2 MEDIA_URL, but prefer STATIC_URL if it's set.
     icon_static_root = getattr(settings, 'STATIC_URL', settings.MEDIA_URL)
-    icon_theme_root = "{0}ecms_dashboard/{1}/".format(icon_static_root, appsettings.ECMS_DASHBOARD_ICON_THEME)
+    icon_theme_root = "{0}fluent_dashboard/{1}/".format(icon_static_root, appsettings.FLUENT_DASHBOARD_ICON_THEME)
 
 
     def init_with_context(self, context):
@@ -76,9 +76,9 @@ class AppIconList(modules.AppList):
                 try:
                     model_name = model['change_url'].strip('/').split('/')[2 + path_levels]   # admin/appname/modelname
                     model['name'] = model_name
-                    model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.ECMS_DASHBOARD_DEFAULT_ICON
+                    model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
                 except ValueError:
-                    model['icon'] = appsettings.ECMS_DASHBOARD_DEFAULT_ICON
+                    model['icon'] = appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
 
                 # Automatically add STATIC_URL before relative icon paths.
                 model['icon'] = self.get_icon_url(model['icon'])
@@ -89,7 +89,7 @@ class AppIconList(modules.AppList):
         Return the icon for the given model.
         """
         key = "%s/%s" % (app_name, model_name)
-        return appsettings.ECMS_DASHBOARD_APP_ICONS.get(key, None)
+        return appsettings.FLUENT_DASHBOARD_APP_ICONS.get(key, None)
 
 
     def get_icon_url(self, icon):

@@ -1,0 +1,30 @@
+.fluent-dashboard-appiconlist li {
+  float: left;
+  display: inline;
+  text-align: center;
+}
+
+.fluent-dashboard-appiconlist .fluent-dashboard-icon {
+  display: block;
+  text-align: center;
+}
+
+.fluent-dashboard-appiconlist .fluent-dashboard-icon-caption {
+  text-align: center;
+}
+
+
+/* clearfix */
+
+.fluent-dashboard-appiconlist:after {
+  content:      ".";
+  font-size:    0;
+  line-height:  0;
+  display:      block;
+  height:       0;
+  clear:        both;
+  visibility:   hidden;
+}
+
+* html .fluent-dashboard-appiconlist { height:     1%; } /* IE6 */
+*+html .fluent-dashboard-appiconlist { min-height: 0;  } /* IE7 */

@@ -1,27 +1,29 @@
 """
-Custom dashboard for ECMS.
+Custom dashboard for Django applications.
 
 To activate the index dashboard add the following to your settings.py::
-    ADMIN_TOOLS_INDEX_DASHBOARD = 'ecms_dashboard.dashboard.CustomIndexDashboard'
+
+    ADMIN_TOOLS_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentIndexDashboard'
 
 And to activate the app index dashboard::
-    ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'ecms_dashboard.dashboard.CustomAppIndexDashboard'
+
+    ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentAppIndexDashboard'
 """
 
 from django.utils.translation import ugettext_lazy as _
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 
-from ecms_dashboard.modules import CmsAppIconList, PersonalModule
-from ecms_dashboard.appgroups import get_application_groups
+from fluent_dashboard.modules import CmsAppIconList, PersonalModule
+from fluent_dashboard.appgroups import get_application_groups
 
 
-class EcmsIndexDashboard(Dashboard):
+class FluentIndexDashboard(Dashboard):
     """
-    Custom index dashboard for ECMS
+    Custom admin dashboard for Django applications.
     """
     class Media:
-        css = ("ecms_dashboard/dashboard.css",)
+        css = ("fluent_dashboard/dashboard.css",)
 
     def init_with_context(self, context):
         quick_links = PersonalModule(
@@ -43,16 +45,16 @@ class EcmsIndexDashboard(Dashboard):
         self.children.append(recent_actions)
 
 
-class EcmsAppIndexDashboard(AppIndexDashboard):
+class FluentAppIndexDashboard(AppIndexDashboard):
     """
-    Custom app index dashboard for ECMS
+    Custom app index dashboard for Django applications.
     """
 
     # disable title because its redundant with the model list module
     title = ''
 
     def __init__(self, *args, **kwargs):
-        AppIndexDashboard.__init__(self, *args, **kwargs)
+        super(FluentAppIndexDashboard, self).__init__(*args, **kwargs)
 
         model_list = modules.ModelList(self.app_title, self.models)
 
@@ -71,4 +73,4 @@ class EcmsAppIndexDashboard(AppIndexDashboard):
         """
         Use this method if you need to access the request context.
         """
-        return super(EcmsAppIndexDashboard, self).init_with_context(context)
+        return super(FluentAppIndexDashboard, self).init_with_context(context)

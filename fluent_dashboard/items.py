@@ -2,12 +2,12 @@
 Custom menu items
 """
 from admin_tools.menu import items
-from django.core import urlresolvers
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
-from ecms_dashboard.appgroups import sort_cms_models
+from fluent_dashboard.appgroups import sort_cms_models
 
-# For now, just allow this package to be used outside the main ECMS module
+#TODO: Fix this direct dependency on one CMS.
+# For now, just allow this package to be used outside the main Fluent module
 # Later, this could use a registry or backend system to support other modules.
 try:
     from ecms.admin.utils import get_current_edited_page

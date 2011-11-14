@@ -4,12 +4,12 @@ Overview of all settings which can be customized.
 from django.conf import settings
 from django.utils.translation import ugettext as _
 
-ECMS_DASHBOARD_ICON_THEME = getattr(settings, "ECMS_DASHVOARD_ICON_THEME", "oxygen")
+FLUENT_DASHBOARD_ICON_THEME = getattr(settings, "FLUENT_DASHBOARD_ICON_THEME", "oxygen")
 
 # The icon names are not Oxygen specific,
 # Oxygen uses the XDG icon naming spec.
 
-ECMS_DASHBOARD_APP_ICONS = {
+FLUENT_DASHBOARD_APP_ICONS = {
     'cms/page': 'internet-web-browser.png',
     'snippet/snippet': 'folder-txt.png',
     'filer/folder': 'folder.png',
@@ -36,11 +36,11 @@ ECMS_DASHBOARD_APP_ICONS = {
     'registration/registrationprofile': 'list-add-user.png'
 }
 
-ECMS_DASHBOARD_DEFAULT_ICON = getattr(settings, "ECMS_DASHBOARD_DEFAULT_ICON", 'unknown.png')
+FLUENT_DASHBOARD_DEFAULT_ICON = getattr(settings, "FLUENT_DASHBOARD_DEFAULT_ICON", 'unknown.png')
 
-ECMS_DASHBOARD_APP_ICONS.update(getattr(settings, 'ECMS_DASHBOARD_APP_ICONS', {}))
+FLUENT_DASHBOARD_APP_ICONS.update(getattr(settings, 'FLUENT_DASHBOARD_APP_ICONS', {}))
 
-ECMS_DASHBOARD_APP_GROUPS = getattr(settings, 'ECMS_DASHBOARD_APP_GROUPS', (
+FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
     (_('CMS'), ('*',)),
     (_('Interactivity'), (
         'zinnia.*',

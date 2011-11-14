@@ -1,14 +1,14 @@
 {% extends "admin_tools/dashboard/module.html" %}
 {% load i18n %}
 {% block module_content %}
-        <ul class="ecms-dashboard-appiconlist clearfix">
+        <ul class="fluent-dashboard-appiconlist clearfix">
         {% for child in module.children %}
             {% for model in child.models %}
             {% spaceless %}
             <li>
                 {% if model.change_url %}
-                  <a class="ecms-dashboard-icon" href="{{ model.change_url }}"><img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" /></a>
-                  <a class="ecms-dashboard-icon-caption" href="{{ model.change_url }}">{{ model.title }}</a>
+                  <a class="fluent-dashboard-icon" href="{{ model.change_url }}"><img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" /></a>
+                  <a class="fluent-dashboard-icon-caption" href="{{ model.change_url }}">{{ model.title }}</a>
                 {% else %}
                   <img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" />
                   {{ model.title }}{% endif %}
