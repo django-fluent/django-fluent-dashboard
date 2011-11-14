@@ -45,7 +45,11 @@ def get_application_groups():
 
 
 def sort_cms_models(cms_models):
-    cms_models.sort(key=lambda model: (get_cms_model_order(model['name']), model['title']))
+    cms_models.sort(key=lambda model: (
+        get_cms_model_order(model['name']) if is_cms_app(model['app_name']) else 100,
+        model['app_name'],
+        model['title']
+    ))
 
 
 def is_cms_app(app_name):

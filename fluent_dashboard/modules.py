@@ -67,7 +67,8 @@ class AppIconList(modules.AppList):
         apps = self.children
         path_levels = context['request'].META['SCRIPT_NAME'].rstrip('/').count('/')
 
-        # Add icons
+        # Standard model only has a title, change_url and add_url.
+        # Restore the app_name and name, so icons can be matched.
         for app in apps:
             app_name = app['url'].strip('/').split('/')[-1]   # /admin/appname/
             app['name'] = app_name
@@ -82,6 +83,7 @@ class AppIconList(modules.AppList):
 
                 # Automatically add STATIC_URL before relative icon paths.
                 model['icon'] = self.get_icon_url(model['icon'])
+                model['app_name'] = app_name
 
 
     def get_icon_for_model(self, app_name, model_name):
@@ -124,9 +126,6 @@ class CmsAppIconList(AppIconList):
         non_cms_apps = [a for a in apps if a not in cms_apps]
 
         if cms_apps:
-            # Sort CMS apps by name first, title second.
-            cms_apps.sort(key=lambda a: (a['name'], a['title']))
-
             # Group the models of all CMS apps in one group.
             cms_models = []
             for app in cms_apps:

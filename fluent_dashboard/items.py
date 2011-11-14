@@ -22,9 +22,11 @@ class CmsModelList(items.ModelList):
     def init_with_context(self, context):
         listitems = self._visible_models(context['request'])
 
-        # Convert to dictionary items first, like the dashboard icons.
+        # Convert to a similar data structure like the dashboard icons have.
+        # This allows sorting the items identically.
         models = [
-            { 'name': model.__name__,
+            { 'name': model._meta.module_name,
+              'app_name': model._meta.app_label,
               'title': capfirst(model._meta.verbose_name_plural),
               'url': self._get_admin_change_url(model, context)
             }
