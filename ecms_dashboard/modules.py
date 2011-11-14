@@ -83,9 +83,6 @@ class AppIconList(modules.AppList):
                 # Automatically add STATIC_URL before relative icon paths.
                 model['icon'] = self.get_icon_url(model['icon'])
 
-        # put ECMS on top
-        self.children.sort(key=lambda a: (0 if a['name'] == 'ecms' else 1, a['title']))
-
 
     def get_icon_for_model(self, app_name, model_name):
         """
@@ -127,6 +124,9 @@ class CmsAppIconList(AppIconList):
         non_cms_apps = [a for a in apps if a not in cms_apps]
 
         if cms_apps:
+            # Sort CMS apps by name first, title second.
+            cms_apps.sort(key=lambda a: (a['name'], a['title']))
+
             # Group the models of all CMS apps in one group.
             cms_models = []
             for app in cms_apps:
