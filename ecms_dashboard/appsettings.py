@@ -26,6 +26,7 @@ ECMS_DASHBOARD_APP_ICONS = {
     'zinnia/entry': 'view-calendar-journal.png',
     'zinnia/category': 'folder-bookmark.png',
     'comments/comment': 'kde-telepathy.png', #'irc-voice.png',
+    'threadedcomments/threadedcomment': 'kde-telepathy.png', #'irc-voice.png',
     'tagging/tag': 'feed-subscribe.png',
     'tagging/taggeditem': 'feed-subscribe.png',
     'auth/user':  'system-users.png',
@@ -41,7 +42,17 @@ ECMS_DASHBOARD_APP_ICONS.update(getattr(settings, 'ECMS_DASHBOARD_APP_ICONS', {}
 
 ECMS_DASHBOARD_APP_GROUPS = getattr(settings, 'ECMS_DASHBOARD_APP_GROUPS', (
     (_('CMS'), ('*',)),
-    (_('Interactivity'), ('zinnia.*', 'django.contrib.comments.*', 'form_designer.*')),
-    (_('Administration'), ('django.contrib.auth.*', 'django.contrib.sites.*', 'registration.*', 'google_analytics.*',)),
+    (_('Interactivity'), (
+        'zinnia.*',
+        'django.contrib.comments.*',
+        'form_designer.*',
+        'threadedcomments.*',
+    )),
+    (_('Administration'), (
+        'django.contrib.auth.*',
+        'django.contrib.sites.*',
+        'registration.*',
+        'google_analytics.*',
+    )),
     #(_('Developer tools'), ()),
 ))
