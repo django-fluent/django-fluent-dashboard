@@ -57,32 +57,31 @@ class AppIconList(modules.AppList):
     """
     template = 'ecms_dashboard/modules/app_icon_list.html'
 
+    # Allow old Django 1.2 MEDIA_URL, but prefer STATIC_URL if it's set.
+    icon_static_root = getattr(settings, 'STATIC_URL', settings.MEDIA_URL)
+    icon_theme_root = "{0}ecms_dashboard/{1}/".format(icon_static_root, appsettings.ECMS_DASHBOARD_ICON_THEME)
+
+
     def init_with_context(self, context):
         super(AppIconList, self).init_with_context(context)
         apps = self.children
         path_levels = context['request'].META['SCRIPT_NAME'].rstrip('/').count('/')
 
-        # Allow old Django 1.2 MEDIA_URL, but prefer STATIC_URL if it's set.
-        media_root = getattr(settings, 'STATIC_URL', settings.MEDIA_URL)
-
         # Add icons
         for app in apps:
-            app_name = app['url'].strip('/').split('/')[-1]   # /admin/ecms/
+            app_name = app['url'].strip('/').split('/')[-1]   # /admin/appname/
             app['name'] = app_name
 
             for model in app['models']:
                 try:
-                    model_name = model['change_url'].strip('/').split('/')[2 + path_levels]   # admin/ecms/cmssite
+                    model_name = model['change_url'].strip('/').split('/')[2 + path_levels]   # admin/appname/modelname
                     model['name'] = model_name
                     model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.ECMS_DASHBOARD_DEFAULT_ICON
                 except ValueError:
                     model['icon'] = appsettings.ECMS_DASHBOARD_DEFAULT_ICON
 
                 # Automatically add STATIC_URL before relative icon paths.
-                if not model['icon'].startswith('/') \
-                and not model['icon'].startswith('http://') \
-                and not model['icon'].startswith('https://'):
-                    model['icon'] = media_root + model['icon']
+                model['icon'] = self.get_icon_url(model['icon'])
 
         # put ECMS on top
         self.children.sort(key=lambda a: (0 if a['name'] == 'ecms' else 1, a['title']))
@@ -94,6 +93,26 @@ class AppIconList(modules.AppList):
         """
         key = "%s/%s" % (app_name, model_name)
         return appsettings.ECMS_DASHBOARD_APP_ICONS.get(key, None)
+
+
+    def get_icon_url(self, icon):
+        """
+        Return the full URL for an icon name.
+
+        When the icon is an absolute URL, it is used as-is.
+        When the icon contains a slash, it is relative from the ``STATIC_URL``.
+        Otherwise, it's relative to the theme url folder.
+        """
+        if not icon.startswith('/') \
+        and not icon.startswith('http://') \
+        and not icon.startswith('https://'):
+            if '/' in icon:
+                return self.icon_static_root + icon
+            else:
+                return self.icon_theme_root + icon
+        else:
+            return icon
+
 
 
 class CmsAppIconList(AppIconList):
