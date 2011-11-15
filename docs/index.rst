@@ -6,7 +6,12 @@ The ``fluent_dashboard`` module offers a custom admin dashboard, built on top of
 
 The `django-admin-tools` provides a default mechanism to replace the standard Django
 admin homepage with a widget based dashboard. The ``fluent_dashboard`` module extends this,
-by providing additional widgets (called "modules") which can be displayed at the homepage.
+by providing additional widgets (called "modules") such as:
+
+* a "icon list" module for the admin homepage.
+* a "welcome" module for the admin homepage.
+* a configurable module layout for the admin homepage, through ``settings.py``.
+* a "return to site" link.
 
 Contents:
 
