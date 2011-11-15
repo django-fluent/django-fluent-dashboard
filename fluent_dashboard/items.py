@@ -1,25 +1,27 @@
 """
-Custom menu items
+Additional menu items.
 """
 from admin_tools.menu import items
+from django.contrib.contenttypes.models import ContentType
+from django.core import urlresolvers
+from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
 from fluent_dashboard.appgroups import sort_cms_models
+import re
 
-#TODO: Fix this direct dependency on one CMS.
-# For now, just allow this package to be used outside the main Fluent module
-# Later, this could use a registry or backend system to support other modules.
-try:
-    from ecms.admin.utils import get_current_edited_page
-except ImportError:
-    get_current_edited_page = lambda r: None
+RE_CHANGE_URL = re.compile("([^_]+)_([^_]+)_change")
 
 
 class CmsModelList(items.ModelList):
     """
-    An menu of models, with a strong bias towards sorting CMS apps.
+    A custom :class:`~admin_tools.menu.items.ModelList` that displays menu items for each model.
+    It has a strong bias towards sorting CMS apps on top.
     """
     def init_with_context(self, context):
+        """
+        Initialize the menu.
+        """
         listitems = self._visible_models(context['request'])
 
         # Convert to a similar data structure like the dashboard icons have.
@@ -43,16 +45,74 @@ class CmsModelList(items.ModelList):
 
 class ReturnToSiteItem(items.MenuItem):
     """
-    A logout button for the menu.
+    A "Return to site" button for the menu.
+    It redirects the user back to the frontend pages.
+
+    By default, it attempts to find the current frontend URL that corresponds
+    with the model that's being edited in the admin 'change' page.
+    If this is not possible, the default URL (``/``) will be used instead.
+
+    The menu item has a custom ``returntosite`` CSS class to be distinguishable between the other menu items.
     """
+    #: Set the default title
     title = _('Return to site')
+    #: Set the default URL
     url = '/'
-    css_classes = ['ecms-menu-item-tosite']
+    # Make the item distinguishable between the other menu items
+    css_classes = ['returntosite']
+
 
     def init_with_context(self, context):
+        """
+        Find the current URL based on the context.
+        It uses :func:`get_edited_object` to find the model,
+        and calls ``get_absolute_url()`` to get the frontend URL.
+        """
         super(ReturnToSiteItem, self).init_with_context(context)
 
         # See if the current page is being edited, update URL accordingly.
-        edited_page = get_current_edited_page(context['request'])
-        if edited_page:
-            self.url = edited_page.url
+        edited_model = self.get_edited_object(context['request'])
+        if edited_model:
+            try:
+                url = edited_model.get_absolute_url()
+            except (AttributeError, urlresolvers.NoReverseMatch) as e:
+                pass
+            else:
+                if url:
+                    self.url = url
+
+
+    def get_edited_object(self, request):
+        """
+        Return the object which is currently being edited.
+        Returns ``None`` if the match could not be made.
+        """
+        resolvermatch = urlresolvers.resolve(request.path_info)
+        if resolvermatch.namespace == 'admin' and resolvermatch.url_name.endswith('_change'):
+            # In "appname_modelname_change" view of the admin.
+            # Extract the appname and model from the url name.
+            match = RE_CHANGE_URL.match(resolvermatch.url_name)
+            if not match:
+                return None
+
+            object_id = int(resolvermatch.args[0])
+            return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
+        return None
+
+
+    def get_object_by_natural_key(self, app_label, model_name, object_id):
+        """
+        Return a model based on a natural key.
+        This is a utility function for :func:`get_edited_object`.
+        """
+        try:
+            model_type = ContentType.objects.get_by_natural_key(app_label, model_name)
+        except ContentType.DoesNotExist:
+            return None
+
+        try:
+            return model_type.get_object_for_this_type(pk=object_id)
+        except ObjectDoesNotExist:
+            return None
+
+        return None
