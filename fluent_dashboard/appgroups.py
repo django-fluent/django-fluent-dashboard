@@ -1,5 +1,6 @@
 """
-Internal module to split applications and models into groups.
+Splitting and organizing applications and models into groups.
+This module is mostly meant for internal use.
 """
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.importlib import import_module

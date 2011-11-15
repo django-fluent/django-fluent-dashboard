@@ -1,13 +1,13 @@
 """
-Custom dashboard for Django applications.
+Custom dashboards for Django applications.
 
-To activate the index dashboard add the following to your settings.py::
+This package defines the following classes:
 
-    ADMIN_TOOLS_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentIndexDashboard'
+* :class:`FluentIndexDashboard`
+* :class:`FluentAppIndexDashboard`
 
-And to activate the app index dashboard::
-
-    ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentAppIndexDashboard'
+These classes need to be linked in ``settings.py`` to be loaded by `django-admin-tools`.
+Off course, you can also extend the classes, and use those names in the settings instead.
 """
 
 from django.utils.translation import ugettext_lazy as _
@@ -20,58 +20,110 @@ from fluent_dashboard.appgroups import get_application_groups, get_class
 
 class FluentIndexDashboard(Dashboard):
     """
-    Custom admin dashboard for Django applications.
+    A custom home screen for the Django admin interface.
+
+    It displays the application groups based on with :ref:`FLUENT_DASHBOARD_APP_GROUPS` setting.
+    To activate the dashboard add the following to your settings.py::
+
+        ADMIN_TOOLS_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentIndexDashboard'
+
+    The dashboard modules are instantiated by the following functions, which can be overwritten:
+
+    * :func:`get_personal_module`
+    * :func:`get_application_modules`
+    * :func:`get_recent_actions_module`
+
+    To have a menu which is consistent with the application groups displayed by this module,
+    use the :class:`~fluent_dashboard.menu.FluentMenu` class to render the `admin_tools` menu.
+
+    When overwriting this class, the elements can either be added in
+    the :func:`__init__` method, or the :func:`init_with_context` method.
+    For more information, see the `django-admin-tools` documentation.
     """
     class Media:
         css = ("fluent_dashboard/dashboard.css",)
 
-    def init_with_context(self, context):
-        quick_links = PersonalModule(
+    def __init__(self, **kwargs):
+        super(FluentIndexDashboard, self).__init__(**kwargs)
+        self.children.append(self.get_personal_module())
+        self.children.extend(self.get_application_modules())
+        self.children.append(self.get_recent_actions_module())
+
+
+    def get_personal_module(self):
+        """
+        Instantiate the :class:`~fluent_dashboard.modules.PersonalModule` for use in the dashboard.
+        """
+        return PersonalModule(
             layout='inline',
             draggable=False,
             deletable=False,
             collapsible=False,
         )
 
+
+    def get_application_modules(self):
+        """
+        Instantiate all application modules (i.e.
+         :class:`~admin_tools.dashboard.modules.AppList`,
+         :class:`~fluent_dashboard.modules.AppIconList` and
+         :class:`~fluent_dashboard.modules.CmsAppIconList`)
+         for use in the dashboard.
+        """
+        modules = []
         appgroups = get_application_groups()
-        recent_actions = modules.RecentActions(_('Recent Actions'), 5, enabled=False, collapsible=False)
-
-        # Add all items
-        self.children.append(quick_links)
-
         for title, kwargs in appgroups:
             AppListClass = get_class(kwargs.pop('module'))  #e.g. CmsAppIconlist, AppIconlist, Applist
-            self.children.append(AppListClass(title, **kwargs))
+            modules.append(AppListClass(title, **kwargs))
+        return modules
 
-        self.children.append(recent_actions)
+
+    def get_recent_actions_module(self):
+        """
+        Instantiate the :class:`~admin_tools.dashboard.modules.RecentActions` module for use in the dashboard.
+        """
+        return modules.RecentActions(_('Recent Actions'), 5, enabled=False, collapsible=False)
 
 
 class FluentAppIndexDashboard(AppIndexDashboard):
     """
-    Custom app index dashboard for Django applications.
+    A custom application index page for the Django admin interface.
+
+    This dashboard is displayed when one specific application is opened via the breadcrumb.
+    It displays the models and recent actions of the specific application.
+    To activate the dashboards add the following to your settings.py::
+
+        ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentAppIndexDashboard'
     """
 
     # disable title because its redundant with the model list module
     title = ''
 
-    def __init__(self, *args, **kwargs):
-        super(FluentAppIndexDashboard, self).__init__(*args, **kwargs)
+    def __init__(self, app_title, models, **kwargs):
+        super(FluentAppIndexDashboard, self).__init__(app_title, models, **kwargs)
+        self.children += (
+            self.get_model_list_module(),
+            self.get_recent_actions_module(),
+        )
 
-        model_list = modules.ModelList(self.app_title, self.models)
 
-        recent_actions = modules.RecentActions(
+    def get_model_list_module(self):
+        """
+        Instantiate a standard :class:`~admin_tools.dashboard.modules.ModelList` class
+        to display the models of this application.
+        """
+        return modules.ModelList(self.app_title, self.models)
+
+
+    def get_recent_actions_module(self):
+        """
+        Instantiate the :class:`~admin_tools.dashboard.modules.RecentActions` module
+        for use in the appliation index page.
+        """
+        return modules.RecentActions(
             _('Recent Actions'),
             include_list=self.get_app_content_types(),
             limit=5,
             enabled=False,
             collapsible=False
         )
-
-        self.children += [model_list, recent_actions]
-
-
-    def init_with_context(self, context):
-        """
-        Use this method if you need to access the request context.
-        """
-        return super(FluentAppIndexDashboard, self).init_with_context(context)
