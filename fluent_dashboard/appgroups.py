@@ -1,5 +1,5 @@
 """
-Internal split of applications
+Internal module to split applications and models into groups.
 """
 from fluent_dashboard import appsettings
 import itertools
@@ -45,6 +45,9 @@ def get_application_groups():
 
 
 def sort_cms_models(cms_models):
+    """
+    Sort a set of CMS-related models in a custom (predefined) order.
+    """
     cms_models.sort(key=lambda model: (
         get_cms_model_order(model['name']) if is_cms_app(model['app_name']) else 100,
         model['app_name'],
@@ -53,6 +56,9 @@ def sort_cms_models(cms_models):
 
 
 def is_cms_app(app_name):
+    """
+    Return whether the given application is a CMS app
+    """
     return app_name in CMS_APP_NAMES or 'cms' in app_name
 
 

@@ -6,8 +6,8 @@ from django.utils.translation import ugettext as _
 
 FLUENT_DASHBOARD_ICON_THEME = getattr(settings, "FLUENT_DASHBOARD_ICON_THEME", "oxygen")
 
-# The icon names are not Oxygen specific,
-# Oxygen uses the XDG icon naming spec.
+# The icon names are somewhat Oxygen specific,
+# yet based on the Freedesktop Naming Naming Specification.
 
 FLUENT_DASHBOARD_APP_ICONS = {
     'cms/page': 'internet-web-browser.png',

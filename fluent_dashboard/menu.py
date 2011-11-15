@@ -1,5 +1,5 @@
 """
-Custom menu for ECMS.
+Custom menu for fluent_dashboard apps.
 
 To activate the menu add the following to your settings.py::
 
