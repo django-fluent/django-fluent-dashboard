@@ -22,21 +22,36 @@ A quick overvivew of the available settings:
     FLUENT_DASHBOARD_DEFAULT_ICON = 'unknown.png'
 
     FLUENT_DASHBOARD_APP_GROUPS = (
-        (_('CMS'), (
-            '*',
-        )),
-        (_('Interactivity'), (
-            'django.contrib.comments.*',
-            'form_designer.*'
-            'threadedcomments.*',
-            'zinnia.*',
-        )),
-        (_('Administration'), (
-            'django.contrib.auth.*',
-            'django.contrib.sites.*',
-            'google_analytics.*',
-            'registration.*',
-        )),
+        (_('CMS'), {
+            'models': (
+                'cms.*',
+                'pages.*',
+                'fiber.*',
+            ),
+            'module': 'CmsAppIconList',
+            'collapsible': False,
+        }),
+        (_('Interactivity'), {
+            'models': (
+                'django.contrib.comments.*',
+                'form_designer.*'
+                'threadedcomments.*',
+                'zinnia.*',
+            ),
+        }),
+        (_('Administration'), {
+            'models': (
+                'django.contrib.auth.*',
+                'django.contrib.sites.*',
+                'google_analytics.*',
+                'registration.*',
+            ),
+        }),
+        (_('Applications'), {
+            'models': ('*',),
+            'module': 'AppList',
+            'collapsible': True,
+        }),
     )
 
 The icon names/paths are parsed in the following way:
@@ -58,6 +73,8 @@ This allows to easily switch between icon sets without having to update all sett
 The current theme is "Oxygen", which is freely available from KDE.
 You may use the icons under the `LGPL 3 license <http://www.gnu.org/licenses/lgpl-3.0.html>`_.
 
+.. _FLUENT_DASHBOARD_APP_ICONS:
+
 FLUENT_DASHBOARD_APP_ICONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -70,13 +87,25 @@ FLUENT_DASHBOARD_DEFAULT_ICON
 
 In case a suitable icon is not found, this icon is used.
 
+.. _FLUENT_DASHBOARD_APP_GROUPS:
+
 FLUENT_DASHBOARD_APP_GROUPS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The application groups to display at the dashboard.
-Each tuple defines the title, and list of included modules.
+Each tuple has a title, and dictionary which can have the following fields:
+
+* **models:** which models should be included. Simple pattern based filtering is provided by `django-admin-tools`, based on :func:`fnmatch()`.
+* **collapsible:** whether the group can be collapsed to a single line. Default is ``False`` for all elements to reduce clutter.
+* **module:** which dashboard module can be used. Possible values are:
+
+ * :class:`~admin_tools.dashboard.modules.AppList` (the default from `django-admin-tools`).
+ * :class:`~fluent_dashboard.modules.AppIconList`
+ * :class:`~fluent_dashboard.modules.CmsAppIconList`
+ * any other class, specified as full ``module.ClassName`` syntax.
+
 By default, there is a section for "CMS", "Interactivity" and "Administration" filled with known Django applications.
 
 The ``*`` selector without any application name, is special:
-it functions as a catch-all for all remaining unmatched items.
+it matches all applications which are not placed in any other groups.
 

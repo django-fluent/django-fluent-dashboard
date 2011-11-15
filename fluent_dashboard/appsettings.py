@@ -41,18 +41,37 @@ FLUENT_DASHBOARD_DEFAULT_ICON = getattr(settings, "FLUENT_DASHBOARD_DEFAULT_ICON
 FLUENT_DASHBOARD_APP_ICONS.update(getattr(settings, 'FLUENT_DASHBOARD_APP_ICONS', {}))
 
 FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
-    (_('CMS'), ('*',)),
-    (_('Interactivity'), (
-        'zinnia.*',
-        'django.contrib.comments.*',
-        'form_designer.*',
-        'threadedcomments.*',
-    )),
-    (_('Administration'), (
-        'django.contrib.auth.*',
-        'django.contrib.sites.*',
-        'registration.*',
-        'google_analytics.*',
-    )),
+    (_('CMS'), {
+        'models': [
+            "{0}.*".format(app) for app in FLUENT_DASHBOARD_CMS_APP_NAMES
+        ],
+        'module': 'fluent_dashboard.modules.CmsAppIconList',
+        'collapsible': False,
+    }),
+    (_('Interactivity'), {
+        'models': (
+            'django.contrib.comments.*',
+            'form_designer.*',
+            'threadedcomments.*',
+            'zinnia.*',
+        ),
+        'module': 'fluent_dashboard.modules.AppIconList',
+        'collapsible': False,
+    }),
+    (_('Administration'), {
+        'models': (
+            'django.contrib.auth.*',
+            'django.contrib.sites.*',
+            'registration.*',
+            'google_analytics.*',
+        ),
+        'module': 'fluent_dashboard.modules.AppIconList',
+        'collapsible': False,
+    }),
+    (_('Applications'), {
+        'models': ('*',),
+        'module': 'admin_tools.dashboard.modules.AppList',
+        'collapsible': False,
+    }),
     #(_('Developer tools'), ()),
 ))

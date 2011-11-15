@@ -14,8 +14,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 
-from fluent_dashboard.modules import CmsAppIconList, PersonalModule
-from fluent_dashboard.appgroups import get_application_groups
+from fluent_dashboard.modules import PersonalModule
+from fluent_dashboard.appgroups import get_application_groups, get_class
 
 
 class FluentIndexDashboard(Dashboard):
@@ -40,7 +40,8 @@ class FluentIndexDashboard(Dashboard):
         self.children.append(quick_links)
 
         for title, kwargs in appgroups:
-            self.children.append(CmsAppIconList(title, **kwargs))
+            AppListClass = get_class(kwargs.pop('module'))  #e.g. CmsAppIconlist, AppIconlist, Applist
+            self.children.append(AppListClass(title, **kwargs))
 
         self.children.append(recent_actions)
 

@@ -1,10 +1,12 @@
 """
 Internal module to split applications and models into groups.
 """
+from django.core.exceptions import ImproperlyConfigured
+from django.utils.importlib import import_module
 from fluent_dashboard import appsettings
 import itertools
 
-_groups = [group[1] for group in appsettings.FLUENT_DASHBOARD_APP_GROUPS]
+_groups = [groupdict['models'] for _, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS]
 
 ALL_KNOWN_APPS = list(itertools.chain(*_groups))
 if '*' in ALL_KNOWN_APPS:
@@ -23,6 +25,12 @@ CMS_MODEL_ORDER = {
     'content': 4,
     'file': 5,
     'site': 99
+)
+
+MODULE_ALIASES = {
+    'AppList': 'admin_tools.dashboard.modules.AppList',
+    'AppIconList': 'fluent_dashboard.modules.AppIconList',
+    'CmsAppIconList': 'fluent_dashboard.modules.CmsAppIconList',
 }
 
 
@@ -35,11 +43,22 @@ def get_application_groups():
     """
 
     groups = []
-    for title, patterns in appsettings.FLUENT_DASHBOARD_APP_GROUPS:
-        if '*' in patterns:
-            groups += (title, dict(exclude=ALL_KNOWN_APPS, collapsible=False)),
+    for title, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS:
+        if '*' in groupdict['models']:
+            default_module = 'AppList'
+            module_kwargs = {'exclude': ALL_KNOWN_APPS}
         else:
-            groups += (title, dict(models=patterns, collapsible=False)),
+            default_module = 'CmsAppIconList'
+            module_kwargs = {'models': groupdict['models']}
+
+        # Get module to display, can be a alias for known variations.
+        module = groupdict.get('module', default_module)
+        if MODULE_ALIASES.has_key(module):
+            module = MODULE_ALIASES[module]
+
+        module_kwargs['module'] = module
+        module_kwargs['collapsible'] = groupdict.get('collapsible', False)
+        groups.append((title, module_kwargs),)
 
     return groups
 
@@ -74,3 +93,27 @@ def get_cms_model_order(model_name):
         if name in model_name:
             return order
     return 99
+
+
+def get_class(import_path):
+    """
+    Import a class by name.
+    """
+    # Used from django-form-designer
+    # Copyright (c) 2009, Samuel Luescher, BSD licensed
+
+    try:
+        dot = import_path.rindex('.')
+    except ValueError:
+        raise ImproperlyConfigured("{0} isn't a Python path.".format(import_path))
+
+    module, classname = import_path[:dot], import_path[dot + 1:]
+    try:
+        mod = import_module(module)
+    except ImportError as e:
+        raise ImproperlyConfigured('Error importing module {0}: "{1}"'.format(module, e))
+
+    try:
+        return getattr(mod, classname)
+    except AttributeError:
+        raise ImproperlyConfigured('Module "{0}" does not define a "{1}" class.'.format(module, classname))
