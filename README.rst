@@ -7,11 +7,7 @@ Installation
 
 First install the module, preferably in a virtual environment::
 
-    mkvirtualenv fluent --no-site-packages
-    workon fluent
-    git clone https://github.com/edoburu/django-fluent-dashboard.git
-    cd django-fluent-dashboard
-    python setup.py install
+    pip install .
 
 Configuration
 -------------
@@ -44,12 +40,13 @@ yet recommended to have the full experience of the module.
 In ``urls.py``::
 
     urlpatterns += patterns('',
-        url(r'/admintools/', include('admin_tools.urls'))
+        url(r'/admintools/', include('admin_tools.urls')),
     )
 
-The database can be created afterwards::
+The database tables for ``admin_tools`` can be created afterwards::
 
     ./manage.py syncdb
+    ./manage.py migrate    # If South is installed
 
 Customizing the dashboard
 --------------------------
