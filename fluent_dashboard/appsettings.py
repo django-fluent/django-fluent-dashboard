@@ -38,6 +38,8 @@ FLUENT_DASHBOARD_APP_ICONS = {
 
 FLUENT_DASHBOARD_DEFAULT_ICON = getattr(settings, "FLUENT_DASHBOARD_DEFAULT_ICON", 'unknown.png')
 
+FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(settings, "FLUENT_DASHBOARD_CMS_PAGE_MODEL", None)
+
 FLUENT_DASHBOARD_APP_ICONS.update(getattr(settings, 'FLUENT_DASHBOARD_APP_ICONS', {}))
 
 FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
@@ -75,3 +77,9 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
     }),
     #(_('Developer tools'), ()),
 ))
+
+
+# Provide defaults for some popular Django CMSes
+if not FLUENT_DASHBOARD_CMS_PAGE_MODEL:
+    if 'cms' in settings.INSTALLED_APPS:
+        FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('cms', 'page')

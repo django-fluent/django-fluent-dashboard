@@ -21,6 +21,8 @@ A quick overvivew of the available settings:
 
     FLUENT_DASHBOARD_DEFAULT_ICON = 'unknown.png'
 
+    FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('cms', 'page')
+
     FLUENT_DASHBOARD_APP_GROUPS = (
         (_('CMS'), {
             'models': (
@@ -88,6 +90,13 @@ FLUENT_DASHBOARD_DEFAULT_ICON
 In case a suitable icon is not found, this icon is used.
 
 .. _FLUENT_DASHBOARD_APP_GROUPS:
+
+FLUENT_DASHBOARD_CMS_PAGE_MODEL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The model used to display a link to the CMS pages.
+The value is a tuple of application name, and model name.
+This is used in the welcome text of the :class:`~fluent_dashboard.modules.PersonalModule`.
 
 FLUENT_DASHBOARD_APP_GROUPS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -8,7 +8,9 @@ This package adds the following classes:
 * :class:`PersonalModule`
 """
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.db.models.loading import get_model
 from django.utils.translation import ugettext as _
 from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
@@ -33,6 +35,9 @@ class PersonalModule(modules.LinkList):
     #: Define the title to display
     title = _('Welcome,')
 
+    #: The model to use for the CMS pages link.
+    cms_page_model = appsettings.FLUENT_DASHBOARD_CMS_PAGE_MODEL
+
     #: Define the template to render
     template = 'fluent_dashboard/modules/personal.html'
 
@@ -49,13 +54,21 @@ class PersonalModule(modules.LinkList):
         self.title = _('Welcome,') + ' ' + (current_user.first_name or current_user.username)
 
         # Expose links
+        self.pages_link = None
+        self.pages_title = None
         self.password_link = reverse('%s:password_change' % site_name)
         self.logout_link = reverse('%s:logout' % site_name)
 
-        try:
-            self.pages_link = reverse('%s:ecms_cmsobject_changelist' % site_name)
-        except NoReverseMatch:
-            self.pages_link = None
+        if self.cms_page_model:
+            try:
+                app_label, model_name = self.cms_page_model
+                model = get_model(app_label, model_name)
+                self.pages_title = model._meta.verbose_name_plural.lower()
+                self.pages_link = reverse('{site}:{app}_{model}_changelist'.format(site=site_name, app=app_label.lower(), model=model_name.lower()))
+            except AttributeError:
+                raise ImproperlyConfigured("The value {0} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting (or cms_page_model value) does not reffer to an existing model.".format(self.cms_page_model))
+            except NoReverseMatch:
+                pass
 
     def is_empty(self):
         # Make sure the element is rendered.
