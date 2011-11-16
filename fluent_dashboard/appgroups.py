@@ -2,6 +2,7 @@
 Splitting and organizing applications and models into groups.
 This module is mostly meant for internal use.
 """
+from fnmatch import fnmatch
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.importlib import import_module
 from fluent_dashboard import appsettings
@@ -12,21 +13,6 @@ _groups = [groupdict['models'] for _, groupdict in appsettings.FLUENT_DASHBOARD_
 ALL_KNOWN_APPS = list(itertools.chain(*_groups))
 if '*' in ALL_KNOWN_APPS:
     ALL_KNOWN_APPS.remove('*')  # Default for CMS group, but not useful here.
-
-CMS_APP_NAMES = (
-    'cms',    # DjangoCMS
-    'pages',  # FeinCMS
-    'fiber',  # Django-Fiber
-)
-
-CMS_MODEL_ORDER = {
-    'page': 1,
-    'object': 2,
-    'layout': 3,
-    'content': 4,
-    'file': 5,
-    'site': 99
-)
 
 MODULE_ALIASES = {
     'AppList': 'admin_tools.dashboard.modules.AppList',
@@ -69,7 +55,7 @@ def sort_cms_models(cms_models):
     Sort a set of CMS-related models in a custom (predefined) order.
     """
     cms_models.sort(key=lambda model: (
-        get_cms_model_order(model['name']) if is_cms_app(model['app_name']) else 100,
+        get_cms_model_order(model['name']) if is_cms_app(model['app_name']) else 999,
         model['app_name'],
         model['title']
     ))
@@ -79,21 +65,21 @@ def is_cms_app(app_name):
     """
     Return whether the given application is a CMS app
     """
-    return app_name in CMS_APP_NAMES or 'cms' in app_name
+    for pat in appsettings.FLUENT_DASHBOARD_CMS_APP_NAMES:
+        if fnmatch(app_name, pat):
+            return True
 
-
-def get_app_order(app_name):
-    if is_cms_app(app_name):
-        return 0
-    else:
-        return 1
+    return False
 
 
 def get_cms_model_order(model_name):
-    for name, order in CMS_MODEL_ORDER.iteritems():
+    """
+    Return a numeric ordering for a model name.
+    """
+    for name, order in appsettings.FLUENT_DASHBOARD_CMS_MODEL_ORDER.iteritems():
         if name in model_name:
             return order
-    return 99
+    return 999
 
 
 def get_class(import_path):

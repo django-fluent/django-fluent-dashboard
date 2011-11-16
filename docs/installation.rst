@@ -38,3 +38,5 @@ Next, the `django-admin-tools` can be configured to use the ``fluent_dashboard``
     ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentAppIndexDashboard'
     ADMIN_TOOLS_MENU = 'fluent_dashboard.menu.FluentMenu'
 
+The Django admin dashboard should open now with the dashboard, configured with reasonable defaults.
+The application groups and icons can be customized with additional :doc:`configuration <configuration>`.
