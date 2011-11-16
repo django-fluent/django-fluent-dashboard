@@ -16,7 +16,7 @@ by providing additional widgets (called "modules") such as:
 Screenshot
 ==========
 
-.. image:: docs/images/dashboard.png
+.. image:: https://github.com/edoburu/django-fluent-dashboard/raw/master/docs/images/dashboard.png
    :width: 1056px
    :height: 741px
    :alt: django-fluent-dashboard preview
