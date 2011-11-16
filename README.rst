@@ -17,8 +17,8 @@ Screenshot
 ==========
 
 .. image:: https://github.com/edoburu/django-fluent-dashboard/raw/master/docs/images/dashboard.png
-   :width: 1056px
-   :height: 741px
+   :width: 1030px
+   :height: 715px
    :alt: django-fluent-dashboard preview
 
 Installation
