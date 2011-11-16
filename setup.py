@@ -20,9 +20,7 @@ setup(
     url='https://github.com/edoburu/django-fluent-dashboard',
     download_url='https://github.com/edoburu/django-fluent-dashboard/zipball/master',
 
-    packages=[
-        'fluent_dashboard',
-    ],
+    packages=find_packages(),
     include_package_data=True,
 
     zip_safe=False,
