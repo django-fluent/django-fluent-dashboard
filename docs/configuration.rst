@@ -145,23 +145,26 @@ it matches all applications which are not placed in any other groups.
 CMS integration
 ---------------
 
+.. _FLUENT_DASHBOARD_CMS_PAGE_MODEL:
+
 FLUENT_DASHBOARD_CMS_PAGE_MODEL
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The model used to display a link to the CMS pages.
-The value is a tuple of application name, and model name.
+The value is a tuple of `application name`, and `model name`.
 This is used in the welcome text of the :class:`~fluent_dashboard.modules.PersonalModule`.
+For some known CMS applications, this value is already set to a sane default.
 
 FLUENT_DASHBOARD_CMS_APP_NAMES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A list of patterns to define which applications should be considered as "CMS" applications.
 These applications are sorted on top in the :class:`~fluent_dashboard.modules.CmsAppIconList`
-and `~fluent_dashboard.items.CmsModelList` classes. The default ``FLUENT_DASHBOARD_APP_GROUPS``
+and :class:`~fluent_dashboard.items.CmsModelList` classes. The default ``FLUENT_DASHBOARD_APP_GROUPS``
 also uses this setting to fill the "CMS" category.
 
 FLUENT_DASHBOARD_CMS_MODEL_ORDER
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A dictionary of modelname/ordering items, to sort the models of CMS applications in a custom order.
+A dictionary of `modelname`: `ordering` items, to sort the models of CMS applications in a custom order.
 This can be used for example, to display the pages model first, and the files/images models next.

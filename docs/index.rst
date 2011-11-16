@@ -24,6 +24,14 @@ Contents:
    otherapps
    api/index
 
+Preview
+=======
+
+.. image:: images/dashboard.png
+   :width: 1056px
+   :height: 741px
+   :alt: django-fluent-dashboard preview
+
 Icon credits
 ============
 

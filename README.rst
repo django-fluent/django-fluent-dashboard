@@ -13,8 +13,16 @@ by providing additional widgets (called "modules") such as:
 * a configurable module layout for the admin homepage, through ``settings.py``.
 * a "return to site" link.
 
+Screenshot
+==========
+
+.. image:: docs/images/dashboard.png
+   :width: 1056px
+   :height: 741px
+   :alt: django-fluent-dashboard preview
+
 Installation
-===========
+============
 
 First install the module, preferably in a virtual environment::
 

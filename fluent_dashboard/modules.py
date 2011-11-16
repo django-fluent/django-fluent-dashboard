@@ -22,10 +22,17 @@ class PersonalModule(modules.LinkList):
     """
     A simple module to display a welcome message.
 
+    .. image:: /images/personalmodule.png
+       :width: 471px
+       :height: 77px
+       :alt: PersonalModule for django-fluent-dashboard
+
     It renders the template ``fluent_dashboard/modules/personal.html``,
     unless the ``template`` variable is overwritten.
     The module overrides :class:`~admin_tools.dashboard.modules.LinkList`,
     allowing links to be added to the element.
+    The :ref:`FLUENT_DASHBOARD_CMS_PAGE_MODEL` setting is used to display a link to the pages module.
+    If this setting is not defined, a general text will be displayed instead.
     """
     # Set admin_tools defaults
     draggable = False
@@ -78,6 +85,11 @@ class PersonalModule(modules.LinkList):
 class AppIconList(modules.AppList):
     """
     The list of applications, icon style.
+
+    .. image:: /images/appiconlist.png
+       :width: 471px
+       :height: 124px
+       :alt: AppIconList module for django-fluent-dashboard
 
     It uses the ``FLUENT_DASHBOARD_APP_ICONS`` setting to find application icons.
     """
@@ -152,6 +164,11 @@ class CmsAppIconList(AppIconList):
     """
     A variation of the :class:`AppIconList` class
     with a strong bias towards sorting CMS apps on top.
+
+    .. image:: /images/cmsappiconlist.png
+       :width: 471px
+       :height: 124px
+       :alt: CmsAppIconList module for django-fluent-dashboard
     """
     def init_with_context(self, context):
         """
