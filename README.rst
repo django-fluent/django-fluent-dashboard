@@ -62,7 +62,10 @@ The database tables for ``admin_tools`` can be created afterwards::
 Customizing the dashboard
 --------------------------
 
-The FLUENT_DASHBOARD_APP_ICONS is a dictionary that allows you to define extra icons
+Adding extra icons
+------------------
+
+The ``FLUENT_DASHBOARD_APP_ICONS`` setting is a dictionary that allows you to define extra icons
 for your own modules, and overwrite default settings. For example::
 
     FLUENT_DASHBOARD_APP_ICONS = {
@@ -76,7 +79,44 @@ The icon name is treated in 3 different formats:
 * Icon names with a `/` character, are relative to the ``STATIC_URL`` (or ``MEDIA_URL`` for Django 1.2).
 * Icon names without any path information, are relative to the current theme folder, e.g. `STATIC_URL`/fluent_dashboard/`themename`/
 
-.. seealso::
+Organizing the application groups
+---------------------------------
 
-    More customization options are explained in the documentation.
+The ``FLUENT_DASHBOARD_APP_GROUPS`` setting defines which applications are grouped.
+For example::
+
+    FLUENT_DASHBOARD_APP_GROUPS = (
+        (_('CMS'), {
+            'models': (
+                'cms.*',
+                'pages.*',
+                'fiber.*',
+            ),
+            'module': 'CmsAppIconList',
+            'collapsible': False,
+        }),
+        (_('Interactivity'), {
+            'models': (
+                'django.contrib.comments.*',
+                'form_designer.*'
+                'threadedcomments.*',
+                'zinnia.*',
+            ),
+        }),
+        (_('Administration'), {
+            'models': (
+                'django.contrib.auth.*',
+                'django.contrib.sites.*',
+                'google_analytics.*',
+                'registration.*',
+            ),
+        }),
+        (_('Applications'), {
+            'models': ('*',),
+            'module': 'AppList',
+            'collapsible': True,
+        }),
+    )
+
+Details about these options, and additional settings are explained in the documentation.
 
