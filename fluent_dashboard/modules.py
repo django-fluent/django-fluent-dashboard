@@ -75,8 +75,6 @@ class PersonalModule(modules.LinkList):
         return False
 
 
-
-
 class AppIconList(modules.AppList):
     """
     The list of applications, icon style.
@@ -89,7 +87,7 @@ class AppIconList(modules.AppList):
 
     # Allow old Django 1.2 MEDIA_URL, but prefer STATIC_URL if it's set.
     #: The current static root (considered read only)
-    icon_static_root = getattr(settings, 'STATIC_URL', settings.MEDIA_URL)
+    icon_static_root = getattr(settings, 'STATIC_URL', settings.MEDIA_URL) or settings.MEDIA_URL
     #: The current theme folder (considerd read only)
     icon_theme_root = "{0}fluent_dashboard/{1}/".format(icon_static_root, appsettings.FLUENT_DASHBOARD_ICON_THEME)
 
