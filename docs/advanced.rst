@@ -3,21 +3,37 @@
 Advanced customization
 ======================
 
-For advanced dashboard or menu layouts, the classes
-provided by `django-admin-tools` and `fluent-dashboard` can be overwritten.
-These custom classes can be used in the setings:
+For advanced dashboard or menu layouts bejond the normal :doc:`settings <configuration>`,
+the classes provided by this package (and additionally `django-admin-tools`) can be overwritten.
+
+Changing the dashboard layout
+-----------------------------
+
+To change the widget layout, extend the :class:`~fluent_dashboard.dashboard.FluentIndexDashboard` class
+and create the new module layout in the :func:`~fluent_dashboard.dashboard.FluentIndexDashboard.__init__`
+or :func:`~fluent_dashboard.dashboard.FluentIndexDashboard.init_with_context` function.
+
+The custom dashboard class can be loaded by referencing them in either one of these settings:
 
 * ``ADMIN_TOOLS_INDEX_DASHBOARD``
 * ``ADMIN_TOOLS_APP_INDEX_DASHBOARD``
-* ``ADMIN_TOOLS_MENU``
 
-The existing modules in ``fluent_dashboard.modules`` could be reused off course.
-
+Any existing classes from the ``fluent_dashboard.modules`` package could be reused off course.
 
 .. seealso::
     When customizing the dashboard module layout, dont forget to look at the `django-admin-tools <http://django-admin-tools.readthedocs.org/>`_
     package and :ref:`other applications <otherapps>` for additional modules to use. These packages have modules for RSS feeds,
     Varnish/Memcache status, and even tabbing/grouping items.
+
+Changing the menu layout
+------------------------
+
+The menu layout can be changed by extending the :class:`~fluent_dashboard.menu.FluentMenu` class,
+and overwriting the :func:`~fluent_dashboard.menu.FluentMenu.init_with_context` function.
+
+The custom menu class can be loaded by referencing it in the setting:
+
+* ``ADMIN_TOOLS_MENU``
 
 Available classes
 -----------------
