@@ -6,42 +6,66 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-11 00:04+0100\n"
-"PO-Revision-Date: 2011-01-11 00:05+0100\n"
+"POT-Creation-Date: 2011-11-16 08:17+0100\n"
+"PO-Revision-Date: 2011-11-16 08:18+0100\n"
 "Last-Translator: Diederik van der Boor <vdboor@gmail.com>\n"
 "Language-Team: Dutch <kde-i18n-doc@kde.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.1\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: dashboard.py:31
-msgid "Quick links"
-msgstr "Handige links"
-
-#: dashboard.py:37
-msgid "Return to site"
-msgstr "Terug naar de site"
-
-#: dashboard.py:38
-msgid "Change password"
-msgstr "Verander wachtwoord"
-
-#: dashboard.py:40
-msgid "Log out"
-msgstr "Uitloggen"
-
-#: dashboard.py:45
+#: appsettings.py:60
 msgid "CMS"
 msgstr "CMS"
 
-#: dashboard.py:51
+#: appsettings.py:67
+msgid "Interactivity"
+msgstr "Interactiviteit"
+
+#: appsettings.py:77
 msgid "Administration"
 msgstr "Systeembeheer"
 
-#: dashboard.py:56 dashboard.py:78
+#: appsettings.py:87
+msgid "Applications"
+msgstr "Applicaties"
+
+#: dashboard.py:85 dashboard.py:124
 msgid "Recent Actions"
 msgstr "Recente acties"
 
+#: items.py:58
+msgid "Return to site"
+msgstr "Terug naar site"
 
+#: menu.py:33
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: modules.py:34 modules.py:49
+msgid "Welcome,"
+msgstr "Welkom,"
+
+#: templates/fluent_dashboard/modules/personal.html:6
+#, python-format
+msgid ""
+"You can start editing pages using the <a href=\"%(pages_link)s\">pages</a> "
+"button."
+msgstr ""
+"U kunt pagina's bijwerken met de <a href=\"%(pages_link)s\">pagina's</a> knop."
+
+#: templates/fluent_dashboard/modules/personal.html:10
+msgid "You can start editing content using the buttons below."
+msgstr "Je kunt de pagina inhoud aanpassen met de knoppen hieronder."
+
+#~ msgid "Quick links"
+#~ msgstr "Handige links"
+
+#~ msgid "Change password"
+#~ msgstr "Verander wachtwoord"
+
+#~ msgid "Log out"
+#~ msgstr "Uitloggen"
