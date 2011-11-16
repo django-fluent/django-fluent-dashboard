@@ -26,6 +26,7 @@ FLUENT_DASHBOARD_APP_ICONS = {
     'form_designer/formdefinition': 'mail-mark-task.png',
     'form_designer/formlog': 'view-calendar-journal.png',
     'google_analytics/analytics': 'view-statistics.png',
+    'page/page': 'internet-web-browser.png',
     'registration/registrationprofile': 'list-add-user.png',
     'sites/site': 'applications-internet.png',
     'snippet/snippet': 'folder-txt.png',
@@ -41,10 +42,8 @@ FLUENT_DASHBOARD_DEFAULT_ICON = getattr(settings, "FLUENT_DASHBOARD_DEFAULT_ICON
 FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(settings, "FLUENT_DASHBOARD_CMS_PAGE_MODEL", None)
 
 FLUENT_DASHBOARD_CMS_APP_NAMES = getattr(settings, "FLUENT_DASHBOARD_CMS_APP_NAMES", (
-    'cms',    # DjangoCMS
-    'pages',  # FeinCMS
-    'fiber',  # Django-Fiber
-    '*cms*',  # wildcard match
+    '*cms*',    # DjangoCMS, FeinCMS and wildcard match  (should not be separate settings, causes errors in admin_tools 0.4.1)
+    'fiber',    # Django-Fiber
 ))
 
 FLUENT_DASHBOARD_CMS_MODEL_ORDER = getattr(settings, "FLUENT_DASHBOARD_CMS_MODEL_ORDER", {
@@ -99,3 +98,6 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
 if not FLUENT_DASHBOARD_CMS_PAGE_MODEL:
     if 'cms' in settings.INSTALLED_APPS:
         FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('cms', 'page')
+    elif 'feincms' in settings.INSTALLED_APPS:
+        FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('page', 'page')
+
