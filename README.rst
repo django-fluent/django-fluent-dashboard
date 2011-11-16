@@ -24,7 +24,11 @@ Screenshot
 Installation
 ============
 
-First install the module, preferably in a virtual environment::
+First install the module, preferably in a virtual environment. It can be installed from PyPI::
+
+    pip install django-fluent-dashboard
+
+Or the current folder can be installed::
 
     pip install .
 
