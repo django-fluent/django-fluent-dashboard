@@ -4,7 +4,7 @@ from os.path import dirname, join
 
 setup(
     name='django-fluent-dashboard',
-    version='0.2.0',
+    version='0.3.0dev',
     license='Apache License, Version 2.0',
 
     install_requires=[
