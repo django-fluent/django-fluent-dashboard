@@ -20,6 +20,7 @@ Contents:
 
    installation
    configuration
+   optionaldeps
    advanced
    otherapps
    api/index

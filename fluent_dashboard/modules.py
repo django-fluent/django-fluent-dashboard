@@ -6,7 +6,10 @@ This package adds the following classes:
 * :class:`AppIconList`
 * :class:`CmsAppIconList`
 * :class:`PersonalModule`
+* :class:`CacheStatusGroup`
 """
+import logging
+import socket
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, NoReverseMatch
@@ -16,6 +19,9 @@ from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
 from fluent_dashboard import appsettings
 from fluent_dashboard.appgroups import is_cms_app, sort_cms_models
+
+
+logger = logging.getLogger("fluent_dashboard.modules")
 
 
 class PersonalModule(modules.LinkList):
@@ -191,3 +197,43 @@ class CmsAppIconList(AppIconList):
 
             # Put remaining groups after the first CMS group.
             self.children = [single_cms_app] + non_cms_apps
+
+
+class CacheStatusGroup(modules.Group):
+    """
+    Display status modules for Varnish en Memcache, in a :class:`~admin_tools.modules.Group` module.
+
+    This module is only displayed when the :ref:`dashboardmods` package
+    is installed, added to the ``INSTALLED_APPS``, and the caches are configured and reachable.
+    For more information, see the :ref:`optional dependencies <cachestatus>` page.
+
+    .. image:: /images/cachestatusgroup.png
+       :width: 471px
+       :height: 198px
+       :alt: CacheStatusGroup module for django-fluent-dashboard
+    """
+
+    #: The default title
+    title = _("System status")
+    #: The default display mode, can be "tabs", "stacked" or "accordion"
+    display = "accordion"
+
+    def init_with_context(self, context):
+        """
+        Initializes the status list.
+        """
+        super(CacheStatusGroup, self).init_with_context(context)
+
+        if 'dashboardmods' in settings.INSTALLED_APPS:
+            import dashboardmods
+            memcache_mods = dashboardmods.get_memcache_dash_modules()
+
+            try:
+                varnish_mods = dashboardmods.get_varnish_dash_modules()
+            except (socket.error, KeyError) as e:
+                # dashboardmods 2.2 throws KeyError for 'cache_misses' when the Varnish cache is empty.
+                # Socket errors are also ignored, to work similar to the memcache stats.
+                logger.exception("Unable to request Varnish stats: {0}".format(str(e)))
+                varnish_mods = []
+
+            self.children = memcache_mods + varnish_mods

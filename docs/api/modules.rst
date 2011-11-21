@@ -21,3 +21,9 @@ The ``PersonalModule`` class
 .. autoclass:: fluent_dashboard.modules.PersonalModule
    :members:
 
+The ``CacheStatusGroup`` class
+------------------------------
+
+.. autoclass:: fluent_dashboard.modules.CacheStatusGroup
+   :members:
+

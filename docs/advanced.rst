@@ -60,4 +60,5 @@ which are suitable for overwriting them:
 * :class:`~fluent_dashboard.modules.AppIconList`: an :class:`~admin_tools.dashboard.modules.AppList` implementation that displays the models as icons.
 * :class:`~fluent_dashboard.modules.CmsAppIconList`: an :class:`~fluent_dashboard.modules.AppIconList` variation with a strong bios towards sorting CMS applications on top.
 * :class:`~fluent_dashboard.modules.PersonalModule`: a personal welcome text.
+* :class:`~fluent_dashboard.modules.CacheStatusGroup`: the statistics of Memcache and Varnish.
 

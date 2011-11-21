@@ -9,13 +9,15 @@ This package defines the following classes:
 These classes need to be linked in ``settings.py`` to be loaded by `django-admin-tools`.
 Off course, you can also extend the classes, and use those names in the settings instead.
 """
-
+from admin_tools.dashboard.modules import Group
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 
-from fluent_dashboard.modules import PersonalModule
+from fluent_dashboard.modules import PersonalModule, CacheStatusGroup
 from fluent_dashboard.appgroups import get_application_groups, get_class
+
 
 
 class FluentIndexDashboard(Dashboard):
@@ -32,6 +34,8 @@ class FluentIndexDashboard(Dashboard):
     * :func:`get_personal_module`
     * :func:`get_application_modules`
     * :func:`get_recent_actions_module`
+    * :func:`get_rss_modules`
+    * :func:`get_cache_status_modules`
 
     To have a menu which is consistent with the application groups displayed by this module,
     use the :class:`~fluent_dashboard.menu.FluentMenu` class to render the `admin_tools` menu.
@@ -48,6 +52,13 @@ class FluentIndexDashboard(Dashboard):
         self.children.append(self.get_personal_module())
         self.children.extend(self.get_application_modules())
         self.children.append(self.get_recent_actions_module())
+
+
+    def init_with_context(self, context):
+        request = context['request']
+        if 'dashboardmods' in settings.INSTALLED_APPS:
+            self.children.extend(self.get_rss_modules())
+            self.children.extend(self.get_cache_status_modules(request))
 
 
     def get_personal_module(self):
@@ -83,6 +94,31 @@ class FluentIndexDashboard(Dashboard):
         Instantiate the :class:`~admin_tools.dashboard.modules.RecentActions` module for use in the dashboard.
         """
         return modules.RecentActions(_('Recent Actions'), 5, enabled=False, collapsible=False)
+
+
+    def get_cache_status_modules(self, request):
+        """
+        Instantiate the :class:`~fluent_dashboard.modules.CacheStatusGroup` module for use in the dashboard.
+
+        This module displays the status of Varnish and Memcache,
+        if the :ref:`dashboardmods` package is installed and the caches are configured.
+        By default, these modules are only shown for the superuser.
+        """
+        if not request.user.is_superuser:
+            return []
+
+        return [CacheStatusGroup()]
+
+
+    def get_rss_modules(self):
+        """
+        Instantiate the RSS modules for use in the dashboard.
+        This module displays the RSS feeds of the :ref:`dashboardmods` package, if it is installed, and configured.
+        """
+        if not 'dashboardmods' in settings.INSTALLED_APPS:
+            return []
+        import dashboardmods
+        return dashboardmods.get_rss_dash_modules()
 
 
 class FluentAppIndexDashboard(AppIndexDashboard):

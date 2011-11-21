@@ -38,5 +38,10 @@ Next, the `django-admin-tools` can be configured to use the ``fluent_dashboard``
     ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentAppIndexDashboard'
     ADMIN_TOOLS_MENU = 'fluent_dashboard.menu.FluentMenu'
 
+That's all!
 The Django admin dashboard should open now with the dashboard, configured with sane defaults.
-The application groups and icons can be customized with additional :doc:`configuration <configuration>`.
+
+Next:
+
+* The application groups and icons can be customized with additional :doc:`configuration <configuration>`.
+* The Memcache and Varnish statistics can also be displayed by configuring some :doc:`optional dependencies <optionaldeps>`.

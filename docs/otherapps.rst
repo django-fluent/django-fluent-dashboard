@@ -34,6 +34,8 @@ Different model data can be hooked in, for example, new user registrations, numb
 
 * Website: https://github.com/Star2Billing/django-admin-tools-stats
 
+.. _dashboardmods:
+
 collowayproject/dashboardmods
 -----------------------------
 
@@ -41,6 +43,10 @@ Initiated by the The Washington Times, this package adds status modules to the a
 
 * Varnish
 * Memcached
+
+When the ``dashboardmods`` package is installed, and added to the ``INSTALLED_APPS``,
+the :class:`~fluent_dashboard.dashboard.FluentIndexDashboard` and :class:`~fluent_dashboard.modules.CacheStatusGroup`
+classed will automatically pick it up to display the cache status.
 
 Website: https://github.com/callowayproject/dashboardmods
 
