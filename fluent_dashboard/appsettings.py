@@ -15,9 +15,8 @@ FLUENT_DASHBOARD_APP_ICONS = {
     'cms/page': 'internet-web-browser.png',
     'comments/comment': 'kde-telepathy.png', #'irc-voice.png',
     'dashboardmods/rssdashboardmodule': 'feed-subscribe.png',
-    'ecms/cmslayout': 'view-choose.png',
-    'ecms/cmsobject': 'internet-web-browser.png',
-    'ecms/cmssite': 'preferences-system-network.png',
+    'fluent_pages/cmslayout': 'view-choose.png',
+    'fluent_pages/page': 'internet-web-browser.png',
     'ecms_media/file': 'folder.png',
     'fiber/contentitem': 'folder-txt.png',
     'fiber/file': 'folder.png',
@@ -44,6 +43,7 @@ FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(settings, "FLUENT_DASHBOARD_CMS_PAGE_M
 
 FLUENT_DASHBOARD_CMS_APP_NAMES = getattr(settings, "FLUENT_DASHBOARD_CMS_APP_NAMES", (
     '*cms*',    # DjangoCMS, FeinCMS and wildcard match  (should not be separate settings, causes errors in admin_tools 0.4.1)
+    'fluent*',  # Fluent pages
     'fiber',    # Django-Fiber
 ))
 
@@ -102,4 +102,5 @@ if not FLUENT_DASHBOARD_CMS_PAGE_MODEL:
         FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('cms', 'page')
     elif 'feincms' in settings.INSTALLED_APPS:
         FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('page', 'page')
-
+    elif 'fluent_pages' in settings.INSTALLED_APPS:
+        FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('fluent_pages', 'page')

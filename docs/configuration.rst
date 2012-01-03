@@ -32,8 +32,7 @@ A quick overvivew of the available settings:
     FLUENT_DASHBOARD_APP_GROUPS = (
         (_('CMS'), {
             'models': (
-                'cms.*',
-                'pages.*',
+                '*cms*.*',
                 'fiber.*',
             ),
             'module': 'CmsAppIconList',
@@ -68,10 +67,8 @@ A quick overvivew of the available settings:
     FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('cms', 'page')
 
     FLUENT_DASHBOARD_CMS_APP_NAMES = (
-        'cms',    # DjangoCMS
-        'pages',  # FeinCMS
+        '*cms*',  # wildcard match; DjangoCMS, FeinCMS
         'fiber',  # Django-Fiber
-        '*cms*',  # wildcard match
     )
 
     FLUENT_DASHBOARD_CMS_MODEL_ORDER = {
