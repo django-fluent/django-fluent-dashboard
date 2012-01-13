@@ -3,7 +3,7 @@
 Advanced customization
 ======================
 
-For advanced dashboard or menu layouts bejond the normal :doc:`settings <configuration>`,
+For advanced dashboard or menu layouts beyond the normal :doc:`settings <configuration>`,
 the classes provided by this package (and additionally `django-admin-tools`) can be overwritten.
 
 Changing the dashboard layout
