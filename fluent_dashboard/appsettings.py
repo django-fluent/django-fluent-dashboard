@@ -15,7 +15,7 @@ FLUENT_DASHBOARD_APP_ICONS = {
     'cms/page': 'internet-web-browser.png',
     'comments/comment': 'kde-telepathy.png', #'irc-voice.png',
     'dashboardmods/rssdashboardmodule': 'feed-subscribe.png',
-    'fluent_pages/cmslayout': 'view-choose.png',
+    'fluent_pages/pagelayout': 'view-choose.png',
     'fluent_pages/page': 'internet-web-browser.png',
     'ecms_media/file': 'folder.png',
     'fiber/contentitem': 'folder-txt.png',
@@ -103,4 +103,4 @@ if not FLUENT_DASHBOARD_CMS_PAGE_MODEL:
     elif 'feincms' in settings.INSTALLED_APPS:
         FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('page', 'page')
     elif 'fluent_pages' in settings.INSTALLED_APPS:
-        FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('fluent_pages', 'page')
+        FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('fluent_pages', 'urlnode')
