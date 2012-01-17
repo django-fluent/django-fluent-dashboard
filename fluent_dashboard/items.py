@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 from fluent_dashboard.appgroups import sort_cms_models
 import re
 
-RE_CHANGE_URL = re.compile("([^_]+)_([^_]+)_change")
+RE_CHANGE_URL = re.compile("(.+)_([^_]+)_change")
 
 
 class CmsModelList(items.ModelList):
@@ -114,5 +114,3 @@ class ReturnToSiteItem(items.MenuItem):
             return model_type.get_object_for_this_type(pk=object_id)
         except ObjectDoesNotExist:
             return None
-
-        return None

@@ -103,4 +103,4 @@ if not FLUENT_DASHBOARD_CMS_PAGE_MODEL:
     elif 'feincms' in settings.INSTALLED_APPS:
         FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('page', 'page')
     elif 'fluent_pages' in settings.INSTALLED_APPS:
-        FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('fluent_pages', 'urlnode')
+        FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('fluent_pages', 'page')
