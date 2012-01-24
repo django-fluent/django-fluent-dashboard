@@ -30,13 +30,16 @@ def get_application_groups():
     """
 
     groups = []
+    excluded = []
     for title, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS:
         if '*' in groupdict['models']:
             default_module = 'AppList'
-            module_kwargs = {'exclude': ALL_KNOWN_APPS}
+            module_kwargs = {'exclude': ALL_KNOWN_APPS + excluded[:]}
         else:
             default_module = 'CmsAppIconList'
-            module_kwargs = {'models': groupdict['models']}
+            module_kwargs = {'models': groupdict['models'],
+                             'exclude': excluded[:]}
+        excluded += groupdict['models']
 
         # Get module to display, can be a alias for known variations.
         module = groupdict.get('module', default_module)
