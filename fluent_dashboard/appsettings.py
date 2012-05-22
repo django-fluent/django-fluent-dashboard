@@ -27,6 +27,7 @@ FLUENT_DASHBOARD_APP_ICONS = {
     'form_designer/formlog': 'view-calendar-journal.png',
     'google_analytics/analytics': 'view-statistics.png',
     'page/page': 'internet-web-browser.png',
+    'media_tree/filenode': 'folder.png',
     'registration/registrationprofile': 'list-add-user.png',
     'sites/site': 'applications-internet.png',
     'snippet/snippet': 'folder-txt.png',
@@ -42,9 +43,10 @@ FLUENT_DASHBOARD_DEFAULT_ICON = getattr(settings, "FLUENT_DASHBOARD_DEFAULT_ICON
 FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(settings, "FLUENT_DASHBOARD_CMS_PAGE_MODEL", None)
 
 FLUENT_DASHBOARD_CMS_APP_NAMES = getattr(settings, "FLUENT_DASHBOARD_CMS_APP_NAMES", (
-    '*cms*',    # DjangoCMS, FeinCMS and wildcard match  (should not be separate settings, causes errors in admin_tools 0.4.1)
-    'fluent*',  # Fluent pages
-    'fiber',    # Django-Fiber
+    '*cms*',      # DjangoCMS, FeinCMS and wildcard match  (should not be separate settings, causes errors in admin_tools 0.4.1)
+    'fluent*',    # Fluent pages
+    'fiber',      # Django-Fiber
+    'media_tree', # django-media-tree
 ))
 
 FLUENT_DASHBOARD_CMS_MODEL_ORDER = getattr(settings, "FLUENT_DASHBOARD_CMS_MODEL_ORDER", {
