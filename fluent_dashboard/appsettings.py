@@ -15,6 +15,7 @@ FLUENT_DASHBOARD_APP_ICONS = {
     'cms/page': 'internet-web-browser.png',
     'comments/comment': 'kde-telepathy.png', #'irc-voice.png',
     'dashboardmods/rssdashboardmodule': 'feed-subscribe.png',
+    'fluent_blogs/entry': 'view-calendar-journal.png',
     'fluent_pages/pagelayout': 'view-choose.png',
     'fluent_pages/page': 'internet-web-browser.png',
     'ecms_media/file': 'folder.png',
