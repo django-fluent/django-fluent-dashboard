@@ -42,13 +42,11 @@ Next, create a project which uses the CMS::
 
 It should have the following settings::
 
-    ADMIN_MEDIA_PREFIX = '/static/admin/'
-    
     INSTALLED_APPS += (
         'fluent_dashboard',
 
         # enable the admin
-        'admin_tools',     # for staticfiles in Django 1.3
+        'admin_tools',
         'admin_tools.theming',
         'admin_tools.menu',
         'admin_tools.dashboard',
@@ -58,6 +56,10 @@ It should have the following settings::
     ADMIN_TOOLS_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentIndexDashboard'
     ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentAppIndexDashboard'
     ADMIN_TOOLS_MENU = 'fluent_dashboard.menu.FluentMenu'
+
+For Django 1.3 the following setting is also required::
+
+    ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 Note that some ``admin_tools`` applications are optional,
 yet recommended to have the full experience of the module.
