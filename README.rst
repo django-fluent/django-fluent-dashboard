@@ -63,7 +63,7 @@ yet recommended to have the full experience of the module.
 In ``urls.py``::
 
     urlpatterns += patterns('',
-        url(r'/admintools/', include('admin_tools.urls')),
+        url(r'^admintools/', include('admin_tools.urls')),
     )
 
 The database tables for ``admin_tools`` can be created afterwards::
