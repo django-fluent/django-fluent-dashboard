@@ -22,7 +22,7 @@ setup(
     ],
     extras_require = {
         'cachestatus': ['dashboardmods>=0.2.2'],
-    }
+    },
 
     description='An improved django-admin-tools dashboard for Django projects',
     long_description=open(join(dirname(__file__), 'README.rst')).read(),
