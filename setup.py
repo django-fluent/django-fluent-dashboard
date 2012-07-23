@@ -20,6 +20,9 @@ setup(
     install_requires=[
         'django-admin-tools>=0.4.1',  # 0.4.1 is the first release with Django 1.3 support.
     ],
+    extras_require = {
+        'cachestatus': ['dashboardmods>=0.2.2'],
+    }
 
     description='Django Fluent Dashboard - An improved django-admin-tools dashboard for Django projects',
     long_description=open(join(dirname(__file__), 'README.rst')).read(),
