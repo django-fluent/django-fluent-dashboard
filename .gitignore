@@ -1,10 +1,12 @@
 *.pyc
 *.pyo
-#*.mo
+*.mo
+*.db
+*.egg-info/
 .project
+.idea/
 .pydevproject
 .idea/workspace.xml
 .DS_Store
 dist/
-django_fluent_dashboard.egg-info/
 docs/_build/
