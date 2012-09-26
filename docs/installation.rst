@@ -9,7 +9,7 @@ This package can be installed using pip:
 
     pip install django-fluent-dashboard
 
-This should automatically install `django-admin-tools` 0.4.1 as well.
+This should automatically install django-admin-tools_ 0.4.1 as well.
 The 0.4.1 release is required to use Django 1.3.
 
 Django configuration
@@ -32,7 +32,7 @@ To enable the dashboard in Django, both the `fluent_dashboard` and the `admin_to
 .. note::
     The ``admin_tools.theming`` and ``admin_tools.menu`` applications are optional.
 
-Next, the `django-admin-tools` can be configured to use the ``fluent_dashboard`` instead, by using::
+Next, the django-admin-tools_ can be configured to use the ``fluent_dashboard`` instead, by using::
 
     ADMIN_TOOLS_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentIndexDashboard'
     ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentAppIndexDashboard'
@@ -45,3 +45,6 @@ Next:
 
 * The application groups and icons can be customized with additional :doc:`configuration <configuration>`.
 * The Memcache and Varnish statistics can also be displayed by configuring some :doc:`optional dependencies <optionaldeps>`.
+
+
+.. _django-admin-tools: http://django-admin-tools.readthedocs.org/

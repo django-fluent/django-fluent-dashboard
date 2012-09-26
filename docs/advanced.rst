@@ -4,7 +4,7 @@ Advanced customization
 ======================
 
 For advanced dashboard or menu layouts beyond the normal :doc:`settings <configuration>`,
-the classes provided by this package (and additionally `django-admin-tools`) can be overwritten.
+the classes provided by this package (and additionally django-admin-tools_) can be overwritten.
 
 Changing the dashboard layout
 -----------------------------
@@ -21,7 +21,7 @@ The custom dashboard class can be loaded by referencing them in either one of th
 Any existing classes from the ``fluent_dashboard.modules`` package could be reused off course.
 
 .. seealso::
-    When customizing the dashboard module layout, dont forget to look at the `django-admin-tools <http://django-admin-tools.readthedocs.org/>`_
+    When customizing the dashboard module layout, dont forget to look at the django-admin-tools_
     package and :ref:`other applications <otherapps>` for additional modules to use. These packages have modules for RSS feeds,
     Varnish/Memcache status, and even tabbing/grouping items.
 
@@ -62,3 +62,5 @@ which are suitable for overwriting them:
 * :class:`~fluent_dashboard.modules.PersonalModule`: a personal welcome text.
 * :class:`~fluent_dashboard.modules.CacheStatusGroup`: the statistics of Memcache and Varnish.
 
+
+.. _django-admin-tools: http://django-admin-tools.readthedocs.org/

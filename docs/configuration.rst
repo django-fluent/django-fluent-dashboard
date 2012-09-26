@@ -129,7 +129,8 @@ Each tuple has a title, and dictionary which can have the following fields:
 * **collapsible:** whether the group can be collapsed to a single line. Default is ``False`` for all elements to reduce clutter.
 * **module:** which dashboard module can be used. Possible values are:
 
- * :class:`~admin_tools.dashboard.modules.AppList` (the default from `django-admin-tools`).
+ * :class:`~admin_tools.dashboard.modules.AppList` (the default from django-admin-tools_).
+ * :class:`~admin_tools.dashboard.modules.ModelList` (the alternative from django-admin-tools_).
  * :class:`~fluent_dashboard.modules.AppIconList`
  * :class:`~fluent_dashboard.modules.CmsAppIconList`
  * any other class, specified as full ``module.ClassName`` syntax.
@@ -165,3 +166,6 @@ FLUENT_DASHBOARD_CMS_MODEL_ORDER
 
 A dictionary of `modelname`: `ordering` items, to sort the models of CMS applications in a custom order.
 This can be used for example, to display the pages model first, and the files/images models next.
+
+
+.. _django-admin-tools: http://django-admin-tools.readthedocs.org/
