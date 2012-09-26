@@ -16,6 +16,7 @@ if '*' in ALL_KNOWN_APPS:
 
 MODULE_ALIASES = {
     'AppList': 'admin_tools.dashboard.modules.AppList',
+    'ModelList': 'admin_tools.dashboard.modules.ModelList',
     'AppIconList': 'fluent_dashboard.modules.AppIconList',
     'CmsAppIconList': 'fluent_dashboard.modules.CmsAppIconList',
 }
@@ -32,7 +33,7 @@ def get_application_groups():
     groups = []
     for title, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS:
         if '*' in groupdict['models']:
-            default_module = 'AppList'
+            default_module = appsettings.FLUENT_DASHBOARD_DEFAULT_MODULE
             module_kwargs = {'exclude': ALL_KNOWN_APPS}
         else:
             default_module = 'CmsAppIconList'

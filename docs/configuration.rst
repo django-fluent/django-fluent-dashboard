@@ -26,6 +26,7 @@ A quick overvivew of the available settings:
 
     FLUENT_DASHBOARD_DEFAULT_ICON = 'unknown.png'
 
+    FLUENT_DASHBOARD_DEFAULT_MODULE = 'admin_tools.dashboard.modules.AppList'
 
     # Application grouping:
 
@@ -56,7 +57,7 @@ A quick overvivew of the available settings:
         }),
         (_('Applications'), {
             'models': ('*',),
-            'module': 'AppList',
+            'module': FLUENT_DASHBOARD_DEFAULT_MODULE,
             'collapsible': True,
         }),
     )
@@ -139,6 +140,14 @@ By default, there is a section for "CMS", "Interactivity" and "Administration" f
 
 The ``*`` selector without any application name, is special:
 it matches all applications which are not placed in any other groups.
+
+
+FLUENT_DASHBOARD_DEFAULT_MODULE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The application module used to group the remaining applications.
+Any of the valued for the **module** field of the FLUENT_DASHBOARD_APP_GROUPS_ setting can be used.
+
 
 CMS integration
 ---------------

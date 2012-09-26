@@ -1,3 +1,10 @@
+Changes in version 0.4.0 (dev)
+------------------------------
+
+* Added ``FLUENT_DASHBOARD_DEFAULT_MODULE`` setting, to switch between ``AppList``,  ``ModelList``, etc..
+* Improved support for the ``admin_tools.dashboard.modules.ModelList`` module.
+
+
 Changes in version 0.3.0
 ------------------------
 

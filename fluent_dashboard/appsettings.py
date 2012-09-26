@@ -61,6 +61,8 @@ FLUENT_DASHBOARD_CMS_MODEL_ORDER = getattr(settings, "FLUENT_DASHBOARD_CMS_MODEL
 
 FLUENT_DASHBOARD_APP_ICONS.update(getattr(settings, 'FLUENT_DASHBOARD_APP_ICONS', {}))
 
+FLUENT_DASHBOARD_DEFAULT_MODULE = getattr(settings, 'FLUENT_DASHBOARD_DEFAULT_MODULE', 'admin_tools.dashboard.modules.AppList')
+
 FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
     (_('CMS'), {
         'models': [
@@ -92,7 +94,7 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
     }),
     (_('Applications'), {
         'models': ('*',),
-        'module': 'admin_tools.dashboard.modules.AppList',
+        'module': FLUENT_DASHBOARD_DEFAULT_MODULE,
         'collapsible': False,
     }),
     #(_('Developer tools'), ()),
