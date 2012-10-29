@@ -14,7 +14,7 @@ finally:
 
 setup(
     name='django-fluent-dashboard',
-    version='0.3.1',
+    version='0.4.0dev',
     license='Apache License, Version 2.0',
 
     install_requires=[
