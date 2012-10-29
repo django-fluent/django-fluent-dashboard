@@ -1,4 +1,4 @@
-Changes in version 0.4.0 (dev)
+Changes in version 0.3.1 (dev)
 ------------------------------
 
 * Added ``FLUENT_DASHBOARD_DEFAULT_MODULE`` setting, to switch between ``AppList``,  ``ModelList``, etc..
