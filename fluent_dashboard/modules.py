@@ -116,17 +116,16 @@ class AppIconList(modules.AppList):
         """
         super(AppIconList, self).init_with_context(context)
         apps = self.children
-        path_levels = context['request'].META['SCRIPT_NAME'].rstrip('/').count('/')
 
         # Standard model only has a title, change_url and add_url.
         # Restore the app_name and name, so icons can be matched.
         for app in apps:
-            app_name = app['url'].strip('/').split('/')[-1]   # /admin/appname/
+            app_name = app['url'].strip('/').split('/')[-1]   # /foo/admin/appname/
             app['name'] = app_name
 
             for model in app['models']:
                 try:
-                    model_name = model['change_url'].strip('/').split('/')[2 + path_levels]   # admin/appname/modelname
+                    model_name = model['change_url'].strip('/').split('/')[-1]   # /foo/admin/appname/modelname
                     model['name'] = model_name
                     model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
                 except ValueError:

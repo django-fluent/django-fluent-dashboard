@@ -1,5 +1,11 @@
-Changes in version 0.3.1 (dev)
-------------------------------
+Changes in version 0.4.0
+------------------------
+
+* Fix dashboard icons when admin is mounted in a subpath (e.g. ``/en/admin/``)
+
+
+Changes in version 0.3.1
+------------------------
 
 * Added ``FLUENT_DASHBOARD_DEFAULT_MODULE`` setting, to switch between ``AppList``,  ``ModelList``, etc..
 * Improved support for the ``admin_tools.dashboard.modules.ModelList`` module.
