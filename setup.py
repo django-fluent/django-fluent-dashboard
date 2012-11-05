@@ -4,12 +4,13 @@ from os.path import dirname, join
 import sys, os
 
 # When creating the sdist, make sure the django.mo file also exists:
-try:
-    os.chdir('fluent_dashboard')
-    from django.core.management.commands.compilemessages import compile_messages
-    compile_messages(sys.stderr)
-finally:
-    os.chdir('..')
+if 'sdist' in sys.argv:
+    try:
+        os.chdir('fluent_dashboard')
+        from django.core.management.commands.compilemessages import compile_messages
+        compile_messages(sys.stderr)
+    finally:
+        os.chdir('..')
 
 
 setup(
