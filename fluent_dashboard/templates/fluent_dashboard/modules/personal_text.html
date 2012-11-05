@@ -1,0 +1,10 @@
+{% load i18n %}
+{% if module.pages_link %}
+  <p>
+    {% blocktrans with pages_link=module.pages_link pages_title=module.pages_title password_link=module.password_link logout_link=module.logout_link %}You can start editing pages using the <a href="{{ pages_link }}">{{ pages_title }}</a> button.{% endblocktrans %}
+  </p>
+{% else %}
+  <p>
+    {% blocktrans %}You can start editing content using the buttons below.{% endblocktrans %}
+  </p>
+{% endif %}
