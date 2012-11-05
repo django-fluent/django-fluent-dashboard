@@ -69,8 +69,8 @@ class PersonalModule(modules.LinkList):
         # Expose links
         self.pages_link = None
         self.pages_title = None
-        self.password_link = reverse('%s:password_change' % site_name)
-        self.logout_link = reverse('%s:logout' % site_name)
+        self.password_link = reverse('{0}:password_change'.format(site_name))
+        self.logout_link = reverse('{0}:logout'.format(site_name))
 
         if self.cms_page_model:
             try:
@@ -142,7 +142,7 @@ class AppIconList(modules.AppList):
         Return the icon for the given model.
         It reads the :ref:`FLUENT_DASHBOARD_APP_ICONS` setting.
         """
-        key = "%s/%s" % (app_name, model_name)
+        key = "{0}/{1}".format(app_name, model_name)
         return appsettings.FLUENT_DASHBOARD_APP_ICONS.get(key, default)
 
 
