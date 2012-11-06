@@ -1,4 +1,4 @@
-Changes in version 0.4.0
+Changes in version 0.3.2
 ------------------------
 
 * Fix dashboard icons when admin is mounted in a subpath (e.g. ``/en/admin/``)
