@@ -85,6 +85,7 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
         'models': (
             'django.contrib.auth.*',
             'django.contrib.sites.*',
+            '*.UserProfile',
             'registration.*',
             'dashboardmods.*',
             'google_analytics.*',

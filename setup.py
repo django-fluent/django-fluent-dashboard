@@ -4,17 +4,18 @@ from os.path import dirname, join
 import sys, os
 
 # When creating the sdist, make sure the django.mo file also exists:
-try:
-    os.chdir('fluent_dashboard')
-    from django.core.management.commands.compilemessages import compile_messages
-    compile_messages(sys.stderr)
-finally:
-    os.chdir('..')
+if 'sdist' in sys.argv:
+    try:
+        os.chdir('fluent_dashboard')
+        from django.core.management.commands.compilemessages import compile_messages
+        compile_messages(sys.stderr)
+    finally:
+        os.chdir('..')
 
 
 setup(
     name='django-fluent-dashboard',
-    version='0.3.1',
+    version='0.4.0dev',
     license='Apache License, Version 2.0',
 
     install_requires=[
