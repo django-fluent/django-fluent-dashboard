@@ -1,6 +1,11 @@
 Changes in version 0.4.0
 ------------------------
 
+None yet
+
+Changes in version 0.3.2
+------------------------
+
 * Fix dashboard icons when admin is mounted in a subpath (e.g. ``/en/admin/``)
 * Added ``fluent_dashboard/modules/personal_text.html`` template to change the personal text easily.
 * Added ``*.UserProfile`` to the Administration group.
