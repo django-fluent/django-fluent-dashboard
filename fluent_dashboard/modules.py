@@ -109,7 +109,6 @@ class AppIconList(modules.AppList):
     #: The current theme folder (considerd read only)
     icon_theme_root = "{0}fluent_dashboard/{1}/".format(icon_static_root, appsettings.FLUENT_DASHBOARD_ICON_THEME)
 
-
     def init_with_context(self, context):
         """
         Initializes the icon list.
@@ -120,17 +119,17 @@ class AppIconList(modules.AppList):
         # Standard model only has a title, change_url and add_url.
         # Restore the app_name and name, so icons can be matched.
         for app in apps:
-            app_name = app['url'].strip('/').split('/')[-1]   # /foo/admin/appname/
+            app_name = app['url'].strip('/').split('/')[-1]   # /admin/appname/
             app['name'] = app_name
-
+            
             for model in app['models']:
                 try:
-                    model_name = model['change_url'].strip('/').split('/')[-1]   # /foo/admin/appname/modelname
+                    model_name = model['change_url'].strip('/').split('/')[-1]   # admin/appname/modelname
                     model['name'] = model_name
                     model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
                 except ValueError:
                     model['icon'] = appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
-
+                
                 # Automatically add STATIC_URL before relative icon paths.
                 model['icon'] = self.get_icon_url(model['icon'])
                 model['app_name'] = app_name
