@@ -1,3 +1,10 @@
+Changes in version 0.3.3
+------------------------
+
+* Added more Oxygen icons.
+* Added icon for *sharedcontent* plugin of *django-fluent-contents*.
+
+
 Changes in version 0.3.2
 ------------------------
 
