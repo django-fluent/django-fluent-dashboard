@@ -13,8 +13,8 @@
                   <a class="fluent-dashboard-icon" href="{{ model.add_url }}"><img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" /></a>
                   <a class="fluent-dashboard-icon-caption" href="{{ model.add_url }}">{{ model.title }}</a>
                 {% else %}
-                  <img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" />
-                  {{ model.title }}
+                  <span class="fluent-dashboard-icon"><img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" /></span>
+                  <span class="fluent-dashboard-icon-caption">{{ model.title }}</span>
                 {% endif %}{% endif %}
             </li>
             {% endspaceless %}
