@@ -15,7 +15,7 @@ if 'sdist' in sys.argv:
 
 setup(
     name='django-fluent-dashboard',
-    version='0.4.0dev',
+    version='0.3.2',
     license='Apache License, Version 2.0',
 
     install_requires=[
@@ -41,10 +41,15 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
+        'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Framework :: Django',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Software Development :: Libraries :: Application Frameworks',
+        'Topic :: Software Development :: Libraries :: Python Modules',
     ]
 )

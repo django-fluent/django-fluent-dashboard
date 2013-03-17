@@ -30,6 +30,7 @@ FLUENT_DASHBOARD_APP_ICONS = {
     'page/page': 'internet-web-browser.png',
     'media_tree/filenode': 'folder.png',
     'registration/registrationprofile': 'list-add-user.png',
+    'sharedcontent/sharedcontent': 'x-office-document.png',
     'sites/site': 'applications-internet.png',
     'snippet/snippet': 'folder-txt.png',
     'tagging/tag': 'feed-subscribe.png',

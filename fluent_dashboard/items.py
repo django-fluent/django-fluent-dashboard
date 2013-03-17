@@ -22,6 +22,7 @@ class CmsModelList(items.ModelList):
         """
         Initialize the menu.
         """
+        # Apply the include/exclude patterns:
         listitems = self._visible_models(context['request'])
 
         # Convert to a similar data structure like the dashboard icons have.
@@ -32,7 +33,7 @@ class CmsModelList(items.ModelList):
               'title': capfirst(model._meta.verbose_name_plural),
               'url': self._get_admin_change_url(model, context)
             }
-            for model, perms in listitems if perms['change']
+            for model, perms in listitems if self.is_item_visible(model, perms)
         ]
 
         # Sort models.
@@ -41,6 +42,18 @@ class CmsModelList(items.ModelList):
         # Convert to items
         for model in models:
             self.children.append(items.MenuItem(title=model['title'], url=model['url']))
+
+
+    def is_item_visible(self, model, perms):
+        """
+        Return whether the model should be displayed in the menu.
+        By default it checks for the ``perms['change']`` value; only items with change permission will be displayed.
+        This function can be extended to support "view permissions" for example.
+
+        :param model: The model class
+        :param perms: The permissions from :func:`ModelAdmin.get_model_perms()<django.contrib.admin.ModelAdmin.get_model_perms>`.
+        """
+        return perms['change']
 
 
 class ReturnToSiteItem(items.MenuItem):

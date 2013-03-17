@@ -1,7 +1,12 @@
-Changes in version 0.4.0
+Changes in version 0.3.3
 ------------------------
 
-None yet
+* Added more Oxygen icons.
+* Added icon for *sharedcontent* plugin of *django-fluent-contents*.
+* Fixed ``KeyError`` when a model has add support, but no edit support.
+* Fixed icon layout when a model has no permissions to add/edit.
+* Fixed welcome text in personal module, remove pages link if the user has no permission to edit pages.
+
 
 Changes in version 0.3.2
 ------------------------
