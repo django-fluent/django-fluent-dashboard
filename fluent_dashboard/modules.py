@@ -76,12 +76,17 @@ class PersonalModule(modules.LinkList):
             try:
                 app_label, model_name = self.cms_page_model
                 model = get_model(app_label, model_name)
-                self.pages_title = model._meta.verbose_name_plural.lower()
-                self.pages_link = reverse('{site}:{app}_{model}_changelist'.format(site=site_name, app=app_label.lower(), model=model_name.lower()))
+                pages_title = model._meta.verbose_name_plural.lower()
+                pages_link = reverse('{site}:{app}_{model}_changelist'.format(site=site_name, app=app_label.lower(), model=model_name.lower()))
             except AttributeError:
                 raise ImproperlyConfigured("The value {0} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting (or cms_page_model value) does not reffer to an existing model.".format(self.cms_page_model))
             except NoReverseMatch:
                 pass
+            else:
+                # Also check if the user has permission to view the module.'
+                if current_user.has_perm('{0}.{1}'.format(model._meta.app_label, model._meta.get_change_permission())):
+                    self.pages_title = pages_title
+                    self.pages_link = pages_link
 
     def is_empty(self):
         # Make sure the element is rendered.
