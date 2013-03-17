@@ -120,12 +120,12 @@ class AppIconList(modules.AppList):
         # Standard model only has a title, change_url and add_url.
         # Restore the app_name and name, so icons can be matched.
         for app in apps:
-            app_name = app['url'].strip('/').split('/')[-1]   # /foo/admin/appname/
+            app_name = self._get_app_name(app)
             app['name'] = app_name
 
             for model in app['models']:
                 try:
-                    model_name = model['change_url'].strip('/').split('/')[-1]   # /foo/admin/appname/modelname
+                    model_name = self._get_model_name(model)
                     model['name'] = model_name
                     model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
                 except ValueError:
@@ -134,6 +134,25 @@ class AppIconList(modules.AppList):
                 # Automatically add STATIC_URL before relative icon paths.
                 model['icon'] = self.get_icon_url(model['icon'])
                 model['app_name'] = app_name
+
+
+    def _get_app_name(self, appdata):
+        """
+        Extract the app name from the ``appdata`` that *django-admin-tools* provides.
+        """
+        return appdata['url'].strip('/').split('/')[-1]   # /foo/admin/appname/
+
+
+    def _get_model_name(self, modeldata):
+        """
+        Extract the model name from the ``modeldata`` that *django-admin-tools* provides.
+        """
+        if 'change_url' in modeldata:
+            return modeldata['change_url'].strip('/').split('/')[-1]   # /foo/admin/appname/modelname
+        elif 'add_url' in modeldata:
+            return modeldata['add_url'].strip('/').split('/')[-2]      # /foo/admin/appname/modelname/add
+        else:
+            raise ValueError("Missing attributes in modeldata to find the model name!")
 
 
     def get_icon_for_model(self, app_name, model_name, default=None):

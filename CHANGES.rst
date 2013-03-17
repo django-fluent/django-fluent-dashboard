@@ -3,6 +3,7 @@ Changes in version 0.3.3
 
 * Added more Oxygen icons.
 * Added icon for *sharedcontent* plugin of *django-fluent-contents*.
+* Fixed ``KeyError`` when a model has add support, but no edit support.
 
 
 Changes in version 0.3.2
