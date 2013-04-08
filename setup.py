@@ -15,7 +15,7 @@ if 'sdist' in sys.argv:
 
 setup(
     name='django-fluent-dashboard',
-    version='0.3.3',
+    version='0.3.4',
     license='Apache License, Version 2.0',
 
     install_requires=[

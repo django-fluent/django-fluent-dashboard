@@ -1,3 +1,9 @@
+Changes in version 0.3.4
+------------------------
+
+* Fixed a packaging error, ``dashboard.css`` was missing in the dist.
+
+
 Changes in version 0.3.3
 ------------------------
 
