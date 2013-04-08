@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-16 08:56+0100\n"
+"POT-Creation-Date: 2013-04-08 16:04+0200\n"
 "PO-Revision-Date: 2011-11-16 08:55+0100\n"
 "Last-Translator: Diederik van der Boor <vdboor@gmail.com>\n"
 "Language-Team: Dutch <kde-i18n-doc@kde.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.2\n"
 
-#: appsettings.py:62
+#: appsettings.py:68
 msgid "CMS"
 msgstr "CMS"
 
-#: appsettings.py:69
+#: appsettings.py:75
 msgid "Interactivity"
 msgstr "Interactiviteit"
 
-#: appsettings.py:79
+#: appsettings.py:85
 msgid "Administration"
 msgstr "Systeembeheer"
 
-#: appsettings.py:89
+#: appsettings.py:97
 msgid "Applications"
 msgstr "Applicaties"
 
-#: dashboard.py:85 dashboard.py:124
+#: dashboard.py:96 dashboard.py:160
 msgid "Recent Actions"
 msgstr "Recente acties"
 
-#: items.py:58
+#: items.py:71
 msgid "Return to site"
 msgstr "Terug naar site"
 
@@ -45,11 +45,15 @@ msgstr "Terug naar site"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: modules.py:36 modules.py:54
+#: modules.py:49 modules.py:67
 msgid "Welcome,"
 msgstr "Welkom,"
 
-#: templates/fluent_dashboard/modules/personal.html:6
+#: modules.py:240
+msgid "System status"
+msgstr "Systeemstatus"
+
+#: templates/fluent_dashboard/modules/personal_text.html:4
 #, python-format
 msgid ""
 "You can start editing pages using the <a href=\"%(pages_link)s\">"
@@ -58,15 +62,6 @@ msgstr ""
 "U kunt pagina's bijwerken met de <a href=\"%(pages_link)s\">%(pages_title)s</"
 "a> knop."
 
-#: templates/fluent_dashboard/modules/personal.html:10
+#: templates/fluent_dashboard/modules/personal_text.html:8
 msgid "You can start editing content using the buttons below."
 msgstr "Je kunt de pagina inhoud aanpassen met de knoppen hieronder."
-
-#~ msgid "Quick links"
-#~ msgstr "Handige links"
-
-#~ msgid "Change password"
-#~ msgstr "Verander wachtwoord"
-
-#~ msgid "Log out"
-#~ msgstr "Uitloggen"
