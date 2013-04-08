@@ -15,11 +15,11 @@ if 'sdist' in sys.argv:
 
 setup(
     name='django-fluent-dashboard',
-    version='0.3.2',
+    version='0.3.3',
     license='Apache License, Version 2.0',
 
     install_requires=[
-        'django-admin-tools>=0.4.1',  # 0.4.1 is the first release with Django 1.3 support.
+        'django-admin-tools>=0.5.1',  # 0.5.1 has proper Django 1.4 support.
     ],
     extras_require = {
         'cachestatus': ['dashboardmods>=0.2.2'],
