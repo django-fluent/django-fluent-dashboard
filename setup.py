@@ -22,7 +22,7 @@ setup(
         'django-admin-tools>=0.5.1',  # 0.5.1 has proper Django 1.4 support.
     ],
     extras_require = {
-        'cachestatus': ['dashboardmods>=0.2.2'],
+        'cachestatus': ['dashboardmods>=0.2.2', 'feedparser', 'python-varnish'],
     },
 
     description='An improved django-admin-tools dashboard for Django projects',
