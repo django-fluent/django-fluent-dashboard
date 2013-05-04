@@ -239,7 +239,9 @@ class CacheStatusGroup(modules.Group):
     #: The default title
     title = _("System status")
     #: The default display mode, can be "tabs", "stacked" or "accordion"
-    display = "accordion"
+    display = "stacked"
+    #: Hide by default
+    enabled = False
 
     def init_with_context(self, context):
         """
