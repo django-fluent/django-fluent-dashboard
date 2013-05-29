@@ -10,6 +10,7 @@ This package adds the following classes:
 """
 import logging
 import socket
+import django
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, NoReverseMatch
@@ -59,12 +60,13 @@ class PersonalModule(modules.LinkList):
         Initializes the link list.
         """
         super(PersonalModule, self).init_with_context(context)
-
         current_user = context['request'].user
+        current_username = (current_user.first_name or current_user.username) if django.VERSION < (1, 5) else current_user.get_short_name()
         site_name = get_admin_site_name(context)
 
         # Personalize
-        self.title = _('Welcome,') + ' ' + (current_user.first_name or current_user.username)
+        current_username = 
+        self.title = _('Welcome,') + ' ' + (current_username)
 
         # Expose links
         self.pages_link = None
