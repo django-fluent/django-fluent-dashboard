@@ -68,7 +68,6 @@ class PersonalModule(modules.LinkList):
         site_name = get_admin_site_name(context)
 
         # Personalize
-        current_username = 
         self.title = _('Welcome,') + ' ' + (current_username)
 
         # Expose links
