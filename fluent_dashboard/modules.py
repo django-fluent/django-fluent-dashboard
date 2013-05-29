@@ -61,7 +61,7 @@ class PersonalModule(modules.LinkList):
         """
         super(PersonalModule, self).init_with_context(context)
         current_user = context['request'].user
-        current_username = (current_user.first_name or current_user.username) if django.VERSION < (1, 5) else current_user.get_short_name()
+        current_username = current_user.first_name or current_user.username if django.VERSION < (1, 5) else current_user.get_short_name()
         site_name = get_admin_site_name(context)
 
         # Personalize
