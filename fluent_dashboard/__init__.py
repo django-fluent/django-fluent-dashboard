@@ -1,4 +1,5 @@
-VERSION = (0, 1, 0)
+# following PEP 386
+__version__ = "0.3.5"
 
 # Do some sane version checking
 import admin_tools
