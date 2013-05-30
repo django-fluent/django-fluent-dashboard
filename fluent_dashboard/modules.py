@@ -64,7 +64,7 @@ class PersonalModule(modules.LinkList):
         if django.VERSION < (1, 5):
             current_username = current_user.first_name or current_user.username
         else:
-            current_username = current_user.get_short_name()
+            current_username = current_user.get_short_name() or current_user.get_username()
         site_name = get_admin_site_name(context)
 
         # Personalize
