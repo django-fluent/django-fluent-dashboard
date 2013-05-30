@@ -1,3 +1,12 @@
+Changes in version 0.3.5
+------------------------
+
+* Added filebrowser icon.
+* Fix custom user model support of Django 1.5.
+* Fix requirements of extras_require cachestatus
+* Hide cache status group by default.
+
+
 Changes in version 0.3.4
 ------------------------
 
