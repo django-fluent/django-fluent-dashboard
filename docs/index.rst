@@ -43,7 +43,7 @@ see the :ref:`FLUENT_DASHBOARD_ICON_THEME` setting in the :ref:`configuration` s
 
 For more information about the Oxygen icon theme, see:
 
-* http://www.oxyen-icons.org/
+* http://www.oxygen-icons.org/
 * http://techbase.kde.org/Projects/Oxygen/Licensing
 
 The Oxygen icon theme can be downloaded from:
