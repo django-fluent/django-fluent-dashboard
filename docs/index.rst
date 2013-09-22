@@ -47,7 +47,7 @@ For more information about the Oxygen icon theme, see:
 * http://techbase.kde.org/Projects/Oxygen/Licensing
 
 The Oxygen icon theme can be downloaded from:
-http://download.kde.org/stable/4.9.0/src/oxygen-icons-4.9.0.tar.xz.
+http://download.kde.org/stable/4.10.0/src/oxygen-icons-4.10.0.tar.xz.
 
 
 Indices and tables
