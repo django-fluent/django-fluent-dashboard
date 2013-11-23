@@ -1,3 +1,10 @@
+Changes in version 0.3.6
+------------------------
+
+* Fix error when primary keys are not an integer.
+* Added more Oxygen icons.
+
+
 Changes in version 0.3.5
 ------------------------
 
