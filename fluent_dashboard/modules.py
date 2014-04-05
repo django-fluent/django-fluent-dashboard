@@ -264,5 +264,7 @@ class CacheStatusGroup(modules.Group):
                 # Socket errors are also ignored, to work similar to the memcache stats.
                 logger.exception("Unable to request Varnish stats: {0}".format(str(e)))
                 varnish_mods = []
+            except ImportError:
+                varnish_mods = []
 
             self.children = memcache_mods + varnish_mods
