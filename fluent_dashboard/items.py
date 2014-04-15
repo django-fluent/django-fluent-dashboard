@@ -108,7 +108,7 @@ class ReturnToSiteItem(items.MenuItem):
             if not match:
                 return None
 
-            object_id = int(resolvermatch.args[0])
+            object_id = resolvermatch.args[0]  # Can be string (e.g. a country code as PK).
             return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
         return None
 
