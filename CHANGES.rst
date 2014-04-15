@@ -1,3 +1,10 @@
+Changes in version 0.4.0
+------------------------
+
+* Allow passing all ``DashboardModule`` kwargs to ``FLUENT_DASHBOARD_APP_GROUPS``.
+* Fix assumption that varnish_ is installed because dashboardmods_ is.
+
+
 Changes in version 0.3.6
 ------------------------
 
@@ -88,3 +95,5 @@ Initial internal release
 
 .. _django-admin-tools: https://bitbucket.org/izi/django-admin-tools/wiki/Home
 .. _django-fluent-contents: https://github.com/edoburu/django-fluent-contents
+.. _dashboardmods: https://github.com/callowayproject/dashboardmods
+.. _varnish: https://github.com/justquick/python-varnish_
