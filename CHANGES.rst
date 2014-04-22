@@ -1,8 +1,8 @@
 Changelog
 =========
 
-Changes in version 0.4.0
-------------------------
+Changes in version 0.4.0 (dev)
+------------------------------
 
 * Allow passing all ``DashboardModule`` kwargs to ``FLUENT_DASHBOARD_APP_GROUPS``.
 * Fix assumption that varnish_ is installed because dashboardmods_ is.
