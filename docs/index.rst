@@ -24,6 +24,7 @@ Contents:
    advanced
    otherapps
    api/index
+   changelog
 
 Preview
 =======
