@@ -18,6 +18,8 @@ FLUENT_DASHBOARD_APP_ICONS = {
     'fluent_blogs/entry': 'view-calendar-journal.png',
     'fluent_pages/pagelayout': 'view-choose.png',
     'fluent_pages/page': 'internet-web-browser.png',
+    'fluent_faq/faqquestion': 'system-help.png',
+    'fluent_faq/faqcategory': 'custom-bookmarks-help.png',
     'fiber/contentitem': 'folder-txt.png',
     'fiber/file': 'folder.png',
     'fiber/image': 'folder-image.png',
