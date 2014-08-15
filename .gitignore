@@ -8,5 +8,6 @@
 .pydevproject
 .idea/workspace.xml
 .DS_Store
+build/
 dist/
 docs/_build/
