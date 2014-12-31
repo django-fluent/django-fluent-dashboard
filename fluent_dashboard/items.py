@@ -123,6 +123,12 @@ class ReturnToSiteItem(items.MenuItem):
         except ContentType.DoesNotExist:
             return None
 
+        # Pointless to fetch the object, if there is no URL to generate
+        # Avoid another database query.
+        ModelClass = model_type.model_class()
+        if not hasattr(ModelClass, 'get_absolute_url'):
+            return None
+
         try:
             return model_type.get_object_for_this_type(pk=object_id)
         except ObjectDoesNotExist:
