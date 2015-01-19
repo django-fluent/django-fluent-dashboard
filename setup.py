@@ -11,6 +11,12 @@ import sys
 if 'sdist' in sys.argv or 'develop' in sys.argv:
     try:
         os.chdir('fluent_dashboard')
+
+        from django.core.management.commands.compilemessages import Command
+        command = Command()
+        command.execute(stdout=sys.stderr, verbosity=1)
+    except ImportError:
+        # < Django 1.7
         from django.core.management.commands.compilemessages import compile_messages
         compile_messages(sys.stderr)
     finally:
@@ -36,7 +42,7 @@ setup(
     license='Apache License, Version 2.0',
 
     install_requires=[
-        'django-admin-tools>=0.5.1',  # 0.5.1 has proper Django 1.4 support.
+        'django-admin-tools>=0.5.2',  # 0.5.2 has proper Django 1.5/1.6 support.
     ],
     requires=[
         'Django (>=1.3)',
