@@ -1,11 +1,16 @@
 Changelog
 =========
 
-Changes in version 0.4.0 (dev)
-------------------------------
+Changes in version 0.4.0
+------------------------
 
 * Allow passing all ``DashboardModule`` kwargs to ``FLUENT_DASHBOARD_APP_GROUPS``.
+* Added new Oxygen icons
 * Fix assumption that varnish_ is installed because dashboardmods_ is.
+* Fix showing disabled application groups in the menu
+* Fix 500 error when PK is not an int.
+* Fix missing icons for django-fluent-faq_.
+* Fix missing icons for django-fluent-comments_.
 
 
 Changes in version 0.3.6
@@ -98,5 +103,7 @@ Initial internal release
 
 .. _django-admin-tools: https://bitbucket.org/izi/django-admin-tools/wiki/Home
 .. _django-fluent-contents: https://github.com/edoburu/django-fluent-contents
+.. _django-fluent-comments: https://github.com/edoburu/django-fluent-comments
+.. _django-fluent-faq: https://github.com/edoburu/django-fluent-faq
 .. _dashboardmods: https://github.com/callowayproject/dashboardmods
 .. _varnish: https://github.com/justquick/python-varnish_

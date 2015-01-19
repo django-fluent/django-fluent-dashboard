@@ -1,5 +1,5 @@
 # following PEP 386
-__version__ = "0.4a1"
+__version__ = "0.4"
 
 # Do some sane version checking
 import admin_tools
