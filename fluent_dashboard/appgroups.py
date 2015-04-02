@@ -41,7 +41,7 @@ def get_application_groups():
 
         # Get module to display, can be a alias for known variations.
         module = groupdict.get('module', default_module)
-        if MODULE_ALIASES.has_key(module):
+        if module in MODULE_ALIASES:
             module = MODULE_ALIASES[module]
 
         module_kwargs['module'] = module
