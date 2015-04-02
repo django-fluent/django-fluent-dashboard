@@ -68,11 +68,7 @@ class PersonalModule(modules.LinkList):
         site_name = get_admin_site_name(context)
 
         # Personalize
-<<<<<<< HEAD
-        self.title = _('Welcome,') + ' ' + current_user.get_short_name()
-=======
         self.title = _('Welcome,') + ' ' + (current_username)
->>>>>>> 7bb50d75c447881abe145185b58ba56c5aeb6abe
 
         # Expose links
         self.pages_link = None
@@ -132,20 +128,12 @@ class AppIconList(modules.AppList):
         # Standard model only has a title, change_url and add_url.
         # Restore the app_name and name, so icons can be matched.
         for app in apps:
-<<<<<<< HEAD
-            app_name = app['url'].strip('/').split('/')[-1]   # /admin/appname/
-=======
             app_name = self._get_app_name(app)
->>>>>>> 7bb50d75c447881abe145185b58ba56c5aeb6abe
             app['name'] = app_name
             
             for model in app['models']:
                 try:
-<<<<<<< HEAD
-                    model_name = model['change_url'].strip('/').split('/')[-1]   # admin/appname/modelname
-=======
                     model_name = self._get_model_name(model)
->>>>>>> 7bb50d75c447881abe145185b58ba56c5aeb6abe
                     model['name'] = model_name
                     model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
                 except ValueError:

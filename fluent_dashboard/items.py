@@ -33,11 +33,7 @@ class CmsModelList(items.ModelList):
               'title': capfirst(model._meta.verbose_name_plural),
               'url': self._get_admin_change_url(model, context)
             }
-<<<<<<< HEAD
             for model, perms in listitems if (perms['view'] or perms['change'])
-=======
-            for model, perms in listitems if self.is_item_visible(model, perms)
->>>>>>> 7bb50d75c447881abe145185b58ba56c5aeb6abe
         ]
 
         # Sort models.
