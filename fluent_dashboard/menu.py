@@ -35,7 +35,8 @@ class FluentMenu(Menu):
         ]
 
         for title, kwargs in get_application_groups():
-            self.children.append(CmsModelList(title, **kwargs))
+            if kwargs.get('enabled', True):
+                self.children.append(CmsModelList(title, **kwargs))
 
         self.children += [
             ReturnToSiteItem()

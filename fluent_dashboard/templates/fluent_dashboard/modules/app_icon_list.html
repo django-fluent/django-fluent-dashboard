@@ -9,9 +9,13 @@
                 {% if model.change_url %}
                   <a class="fluent-dashboard-icon" href="{{ model.change_url }}"><img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" /></a>
                   <a class="fluent-dashboard-icon-caption" href="{{ model.change_url }}">{{ model.title }}</a>
+                {% else %}{% if model.add_url %}{# no 'elif' to support Django 1.3 #}
+                  <a class="fluent-dashboard-icon" href="{{ model.add_url }}"><img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" /></a>
+                  <a class="fluent-dashboard-icon-caption" href="{{ model.add_url }}">{{ model.title }}</a>
                 {% else %}
-                  <img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" />
-                  {{ model.title }}{% endif %}
+                  <span class="fluent-dashboard-icon"><img src="{{ model.icon }}" width="48" height="48" alt="{{ model.title }}" /></span>
+                  <span class="fluent-dashboard-icon-caption">{{ model.title }}</span>
+                {% endif %}{% endif %}
             </li>
             {% endspaceless %}
             {% endfor %}

@@ -22,6 +22,7 @@ class CmsModelList(items.ModelList):
         """
         Initialize the menu.
         """
+        # Apply the include/exclude patterns:
         listitems = self._visible_models(context['request'])
 
         # Convert to a similar data structure like the dashboard icons have.
@@ -32,7 +33,11 @@ class CmsModelList(items.ModelList):
               'title': capfirst(model._meta.verbose_name_plural),
               'url': self._get_admin_change_url(model, context)
             }
+<<<<<<< HEAD
             for model, perms in listitems if (perms['view'] or perms['change'])
+=======
+            for model, perms in listitems if self.is_item_visible(model, perms)
+>>>>>>> 7bb50d75c447881abe145185b58ba56c5aeb6abe
         ]
 
         # Sort models.
@@ -41,6 +46,18 @@ class CmsModelList(items.ModelList):
         # Convert to items
         for model in models:
             self.children.append(items.MenuItem(title=model['title'], url=model['url']))
+
+
+    def is_item_visible(self, model, perms):
+        """
+        Return whether the model should be displayed in the menu.
+        By default it checks for the ``perms['change']`` value; only items with change permission will be displayed.
+        This function can be extended to support "view permissions" for example.
+
+        :param model: The model class
+        :param perms: The permissions from :func:`ModelAdmin.get_model_perms()<django.contrib.admin.ModelAdmin.get_model_perms>`.
+        """
+        return perms['change']
 
 
 class ReturnToSiteItem(items.MenuItem):
@@ -95,7 +112,7 @@ class ReturnToSiteItem(items.MenuItem):
             if not match:
                 return None
 
-            object_id = int(resolvermatch.args[0])
+            object_id = resolvermatch.args[0]  # Can be string (e.g. a country code as PK).
             return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
         return None
 
@@ -108,6 +125,12 @@ class ReturnToSiteItem(items.MenuItem):
         try:
             model_type = ContentType.objects.get_by_natural_key(app_label, model_name)
         except ContentType.DoesNotExist:
+            return None
+
+        # Pointless to fetch the object, if there is no URL to generate
+        # Avoid another database query.
+        ModelClass = model_type.model_class()
+        if not hasattr(ModelClass, 'get_absolute_url'):
             return None
 
         try:

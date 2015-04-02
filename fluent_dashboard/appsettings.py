@@ -14,15 +14,18 @@ FLUENT_DASHBOARD_APP_ICONS = {
     'auth/user':  'system-users.png',
     'cms/page': 'internet-web-browser.png',
     'comments/comment': 'kde-telepathy.png', #'irc-voice.png',
+    'fluent_comments/fluentcomment': 'kde-telepathy.png', #'irc-voice.png',
     'dashboardmods/rssdashboardmodule': 'feed-subscribe.png',
     'fluent_blogs/entry': 'view-calendar-journal.png',
     'fluent_pages/pagelayout': 'view-choose.png',
     'fluent_pages/page': 'internet-web-browser.png',
-    'ecms_media/file': 'folder.png',
+    'fluent_faq/faqquestion': 'system-help.png',
+    'fluent_faq/faqcategory': 'custom-bookmarks-help.png',
     'fiber/contentitem': 'folder-txt.png',
     'fiber/file': 'folder.png',
     'fiber/image': 'folder-image.png',
     'fiber/page': 'internet-web-browser.png',
+    'filebrowser/filebrowser': 'folder.png',
     'filer/folder': 'folder.png',
     'form_designer/formdefinition': 'mail-mark-task.png',
     'form_designer/formlog': 'view-calendar-journal.png',
@@ -30,6 +33,7 @@ FLUENT_DASHBOARD_APP_ICONS = {
     'page/page': 'internet-web-browser.png',
     'media_tree/filenode': 'folder.png',
     'registration/registrationprofile': 'list-add-user.png',
+    'sharedcontent/sharedcontent': 'x-office-document.png',
     'sites/site': 'applications-internet.png',
     'snippet/snippet': 'folder-txt.png',
     'tagging/tag': 'feed-subscribe.png',
@@ -44,10 +48,11 @@ FLUENT_DASHBOARD_DEFAULT_ICON = getattr(settings, "FLUENT_DASHBOARD_DEFAULT_ICON
 FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(settings, "FLUENT_DASHBOARD_CMS_PAGE_MODEL", None)
 
 FLUENT_DASHBOARD_CMS_APP_NAMES = getattr(settings, "FLUENT_DASHBOARD_CMS_APP_NAMES", (
-    '*cms*',      # DjangoCMS, FeinCMS and wildcard match  (should not be separate settings, causes errors in admin_tools 0.4.1)
-    'fluent*',    # Fluent pages
-    'fiber',      # Django-Fiber
-    'media_tree', # django-media-tree
+    '*cms*',        # DjangoCMS, FeinCMS and wildcard match  (should not be separate settings, causes errors in admin_tools 0.4.1)
+    'fluent*',      # Fluent pages
+    'fiber',        # Django-Fiber
+    'filebrowser',  # django-filebrowser
+    'media_tree',   # django-media-tree
 ))
 
 FLUENT_DASHBOARD_CMS_MODEL_ORDER = getattr(settings, "FLUENT_DASHBOARD_CMS_MODEL_ORDER", {
@@ -56,6 +61,7 @@ FLUENT_DASHBOARD_CMS_MODEL_ORDER = getattr(settings, "FLUENT_DASHBOARD_CMS_MODEL
     'layout': 3,
     'content': 4,
     'file': 5,
+    'filebrowser': 5,
     'site': 99
 })
 

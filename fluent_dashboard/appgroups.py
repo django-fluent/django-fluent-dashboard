@@ -32,20 +32,22 @@ def get_application_groups():
 
     groups = []
     for title, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS:
+        # Allow to pass all possible arguments to the DashboardModule class.
+        module_kwargs = groupdict.copy()
+
+        # However, the 'models' is treated special, to have catch-all support.
         if '*' in groupdict['models']:
             default_module = appsettings.FLUENT_DASHBOARD_DEFAULT_MODULE
-            module_kwargs = {'exclude': ALL_KNOWN_APPS}
+            module_kwargs['exclude'] = ALL_KNOWN_APPS + list(module_kwargs.get('exclude', []))
+            del module_kwargs['models']
         else:
             default_module = 'CmsAppIconList'
-            module_kwargs = {'models': groupdict['models']}
 
         # Get module to display, can be a alias for known variations.
         module = groupdict.get('module', default_module)
         if module in MODULE_ALIASES:
             module = MODULE_ALIASES[module]
-
         module_kwargs['module'] = module
-        module_kwargs['collapsible'] = groupdict.get('collapsible', False)
         groups.append((title, module_kwargs),)
 
     return groups

@@ -1,7 +1,50 @@
+Changelog
+=========
+
 Changes in version 0.4.0
 ------------------------
 
-None yet
+* Allow passing all ``DashboardModule`` kwargs to ``FLUENT_DASHBOARD_APP_GROUPS``.
+* Added new Oxygen icons
+* Fix assumption that varnish_ is installed because dashboardmods_ is.
+* Fix showing disabled application groups in the menu
+* Fix 500 error when PK is not an int.
+* Fix missing icons for django-fluent-faq_.
+* Fix missing icons for django-fluent-comments_.
+
+
+Changes in version 0.3.6
+------------------------
+
+* Fix error when primary keys are not an integer.
+* Added more Oxygen icons.
+
+
+Changes in version 0.3.5
+------------------------
+
+* Added filebrowser icon.
+* Fix custom user model support of Django 1.5.
+* Fix requirements of extras_require cachestatus
+* Hide cache status group by default.
+
+
+Changes in version 0.3.4
+------------------------
+
+* Fixed a packaging error, ``dashboard.css`` was missing in the dist.
+
+
+Changes in version 0.3.3
+------------------------
+
+* Added more Oxygen icons.
+* Added icon for *sharedcontent* plugin of django-fluent-contents_.
+* Fixed ``KeyError`` when a model has add support, but no edit support.
+* Fixed icon layout when a model has no permissions to add/edit.
+* Fixed welcome text in personal module, remove pages link if the user has no permission to edit pages.
+* Bump required version of django-admin-tools_ to 0.5.1, which has Django 1.4/1.5 support.
+
 
 Changes in version 0.3.2
 ------------------------
@@ -56,3 +99,11 @@ Version 0.1.0
 -------------
 
 Initial internal release
+
+
+.. _django-admin-tools: https://bitbucket.org/izi/django-admin-tools/wiki/Home
+.. _django-fluent-contents: https://github.com/edoburu/django-fluent-contents
+.. _django-fluent-comments: https://github.com/edoburu/django-fluent-comments
+.. _django-fluent-faq: https://github.com/edoburu/django-fluent-faq
+.. _dashboardmods: https://github.com/callowayproject/dashboardmods
+.. _varnish: https://github.com/justquick/python-varnish_

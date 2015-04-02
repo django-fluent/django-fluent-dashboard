@@ -24,6 +24,7 @@ Contents:
    advanced
    otherapps
    api/index
+   changelog
 
 Preview
 =======
@@ -43,11 +44,11 @@ see the :ref:`FLUENT_DASHBOARD_ICON_THEME` setting in the :ref:`configuration` s
 
 For more information about the Oxygen icon theme, see:
 
-* http://www.oxyen-icons.org/
+* http://www.oxygen-icons.org/
 * http://techbase.kde.org/Projects/Oxygen/Licensing
 
 The Oxygen icon theme can be downloaded from:
-http://download.kde.org/stable/4.9.0/src/oxygen-icons-4.9.0.tar.xz.
+http://download.kde.org/stable/4.10.0/src/oxygen-icons-4.10.0.tar.xz.
 
 
 Indices and tables
