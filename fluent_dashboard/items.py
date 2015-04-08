@@ -1,6 +1,7 @@
 """
 Additional menu items.
 """
+import django
 from admin_tools.menu import items
 from django.contrib.contenttypes.models import ContentType
 from django.core import urlresolvers
@@ -8,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
 from fluent_dashboard.appgroups import sort_cms_models
+from fluent_dashboard.compat import get_meta_model_name
 import re
 
 RE_CHANGE_URL = re.compile("(.+)_([^_]+)_change")
@@ -28,7 +30,7 @@ class CmsModelList(items.ModelList):
         # Convert to a similar data structure like the dashboard icons have.
         # This allows sorting the items identically.
         models = [
-            { 'name': model._meta.module_name,
+            { 'name': get_meta_model_name(model._meta),
               'app_name': model._meta.app_label,
               'title': capfirst(model._meta.verbose_name_plural),
               'url': self._get_admin_change_url(model, context)

@@ -20,6 +20,7 @@ from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
 from fluent_dashboard import appsettings
 from fluent_dashboard.appgroups import is_cms_app, sort_cms_models
+from fluent_dashboard.compat import get_meta_model_name
 
 
 logger = logging.getLogger("fluent_dashboard.modules")
@@ -87,8 +88,11 @@ class PersonalModule(modules.LinkList):
             except NoReverseMatch:
                 pass
             else:
-                # Also check if the user has permission to view the module.'
-                if current_user.has_perm('{0}.{1}'.format(model._meta.app_label, model._meta.get_change_permission())):
+                # Also check if the user has permission to view the module.
+                # TODO: When there are modules that use Django 1.8's has_module_permission, add the support here.
+                permission_name = 'change_{0}'.format(get_meta_model_name(model._meta).lower())
+
+                if current_user.has_perm('{0}.{1}'.format(model._meta.app_label, permission_name)):
                     self.pages_title = pages_title
                     self.pages_link = pages_link
 

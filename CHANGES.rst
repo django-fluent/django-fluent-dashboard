@@ -4,6 +4,7 @@ Changelog
 Changes in version 0.5.0
 ------------------------
 
+* Added Django 1.8 compatibility
 * Fixed Python 3 issue
 
 
