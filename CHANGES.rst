@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Changes in version 0.5.0
+------------------------
+
+* Fixed Python 3 issue
+
+
 Changes in version 0.4.0
 ------------------------
 
