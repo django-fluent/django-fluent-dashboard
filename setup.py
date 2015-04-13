@@ -39,7 +39,7 @@ def find_version(*parts):
 setup(
     name='django-fluent-dashboard',
     version=find_version('fluent_dashboard', '__init__.py'),
-    license='Apache License, Version 2.0',
+    license='Apache 2.0',
 
     install_requires=[
         'django-admin-tools>=0.5.2',  # 0.5.2 has proper Django 1.5/1.6 support.
