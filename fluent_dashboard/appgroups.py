@@ -3,6 +3,7 @@ Splitting and organizing applications and models into groups.
 This module is mostly meant for internal use.
 """
 from fnmatch import fnmatch
+from future.utils import iteritems
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.importlib import import_module
 from fluent_dashboard import appsettings
@@ -79,7 +80,7 @@ def get_cms_model_order(model_name):
     """
     Return a numeric ordering for a model name.
     """
-    for name, order in appsettings.FLUENT_DASHBOARD_CMS_MODEL_ORDER.iteritems():
+    for (name, order) in iteritems(appsettings.FLUENT_DASHBOARD_CMS_MODEL_ORDER):
         if name in model_name:
             return order
     return 999

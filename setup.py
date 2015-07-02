@@ -37,6 +37,7 @@ setup(
 
     install_requires=[
         'django-admin-tools>=0.5.2',  # 0.5.2 has proper Django 1.5/1.6 support.
+        'future>=0.12.2',
     ],
     requires=[
         'Django (>=1.3)',
