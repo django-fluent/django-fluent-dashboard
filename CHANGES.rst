@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Changes in version 0.5.1
+------------------------
+
+* Fixed Python 3 issue
+* Added icons for fluentcms-googlemaps_
+
+
 Changes in version 0.5.0
 ------------------------
 
@@ -112,5 +119,6 @@ Initial internal release
 .. _django-fluent-contents: https://github.com/edoburu/django-fluent-contents
 .. _django-fluent-comments: https://github.com/edoburu/django-fluent-comments
 .. _django-fluent-faq: https://github.com/edoburu/django-fluent-faq
+.. _fluentcms-googlemaps: https://github.com/edoburu/fluentcms-googlemaps
 .. _dashboardmods: https://github.com/callowayproject/dashboardmods
 .. _varnish: https://github.com/justquick/python-varnish_
