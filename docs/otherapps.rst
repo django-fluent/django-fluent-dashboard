@@ -16,7 +16,7 @@ Invaluable to forget, the `django-admin-tools` package also provides modules for
 * Tab grouping module
 * Link list module
 
-Website: https://bitbucket.org/izi/django-admin-tools/
+Website: https://github.com/django-admin-tools/django-admin-tools
 
 django-admin-user-stats
 -----------------------

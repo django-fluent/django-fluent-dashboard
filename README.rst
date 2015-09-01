@@ -196,7 +196,7 @@ Pull requests are welcome too. :-)
 
 .. _documentation: http://django-fluent-dashboard.readthedocs.org/
 .. _dashboardmods: https://github.com/callowayproject/dashboardmods
-.. _django-admin-tools: https://bitbucket.org/izi/django-admin-tools/wiki/Home
+.. _django-admin-tools: https://github.com/django-admin-tools/django-admin-tools
 .. _django-admin-tools-stats: https://github.com/Star2Billing/django-admin-tools-stats
 .. _django-admin-user-stats: https://github.com/kmike/django-admin-user-stats
 

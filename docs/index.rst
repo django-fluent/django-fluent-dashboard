@@ -2,7 +2,7 @@ Welcome to django-fluent-dashboard's documentation!
 ===================================================
 
 The ``fluent_dashboard`` module offers a custom admin dashboard, built on top of
-django-admin-tools_ (`code <https://bitbucket.org/izi/django-admin-tools/wiki/Home>`_).
+django-admin-tools_ (`code <https://github.com/django-admin-tools/django-admin-tools>`_).
 
 The django-admin-tools_ package provides a default mechanism to replace the standard Django
 admin homepage with a widget based dashboard. The ``fluent_dashboard`` module extends this,
