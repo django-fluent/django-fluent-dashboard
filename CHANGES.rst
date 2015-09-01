@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Changes in version 0.5.2
+------------------------
+
+* Fixed CSS media inclusion for django-admin-tools_ 0.6
+
 Changes in version 0.5.1
 ------------------------
 

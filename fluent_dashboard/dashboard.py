@@ -45,7 +45,9 @@ class FluentIndexDashboard(Dashboard):
     For more information, see the `django-admin-tools` documentation.
     """
     class Media:
-        css = ("fluent_dashboard/dashboard.css",)
+        css = {
+            'all': ("fluent_dashboard/dashboard.css",)
+        }
 
     def __init__(self, **kwargs):
         super(FluentIndexDashboard, self).__init__(**kwargs)
