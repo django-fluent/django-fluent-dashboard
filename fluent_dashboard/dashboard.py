@@ -9,6 +9,8 @@ This package defines the following classes:
 These classes need to be linked in ``settings.py`` to be loaded by `django-admin-tools`.
 Off course, you can also extend the classes, and use those names in the settings instead.
 """
+from distutils.version import LooseVersion
+import admin_tools
 from admin_tools.dashboard.modules import Group
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
@@ -45,9 +47,13 @@ class FluentIndexDashboard(Dashboard):
     For more information, see the `django-admin-tools` documentation.
     """
     class Media:
-        css = {
-            'all': ("fluent_dashboard/dashboard.css",)
-        }
+        if LooseVersion(admin_tools.VERSION) < LooseVersion('0.6'):
+            # Older versions of django-admin-tools used an incorrect format for media.
+            css = ("fluent_dashboard/dashboard.css",)
+        else:
+            css = {
+                'all': ("fluent_dashboard/dashboard.css",)
+            }
 
     def __init__(self, **kwargs):
         super(FluentIndexDashboard, self).__init__(**kwargs)

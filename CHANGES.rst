@@ -1,10 +1,18 @@
 Changelog
 =========
 
+Changes in version 0.5.2 (2015-09-02)
+-------------------------------------
+
+* Fixed CSS media inclusion for django-admin-tools_ 0.5.x
+  Turns out both version need a different layout.
+
+
 Changes in version 0.5.2 (2015-09-01)
 -------------------------------------
 
 * Fixed CSS media inclusion for django-admin-tools_ 0.6
+
 
 Changes in version 0.5.1
 ------------------------
