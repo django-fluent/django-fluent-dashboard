@@ -23,6 +23,7 @@ class FluentMenu(Menu):
 
         ADMIN_TOOLS_MENU = 'fluent_dashboard.menu.FluentMenu'
     """
+
     def init_with_context(self, context):
         """
         Initialize the menu items.

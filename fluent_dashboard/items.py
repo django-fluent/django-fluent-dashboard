@@ -20,6 +20,7 @@ class CmsModelList(items.ModelList):
     A custom :class:`~admin_tools.menu.items.ModelList` that displays menu items for each model.
     It has a strong bias towards sorting CMS apps on top.
     """
+
     def init_with_context(self, context):
         """
         Initialize the menu.
@@ -44,7 +45,6 @@ class CmsModelList(items.ModelList):
         # Convert to items
         for model in models:
             self.children.append(items.MenuItem(title=model['title'], url=model['url']))
-
 
     def is_item_visible(self, model, perms):
         """
@@ -76,7 +76,6 @@ class ReturnToSiteItem(items.MenuItem):
     # Make the item distinguishable between the other menu items
     css_classes = ['returntosite']
 
-
     def init_with_context(self, context):
         """
         Find the current URL based on the context.
@@ -96,7 +95,6 @@ class ReturnToSiteItem(items.MenuItem):
                 if url:
                     self.url = url
 
-
     def get_edited_object(self, request):
         """
         Return the object which is currently being edited.
@@ -113,7 +111,6 @@ class ReturnToSiteItem(items.MenuItem):
             object_id = resolvermatch.args[0]  # Can be string (e.g. a country code as PK).
             return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
         return None
-
 
     def get_object_by_natural_key(self, app_label, model_name, object_id):
         """

@@ -122,7 +122,6 @@ class AppIconList(modules.AppList):
     #: The current theme folder (considerd read only)
     icon_theme_root = "{0}fluent_dashboard/{1}/".format(icon_static_root, appsettings.FLUENT_DASHBOARD_ICON_THEME)
 
-
     def init_with_context(self, context):
         """
         Initializes the icon list.
@@ -148,13 +147,11 @@ class AppIconList(modules.AppList):
                 model['icon'] = self.get_icon_url(model['icon'])
                 model['app_name'] = app_name
 
-
     def _get_app_name(self, appdata):
         """
         Extract the app name from the ``appdata`` that *django-admin-tools* provides.
         """
         return appdata['url'].strip('/').split('/')[-1]   # /foo/admin/appname/
-
 
     def _get_model_name(self, modeldata):
         """
@@ -167,7 +164,6 @@ class AppIconList(modules.AppList):
         else:
             raise ValueError("Missing attributes in modeldata to find the model name!")
 
-
     def get_icon_for_model(self, app_name, model_name, default=None):
         """
         Return the icon for the given model.
@@ -175,7 +171,6 @@ class AppIconList(modules.AppList):
         """
         key = "{0}/{1}".format(app_name, model_name)
         return appsettings.FLUENT_DASHBOARD_APP_ICONS.get(key, default)
-
 
     def get_icon_url(self, icon):
         """
@@ -196,7 +191,6 @@ class AppIconList(modules.AppList):
             return icon
 
 
-
 class CmsAppIconList(AppIconList):
     """
     A variation of the :class:`AppIconList` class
@@ -207,6 +201,7 @@ class CmsAppIconList(AppIconList):
        :height: 124px
        :alt: CmsAppIconList module for django-fluent-dashboard
     """
+
     def init_with_context(self, context):
         """
         Initializes the icon list.

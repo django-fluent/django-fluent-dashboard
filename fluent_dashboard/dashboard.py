@@ -21,7 +21,6 @@ from fluent_dashboard.modules import PersonalModule, CacheStatusGroup
 from fluent_dashboard.appgroups import get_application_groups, get_class
 
 
-
 class FluentIndexDashboard(Dashboard):
     """
     A custom home screen for the Django admin interface.
@@ -61,13 +60,11 @@ class FluentIndexDashboard(Dashboard):
         self.children.extend(self.get_application_modules())
         self.children.append(self.get_recent_actions_module())
 
-
     def init_with_context(self, context):
         request = context['request']
         if 'dashboardmods' in settings.INSTALLED_APPS:
             self.children.extend(self.get_rss_modules())
             self.children.extend(self.get_cache_status_modules(request))
-
 
     def get_personal_module(self):
         """
@@ -79,7 +76,6 @@ class FluentIndexDashboard(Dashboard):
             deletable=False,
             collapsible=False,
         )
-
 
     def get_application_modules(self):
         """
@@ -96,13 +92,11 @@ class FluentIndexDashboard(Dashboard):
             modules.append(AppListClass(title, **kwargs))
         return modules
 
-
     def get_recent_actions_module(self):
         """
         Instantiate the :class:`~admin_tools.dashboard.modules.RecentActions` module for use in the dashboard.
         """
         return modules.RecentActions(_('Recent Actions'), 5, enabled=False, collapsible=False)
-
 
     def get_cache_status_modules(self, request):
         """
@@ -116,7 +110,6 @@ class FluentIndexDashboard(Dashboard):
             return []
 
         return [CacheStatusGroup()]
-
 
     def get_rss_modules(self):
         """
@@ -150,14 +143,12 @@ class FluentAppIndexDashboard(AppIndexDashboard):
             self.get_recent_actions_module(),
         )
 
-
     def get_model_list_module(self):
         """
         Instantiate a standard :class:`~admin_tools.dashboard.modules.ModelList` class
         to display the models of this application.
         """
         return modules.ModelList(self.app_title, self.models)
-
 
     def get_recent_actions_module(self):
         """
