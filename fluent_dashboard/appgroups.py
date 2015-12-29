@@ -5,9 +5,14 @@ This module is mostly meant for internal use.
 from fnmatch import fnmatch
 from future.utils import iteritems
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.importlib import import_module
 from fluent_dashboard import appsettings
 import itertools
+
+try:
+    from importlib import import_module  # Python 2.7+
+except ImportError:
+    from django.utils.importlib import import_module
+
 
 _groups = [groupdict['models'] for _, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS]
 

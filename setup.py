@@ -43,7 +43,7 @@ setup(
         'future>=0.12.2',
     ],
     requires=[
-        'Django (>=1.3)',
+        'Django (>=1.5)',
     ],
     extras_require = {
         'cachestatus': ['dashboardmods>=0.2.2', 'feedparser', 'python-varnish'],

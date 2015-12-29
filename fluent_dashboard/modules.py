@@ -14,7 +14,6 @@ import django
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, NoReverseMatch
-from django.db.models.loading import get_model
 from django.utils.translation import ugettext as _
 from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
@@ -22,6 +21,11 @@ from fluent_dashboard import appsettings
 from fluent_dashboard.appgroups import is_cms_app, sort_cms_models
 from fluent_dashboard.compat import get_meta_model_name
 
+try:
+    from django.apps import apps  # Django 1.7+
+    get_model = apps.get_model
+except ImportError:
+    from django.db.models.loading import get_model
 
 logger = logging.getLogger("fluent_dashboard.modules")
 
