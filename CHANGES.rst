@@ -1,8 +1,8 @@
 Changelog
 =========
 
-Changes in version 0.6 (git)
-----------------------------
+Changes in version 0.6 (2015-12-30)
+-----------------------------------
 
 * Added Django 1.9 support
 
