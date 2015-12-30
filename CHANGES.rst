@@ -5,6 +5,7 @@ Changes in version 0.6 (2015-12-30)
 -----------------------------------
 
 * Added Django 1.9 support
+* Dropped Django 1.4 support
 
 
 Changes in version 0.5.2 (2015-09-02)
