@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Changes in version 0.6.1 (2016-01-21)
+-------------------------------------
+
+* Fix Python error in ``ReturnToSiteItem`` when custom admin urls have to url name set.
+
+
 Changes in version 0.6 (2015-12-30)
 -----------------------------------
 
