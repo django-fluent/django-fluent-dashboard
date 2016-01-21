@@ -101,9 +101,10 @@ class ReturnToSiteItem(items.MenuItem):
         Returns ``None`` if the match could not be made.
         """
         resolvermatch = urlresolvers.resolve(request.path_info)
-        if resolvermatch.namespace == 'admin' and resolvermatch.url_name.endswith('_change'):
+        if resolvermatch.namespace == 'admin' and resolvermatch.url_name and resolvermatch.url_name.endswith('_change'):
             # In "appname_modelname_change" view of the admin.
             # Extract the appname and model from the url name.
+            # For some custom views, url_name might not be filled in (e.g. django-polymorphic's subclass_view)
             match = RE_CHANGE_URL.match(resolvermatch.url_name)
             if not match:
                 return None
