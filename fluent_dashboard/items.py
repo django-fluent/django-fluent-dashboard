@@ -8,7 +8,7 @@ from django.core import urlresolvers
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
-from fluent_dashboard.appgroups import sort_cms_models
+from fluent_dashboard.appgroups import sort_app_models
 from fluent_dashboard.compat import get_meta_model_name
 import re
 
@@ -40,7 +40,7 @@ class CmsModelList(items.ModelList):
         ]
 
         # Sort models.
-        sort_cms_models(models)
+        sort_app_models(models)
 
         # Convert to items
         for model in models:

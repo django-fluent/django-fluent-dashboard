@@ -36,7 +36,7 @@ A quick overvivew of the available settings:
                 '*cms*.*',
                 'fiber.*',
             ),
-            'module': 'CmsAppIconList',
+            'module': 'AppIconList',
             'collapsible': False,
         }),
         (_('Interactivity'), {
@@ -132,7 +132,6 @@ Each tuple has a title, and dictionary which can have the following fields:
  * :class:`~admin_tools.dashboard.modules.AppList` (the default from django-admin-tools_).
  * :class:`~admin_tools.dashboard.modules.ModelList` (the alternative from django-admin-tools_).
  * :class:`~fluent_dashboard.modules.AppIconList`
- * :class:`~fluent_dashboard.modules.CmsAppIconList`
  * any other class, specified as full ``module.ClassName`` syntax.
 
 By default, there is a section for "CMS", "Interactivity" and "Administration" filled with known Django applications.

@@ -18,7 +18,7 @@ from django.utils.translation import ugettext as _
 from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
 from fluent_dashboard import appsettings
-from fluent_dashboard.appgroups import is_cms_app, sort_cms_models
+from fluent_dashboard.appgroups import sort_app_models
 from fluent_dashboard.compat import get_meta_model_name
 
 try:
@@ -151,6 +151,9 @@ class AppIconList(modules.AppList):
                 model['icon'] = self.get_icon_url(model['icon'])
                 model['app_name'] = app_name
 
+            # Sort models.
+            sort_app_models(app['models'])
+
     def _get_app_name(self, appdata):
         """
         Extract the app name from the ``appdata`` that *django-admin-tools* provides.
@@ -196,37 +199,8 @@ class AppIconList(modules.AppList):
 
 
 class CmsAppIconList(AppIconList):
-    """
-    A variation of the :class:`AppIconList` class
-    with a strong bias towards sorting CMS apps on top.
-
-    .. image:: /images/cmsappiconlist.png
-       :width: 471px
-       :height: 124px
-       :alt: CmsAppIconList module for django-fluent-dashboard
-    """
-
-    def init_with_context(self, context):
-        """
-        Initializes the icon list.
-        """
-        super(CmsAppIconList, self).init_with_context(context)
-        apps = self.children
-
-        cms_apps     = [a for a in apps if is_cms_app(a['name'])]
-        non_cms_apps = [a for a in apps if a not in cms_apps]
-
-        if cms_apps:
-            # Group the models of all CMS apps in one group.
-            cms_models = []
-            for app in cms_apps:
-                cms_models += app['models']
-
-            sort_cms_models(cms_models)
-            single_cms_app = {'name': "Modules", 'title': "Modules", 'url': "", 'models': cms_models}
-
-            # Put remaining groups after the first CMS group.
-            self.children = [single_cms_app] + non_cms_apps
+    # old deprecated way of sorting some "CMS" apps before other apps.
+    pass
 
 
 class CacheStatusGroup(modules.Group):

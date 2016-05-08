@@ -59,36 +59,14 @@ def get_application_groups():
     return groups
 
 
-def sort_cms_models(cms_models):
+def sort_app_models(models):
     """
     Sort a set of CMS-related models in a custom (predefined) order.
     """
-    cms_models.sort(key=lambda model: (
-        get_cms_model_order(model['name']) if is_cms_app(model['app_name']) else 999,
+    models.sort(key=lambda model: (
         model['app_name'],
         model['title']
     ))
-
-
-def is_cms_app(app_name):
-    """
-    Return whether the given application is a CMS app
-    """
-    for pat in appsettings.FLUENT_DASHBOARD_CMS_APP_NAMES:
-        if fnmatch(app_name, pat):
-            return True
-
-    return False
-
-
-def get_cms_model_order(model_name):
-    """
-    Return a numeric ordering for a model name.
-    """
-    for (name, order) in iteritems(appsettings.FLUENT_DASHBOARD_CMS_MODEL_ORDER):
-        if name in model_name:
-            return order
-    return 999
 
 
 def get_class(import_path):
