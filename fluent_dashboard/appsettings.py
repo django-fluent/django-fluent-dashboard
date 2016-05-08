@@ -30,6 +30,10 @@ if FLUENT_DASHBOARD_ICON_THEME == 'flaticons':
         'threadedcomments/threadedcomment': 'chat-1.png',
         'sites/site': 'global45.png',
         'users/user': 'network60.png',
+
+        # custom
+        'blog/post': 'newspaper1.png',
+        'news/news': 'newspaper1.png',
     }
 
     FLUENT_DASHBOARD_DEFAULT_ICON = getattr(settings, "FLUENT_DASHBOARD_DEFAULT_ICON", 'unknown-document.png')
@@ -78,10 +82,19 @@ FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(settings, "FLUENT_DASHBOARD_CMS_PAGE_M
 FLUENT_DASHBOARD_CMS_APP_NAMES = getattr(settings, "FLUENT_DASHBOARD_CMS_APP_NAMES", (
     'cms.*',        # DjangoCMS
     'feincms.*',    # FeinCMS
-    'fluent*',      # Fluent pages
+    'fluent*',      # Fluent pages, blogs, faq
     'fiber',        # Django-Fiber
-    'filebrowser',  # django-filebrowser
-    'media_tree',   # django-media-tree
+    'django.contrib.flatpages.*',
+    'django.contrib.redirects.*',
+    'zinnia.models.entry.Entry',
+
+    # Custom
+    'blog.*',
+    'faq.*',
+    'news.*',
+    '*.blog.*',
+    '*.faq.*',
+    '*.news.*',
 ))
 
 FLUENT_DASHBOARD_CMS_MODEL_ORDER = getattr(settings, "FLUENT_DASHBOARD_CMS_MODEL_ORDER", {
@@ -100,18 +113,42 @@ FLUENT_DASHBOARD_DEFAULT_MODULE = getattr(settings, 'FLUENT_DASHBOARD_DEFAULT_MO
 
 FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
     (_('CMS'), {
+        # Mainly apps that produce an page + URL at the site.
         'models': [
             "{0}.*".format(app) for app in FLUENT_DASHBOARD_CMS_APP_NAMES
+        ],
+        'exclude': [
+            # Show in other sections:
+            'fluentcms_contactform.*',
+            'fluent_contents.plugins.sharedcontent.*',
+            # Less relevant, not producing pages:
+            'fluent_pages.models.db.PageLayout',
         ],
         'module': 'fluent_dashboard.modules.CmsAppIconList',
         'collapsible': False,
     }),
+    (_('Content Library'), {
+        # Content that is linked by the pages in "CMS"
+        'models': (
+            'filebrowser.*',  # django-filebrowser
+            'fluent_contents.plugins.sharedcontent.*',
+            'form_designer.*',
+            'forms_builder.*',
+            'media_tree',  # django-media-tree
+        ),
+        'module': 'fluent_dashboard.modules.AppIconList',
+        'collapsible': False,
+    }),
     (_('Interactivity'), {
+        # User comments, responses, etc..
         'models': (
             'django.contrib.comments.*',
-            'form_designer.*',
+            'fluentcms_contactform.*',
             'threadedcomments.*',
             'zinnia.*',
+        ),
+        'exclude': (
+            'zinnia.models.entry.Entry',
         ),
         'module': 'fluent_dashboard.modules.AppIconList',
         'collapsible': False,
