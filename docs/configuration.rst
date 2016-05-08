@@ -67,11 +67,6 @@ A quick overvivew of the available settings:
 
     FLUENT_DASHBOARD_CMS_PAGE_MODEL = ('cms', 'page')
 
-    FLUENT_DASHBOARD_CMS_APP_NAMES = (
-        '*cms*',  # wildcard match; DjangoCMS, FeinCMS
-        'fiber',  # Django-Fiber
-    )
-
     FLUENT_DASHBOARD_CMS_MODEL_ORDER = {
         'page': 1,
         'object': 2,
@@ -165,14 +160,6 @@ The model used to display a link to the CMS pages.
 The value is a tuple of `application name`, and `model name`.
 This is used in the welcome text of the :class:`~fluent_dashboard.modules.PersonalModule`.
 For some known CMS applications, this value is already set to a sane default.
-
-FLUENT_DASHBOARD_CMS_APP_NAMES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A list of patterns to define which applications should be considered as "CMS" applications.
-These applications are sorted on top in the :class:`~fluent_dashboard.modules.CmsAppIconList`
-and :class:`~fluent_dashboard.items.CmsModelList` classes. The default ``FLUENT_DASHBOARD_APP_GROUPS``
-also uses this setting to fill the "CMS" category.
 
 FLUENT_DASHBOARD_CMS_MODEL_ORDER
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

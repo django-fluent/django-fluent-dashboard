@@ -79,24 +79,6 @@ else:
 
 FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(settings, "FLUENT_DASHBOARD_CMS_PAGE_MODEL", None)
 
-FLUENT_DASHBOARD_CMS_APP_NAMES = getattr(settings, "FLUENT_DASHBOARD_CMS_APP_NAMES", (
-    'cms.*',        # DjangoCMS
-    'feincms.*',    # FeinCMS
-    'fluent*',      # Fluent pages, blogs, faq
-    'fiber',        # Django-Fiber
-    'django.contrib.flatpages.*',
-    'django.contrib.redirects.*',
-    'zinnia.models.entry.Entry',
-
-    # Custom
-    'blog.*',
-    'faq.*',
-    'news.*',
-    '*.blog.*',
-    '*.faq.*',
-    '*.news.*',
-))
-
 FLUENT_DASHBOARD_CMS_MODEL_ORDER = getattr(settings, "FLUENT_DASHBOARD_CMS_MODEL_ORDER", {
     'page': 1,
     'object': 2,
@@ -115,7 +97,21 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
     (_('CMS'), {
         # Mainly apps that produce an page + URL at the site.
         'models': [
-            "{0}.*".format(app) for app in FLUENT_DASHBOARD_CMS_APP_NAMES
+            'cms.*',  # DjangoCMS
+            'feincms.*',  # FeinCMS
+            'fluent*',  # Fluent pages, blogs, faq
+            'fiber',  # Django-Fiber
+            'django.contrib.flatpages.*',
+            'django.contrib.redirects.*',
+            'zinnia.models.entry.Entry',
+
+            # Custom
+            'blog.*',
+            'faq.*',
+            'news.*',
+            '*.blog.*',
+            '*.faq.*',
+            '*.news.*',
         ],
         'exclude': [
             # Show in other sections:
