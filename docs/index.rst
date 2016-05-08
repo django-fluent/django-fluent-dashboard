@@ -37,7 +37,17 @@ Preview
 Icon credits
 ============
 
-By default, the dashboard uses the "Oxygen" icon theme, which is freely available from KDE.
+The dashboard uses flat icons, which are available from http://www.flaticon.com/
+and require attribution.
+
+* Icons designed by `Freepik <http://www.freepik.com/>`_ from www.flaticon.com
+* Icons designed by `SimpleIcon <http://www.simpleicon.com>`_ from www.flaticon.com
+
+
+Other icon sets
+---------------
+
+Previously, the dashboard uses the "Oxygen" icon theme, which is freely available from KDE.
 You may use the icons under the `LGPL 3 license <http://www.gnu.org/licenses/lgpl-3.0.html>`_.
 To use a different icon theme (e.g. `Tango <http://tango.freedesktop.org/>`_),
 see the :ref:`FLUENT_DASHBOARD_ICON_THEME` setting in the :ref:`configuration` section.

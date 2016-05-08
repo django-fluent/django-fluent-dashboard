@@ -12,7 +12,7 @@ A quick overvivew of the available settings:
 
     # Icon settings
 
-    FLUENT_DASHBOARD_ICON_THEME = 'oxygen'
+    FLUENT_DASHBOARD_ICON_THEME = 'flaticons'
 
     FLUENT_DASHBOARD_APP_ICONS = {
         'cms/page': 'internet-web-browser.png',
@@ -97,7 +97,11 @@ FLUENT_DASHBOARD_ICON_THEME
 
 The icon theme defines which folder is used to find the icons.
 This allows to easily switch between icon sets without having to update all settings.
-The current theme is "Oxygen", which is freely available from KDE.
+
+The current theme is "flaticons", which are available from http://www.flaticon.com/.
+You can use these icons if you give attribution for it.
+
+The previous theme was "Oxygen", which is freely available from KDE.
 You may use the icons under the `LGPL 3 license <http://www.gnu.org/licenses/lgpl-3.0.html>`_.
 
 .. _FLUENT_DASHBOARD_APP_ICONS:
