@@ -1,6 +1,14 @@
 Changelog
 =========
 
+Changes in 1.0a1 (2016-05-08)
+-----------------------------
+
+* Use new icons, from www.flaticon.com
+* **BACKWARDS INCOMPATIBLE:** Icon defaults changed, please review your ``FLUENT_DASHBOARD_...`` settings.
+  You can add ``FLUENT_DASHBOARD_ICON_THEME = 'oxygen'`` to keep using the old settings.
+
+
 Changes in version 0.6.1 (2016-01-21)
 -------------------------------------
 
