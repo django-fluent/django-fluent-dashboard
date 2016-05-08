@@ -14,6 +14,7 @@ if FLUENT_DASHBOARD_ICON_THEME == 'flaticons':
     FLUENT_DASHBOARD_APP_ICONS = {
         'auth/group': 'multiple25.png',
         'auth/user': 'network60.png',
+        'comments/comment': 'chat-1.png',
         'filebrowser/filebrowser': 'connectivity2.png',
         'fluent_blogs/entry': 'newspaper1.png',
         'fluent_faq/faqquestion': 'magnifier41.png',
@@ -26,6 +27,7 @@ if FLUENT_DASHBOARD_ICON_THEME == 'flaticons':
         'fluentcms_privatenotes/privatenotesitem': 'file.png',
         'redirects/redirect': 'right-arrow7.png',
         'sharedcontent/sharedcontent': 'puzzles3.png',
+        'threadedcomments/threadedcomment': 'chat-1.png',
         'sites/site': 'global45.png',
         'users/user': 'network60.png',
     }
