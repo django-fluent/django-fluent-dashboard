@@ -251,5 +251,5 @@ texinfo_documents = [
 intersphinx_mapping = {
     'http://docs.python.org/': None,
     'https://docs.djangoproject.com/en/dev': 'https://docs.djangoproject.com/en/dev/_objects',
-    'http://django-admin-tools.readthedocs.org/en/latest/': None,
+    'https://django-admin-tools.readthedocs.io/en/latest/': None,
 }

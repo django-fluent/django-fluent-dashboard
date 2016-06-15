@@ -68,4 +68,4 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-.. _django-admin-tools: http://django-admin-tools.readthedocs.org/
+.. _django-admin-tools: https://django-admin-tools.readthedocs.io/

@@ -2,7 +2,7 @@ django-fluent-dashboard
 =======================
 
 The ``fluent_dashboard`` module offers a custom admin dashboard, built on top of
-django-admin-tools_ (`docs <http://django-admin-tools.readthedocs.org/>`_).
+django-admin-tools_ (`docs <https://django-admin-tools.readthedocs.io/>`_).
 
 The django-admin-tools_ package provides a default mechanism to replace the standard Django
 admin homepage with a widget based dashboard. The ``fluent_dashboard`` module extends this,
@@ -14,7 +14,7 @@ by providing additional widgets (called "modules") such as:
 * a "return to site" link.
 * an optional "cache statistics" module.
 
-Documentation can be found at: http://django-fluent-dashboard.readthedocs.org/
+Documentation can be found at: https://django-fluent-dashboard.readthedocs.io/
 
 Screenshot
 ==========
@@ -194,7 +194,7 @@ please let us know as well because we will look into it.
 Pull requests are welcome too. :-)
 
 
-.. _documentation: http://django-fluent-dashboard.readthedocs.org/
+.. _documentation: https://django-fluent-dashboard.readthedocs.io/
 .. _dashboardmods: https://github.com/callowayproject/dashboardmods
 .. _django-admin-tools: https://github.com/django-admin-tools/django-admin-tools
 .. _django-admin-tools-stats: https://github.com/Star2Billing/django-admin-tools-stats

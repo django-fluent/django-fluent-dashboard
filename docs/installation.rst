@@ -47,4 +47,4 @@ Next:
 * The Memcache and Varnish statistics can also be displayed by configuring some :doc:`optional dependencies <optionaldeps>`.
 
 
-.. _django-admin-tools: http://django-admin-tools.readthedocs.org/
+.. _django-admin-tools: https://django-admin-tools.readthedocs.io/
