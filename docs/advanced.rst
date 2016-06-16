@@ -63,4 +63,4 @@ which are suitable for overwriting them:
 * :class:`~fluent_dashboard.modules.CacheStatusGroup`: the statistics of Memcache and Varnish.
 
 
-.. _django-admin-tools: http://django-admin-tools.readthedocs.org/
+.. _django-admin-tools: https://django-admin-tools.readthedocs.io/

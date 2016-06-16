@@ -181,4 +181,4 @@ A dictionary of `modelname`: `ordering` items, to sort the models of CMS applica
 This can be used for example, to display the pages model first, and the files/images models next.
 
 
-.. _django-admin-tools: http://django-admin-tools.readthedocs.org/
+.. _django-admin-tools: https://django-admin-tools.readthedocs.io/
