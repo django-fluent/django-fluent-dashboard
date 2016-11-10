@@ -12,10 +12,18 @@ FLUENT_DASHBOARD_ICON_THEME = getattr(settings, "FLUENT_DASHBOARD_ICON_THEME", "
 if FLUENT_DASHBOARD_ICON_THEME == 'flaticons':
     # New defaults with flaticons
     FLUENT_DASHBOARD_APP_ICONS = {
+        # Django contrib
         'auth/group': 'multiple25.png',
         'auth/user': 'network60.png',
+        'sites/site': 'global45.png',
+        'redirects/redirect': 'right-arrow7.png',
+
+        # Third party apps
         'comments/comment': 'chat-1.png',
         'filebrowser/filebrowser': 'connectivity2.png',
+        'threadedcomments/threadedcomment': 'chat-1.png',
+
+        # Fluent
         'fluent_blogs/entry': 'newspaper1.png',
         'fluent_faq/faqquestion': 'magnifier41.png',
         'fluent_pages/page': 'pencil34.png',
@@ -25,14 +33,11 @@ if FLUENT_DASHBOARD_ICON_THEME == 'flaticons':
         'fluentcms_googlemaps/marker': 'placeholder8.png',
         'fluentcms_googlemaps/markergroup': 'map35.png',
         'fluentcms_privatenotes/privatenotesitem': 'file.png',
-        'redirects/redirect': 'right-arrow7.png',
         'sharedcontent/sharedcontent': 'puzzles3.png',
-        'threadedcomments/threadedcomment': 'chat-1.png',
-        'sites/site': 'global45.png',
-        'users/user': 'network60.png',
 
         # custom
         'blog/post': 'newspaper1.png',
+        'users/user': 'network60.png',
         'news/news': 'newspaper1.png',
     }
 
@@ -89,12 +94,9 @@ FLUENT_DASHBOARD_CMS_APP_NAMES = getattr(settings, "FLUENT_DASHBOARD_CMS_APP_NAM
     'zinnia.models.entry.Entry',
 
     # Custom
-    'blog.*',
-    'faq.*',
-    'news.*',
-    '*.blog.*',
-    '*.faq.*',
-    '*.news.*',
+    '*blog.*',
+    '*faq.*',
+    '*news.*',
 ))
 
 FLUENT_DASHBOARD_CMS_MODEL_ORDER = getattr(settings, "FLUENT_DASHBOARD_CMS_MODEL_ORDER", {
