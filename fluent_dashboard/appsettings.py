@@ -22,6 +22,7 @@ if FLUENT_DASHBOARD_ICON_THEME == 'flaticons':
         'comments/comment': 'chat-1.png',
         'filebrowser/filebrowser': 'connectivity2.png',
         'threadedcomments/threadedcomment': 'chat-1.png',
+        'publications/publication': 'open-book.svg',
 
         # Fluent
         'fluent_blogs/entry': 'newspaper1.png',
@@ -137,6 +138,7 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
             'fluent_contents.plugins.sharedcontent.*',
             'form_designer.*',
             'forms_builder.*',
+            'publications.*.Publication',  # django-publications
             'media_tree',  # django-media-tree
         ),
         'module': 'fluent_dashboard.modules.AppIconList',
