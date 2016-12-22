@@ -121,6 +121,7 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
         ],
         'exclude': [
             # Show in other sections:
+            'fluent_comments.*',
             'fluentcms_contactform.*',
             'fluent_contents.plugins.sharedcontent.*',
             # Less relevant, not producing pages:
@@ -145,6 +146,7 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
         # User comments, responses, etc..
         'models': (
             'django.contrib.comments.*',
+            'fluent_comments.*',
             'fluentcms_contactform.*',
             'threadedcomments.*',
             'zinnia.*',
