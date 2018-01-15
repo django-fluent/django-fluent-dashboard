@@ -23,6 +23,7 @@ from fluent_dashboard.compat import get_meta_model_name
 
 try:
     from django.apps import apps  # Django 1.7+
+
     get_model = apps.get_model
 except ImportError:
     from django.db.models.loading import get_model
@@ -86,9 +87,12 @@ class PersonalModule(modules.LinkList):
                 app_label, model_name = self.cms_page_model
                 model = get_model(app_label, model_name)
                 pages_title = model._meta.verbose_name_plural.lower()
-                pages_link = reverse('{site}:{app}_{model}_changelist'.format(site=site_name, app=app_label.lower(), model=model_name.lower()))
+                pages_link = reverse('{site}:{app}_{model}_changelist'.format(site=site_name, app=app_label.lower(),
+                                                                              model=model_name.lower()))
             except AttributeError:
-                raise ImproperlyConfigured("The value {0} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting (or cms_page_model value) does not reffer to an existing model.".format(self.cms_page_model))
+                raise ImproperlyConfigured(
+                    "The value {0} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting (or cms_page_model value) does not reffer to an existing model.".format(
+                        self.cms_page_model))
             except NoReverseMatch:
                 pass
             else:
@@ -143,7 +147,8 @@ class AppIconList(modules.AppList):
                 try:
                     model_name = self._get_model_name(model)
                     model['name'] = model_name
-                    model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
+                    model['icon'] = self.get_icon_for_model(app_name,
+                                                            model_name) or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
                 except ValueError:
                     model['icon'] = appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
 
@@ -155,16 +160,16 @@ class AppIconList(modules.AppList):
         """
         Extract the app name from the ``appdata`` that *django-admin-tools* provides.
         """
-        return appdata['url'].strip('/').split('/')[-1]   # /foo/admin/appname/
+        return appdata['url'].strip('/').split('/')[-1]  # /foo/admin/appname/
 
     def _get_model_name(self, modeldata):
         """
         Extract the model name from the ``modeldata`` that *django-admin-tools* provides.
         """
         if 'change_url' in modeldata:
-            return modeldata['change_url'].strip('/').split('/')[-1]   # /foo/admin/appname/modelname
+            return modeldata['change_url'].strip('/').split('/')[-1]  # /foo/admin/appname/modelname
         elif 'add_url' in modeldata:
-            return modeldata['add_url'].strip('/').split('/')[-2]      # /foo/admin/appname/modelname/add
+            return modeldata['add_url'].strip('/').split('/')[-2]  # /foo/admin/appname/modelname/add
         else:
             raise ValueError("Missing attributes in modeldata to find the model name!")
 
@@ -185,8 +190,8 @@ class AppIconList(modules.AppList):
         * Otherwise, it's relative to the theme url folder.
         """
         if not icon.startswith('/') \
-        and not icon.startswith('http://') \
-        and not icon.startswith('https://'):
+                and not icon.startswith('http://') \
+                and not icon.startswith('https://'):
             if '/' in icon:
                 return self.icon_static_root + icon
             else:
@@ -213,7 +218,7 @@ class CmsAppIconList(AppIconList):
         super(CmsAppIconList, self).init_with_context(context)
         apps = self.children
 
-        cms_apps     = [a for a in apps if is_cms_app(a['name'])]
+        cms_apps = [a for a in apps if is_cms_app(a['name'])]
         non_cms_apps = [a for a in apps if a not in cms_apps]
 
         if cms_apps:

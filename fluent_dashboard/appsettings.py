@@ -47,16 +47,16 @@ else:
     # Old defaults
     FLUENT_DASHBOARD_APP_ICONS = {
         'auth/group': 'resource-group.png',
-        'auth/user':  'system-users.png',
+        'auth/user': 'system-users.png',
         'cms/page': 'internet-web-browser.png',
-        'comments/comment': 'kde-telepathy.png', #'irc-voice.png',
+        'comments/comment': 'kde-telepathy.png',  # 'irc-voice.png',
         'dashboardmods/rssdashboardmodule': 'feed-subscribe.png',
         'fluent_blogs/entry': 'view-calendar-journal.png',
         'fluent_pages/pagelayout': 'view-choose.png',
         'fluent_pages/page': 'internet-web-browser.png',
         'fluent_faq/faqquestion': 'system-help.png',
         'fluent_faq/faqcategory': 'custom-bookmarks-help.png',
-        'fluent_comments/fluentcomment': 'kde-telepathy.png', #'irc-voice.png',
+        'fluent_comments/fluentcomment': 'kde-telepathy.png',  # 'irc-voice.png',
         'fluentcms_googlemaps/markergroup': 'marble.png',
         'fluentcms_googlemaps/marker': 'preferences-system-session-services.png',
         'fiber/contentitem': 'folder-txt.png',
@@ -76,7 +76,7 @@ else:
         'snippet/snippet': 'folder-txt.png',
         'tagging/tag': 'feed-subscribe.png',
         'tagging/taggeditem': 'feed-subscribe.png',
-        'threadedcomments/threadedcomment': 'kde-telepathy.png', #'irc-voice.png',
+        'threadedcomments/threadedcomment': 'kde-telepathy.png',  # 'irc-voice.png',
         'zinnia/category': 'folder-bookmark.png',
         'zinnia/entry': 'view-calendar-journal.png',
     }
@@ -86,10 +86,10 @@ else:
 FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(settings, "FLUENT_DASHBOARD_CMS_PAGE_MODEL", None)
 
 FLUENT_DASHBOARD_CMS_APP_NAMES = getattr(settings, "FLUENT_DASHBOARD_CMS_APP_NAMES", (
-    'cms.*',        # DjangoCMS
-    'feincms.*',    # FeinCMS
-    'fluent*',      # Fluent pages, blogs, faq
-    'fiber',        # Django-Fiber
+    'cms.*',  # DjangoCMS
+    'feincms.*',  # FeinCMS
+    'fluent*',  # Fluent pages, blogs, faq
+    'fiber',  # Django-Fiber
     'django.contrib.flatpages.*',
     'django.contrib.redirects.*',
     'zinnia.models.entry.Entry',
@@ -112,7 +112,8 @@ FLUENT_DASHBOARD_CMS_MODEL_ORDER = getattr(settings, "FLUENT_DASHBOARD_CMS_MODEL
 
 FLUENT_DASHBOARD_APP_ICONS.update(getattr(settings, 'FLUENT_DASHBOARD_APP_ICONS', {}))
 
-FLUENT_DASHBOARD_DEFAULT_MODULE = getattr(settings, 'FLUENT_DASHBOARD_DEFAULT_MODULE', 'admin_tools.dashboard.modules.AppList')
+FLUENT_DASHBOARD_DEFAULT_MODULE = getattr(settings, 'FLUENT_DASHBOARD_DEFAULT_MODULE',
+                                          'admin_tools.dashboard.modules.AppList')
 
 FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
     (_('CMS'), {
@@ -176,9 +177,8 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(settings, 'FLUENT_DASHBOARD_APP_GROUPS', (
         'module': FLUENT_DASHBOARD_DEFAULT_MODULE,
         'collapsible': False,
     }),
-    #(_('Developer tools'), ()),
+    # (_('Developer tools'), ()),
 ))
-
 
 # Provide defaults for some popular Django CMSes
 if not FLUENT_DASHBOARD_CMS_PAGE_MODEL:

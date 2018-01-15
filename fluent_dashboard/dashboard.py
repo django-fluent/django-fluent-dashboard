@@ -45,6 +45,7 @@ class FluentIndexDashboard(Dashboard):
     the :func:`__init__` method, or the :func:`init_with_context` method.
     For more information, see the `django-admin-tools` documentation.
     """
+
     class Media:
         if LooseVersion(admin_tools.VERSION) < LooseVersion('0.6'):
             # Older versions of django-admin-tools used an incorrect format for media.
@@ -88,7 +89,7 @@ class FluentIndexDashboard(Dashboard):
         modules = []
         appgroups = get_application_groups()
         for title, kwargs in appgroups:
-            AppListClass = get_class(kwargs.pop('module'))  #e.g. CmsAppIconlist, AppIconlist, Applist
+            AppListClass = get_class(kwargs.pop('module'))  # e.g. CmsAppIconlist, AppIconlist, Applist
             modules.append(AppListClass(title, **kwargs))
         return modules
 
