@@ -30,8 +30,8 @@ Preview
 =======
 
 .. image:: images/dashboard.png
-   :width: 1030px
-   :height: 715px
+   :width: 2517px
+   :height: 1614px
    :alt: django-fluent-dashboard preview
 
 Icon credits
