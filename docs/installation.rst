@@ -28,6 +28,19 @@ To enable the dashboard in Django, both the `fluent_dashboard` and the `admin_to
         'django.contrib.admin',
     )
 
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': (),
+            'OPTIONS': {
+                'loaders': (
+                    ...
+                    'admin_tools.template_loaders.Loader',  # Add this line!
+                ),
+            }
+        }
+    ]
+
 .. note::
     The ``admin_tools.theming`` and ``admin_tools.menu`` applications are optional.
 

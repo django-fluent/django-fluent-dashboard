@@ -57,8 +57,20 @@ Add the following settings to ``settings.py``:
     ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentAppIndexDashboard'
     ADMIN_TOOLS_MENU = 'fluent_dashboard.menu.FluentMenu'
 
-Note that some ``admin_tools`` applications are optional,
-yet recommended to have the full experience of the module.
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': (),
+            'OPTIONS': {
+                'loaders': (
+                    ...
+                    'admin_tools.template_loaders.Loader',  # Add this line!
+                ),
+            }
+        }
+    ]
+
+The ``admin_tools.theming`` and ``admin_tools.menu`` applications are optional.
 
 Add to ``urls.py``:
 
