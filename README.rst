@@ -38,12 +38,9 @@ Or the current folder can be installed::
 Configuration
 -------------
 
-Next, create a project which uses the CMS::
+Add the following settings to ``settings.py``:
 
-    cd ..
-    django-admin.py startproject fluentdemo
-
-It should have the following settings::
+.. code-block:: python
 
     INSTALLED_APPS += (
         'fluent_dashboard',
@@ -60,23 +57,22 @@ It should have the following settings::
     ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'fluent_dashboard.dashboard.FluentAppIndexDashboard'
     ADMIN_TOOLS_MENU = 'fluent_dashboard.menu.FluentMenu'
 
-For Django 1.3 the following setting is also required::
-
-    ADMIN_MEDIA_PREFIX = '/static/admin/'
-
 Note that some ``admin_tools`` applications are optional,
 yet recommended to have the full experience of the module.
 
-In ``urls.py``::
+Add to ``urls.py``:
 
-    urlpatterns += patterns('',
+.. code-block:: python
+
+    urlpatterns += [
         url(r'^admintools/', include('admin_tools.urls')),
-    )
+    ]
 
-The database tables for ``admin_tools`` can be created afterwards::
+The database tables for ``admin_tools`` can be created afterwards:
 
-    ./manage.py syncdb
-    ./manage.py migrate    # If South is installed
+.. code-block:: bash
+
+    ./manage.py migrate
 
 Customizing the dashboard
 --------------------------
@@ -85,7 +81,9 @@ Adding extra icons
 ------------------
 
 The ``FLUENT_DASHBOARD_APP_ICONS`` setting is a dictionary that allows you to define extra icons
-for your own modules, and overwrite default settings. For example::
+for your own modules, and overwrite default settings. For example:
+
+.. code-block:: python
 
     FLUENT_DASHBOARD_APP_ICONS = {
         'auth/user': "user.png"
@@ -95,14 +93,16 @@ The icon is expected to be 48x48 pixels.
 The icon name is treated in 3 different formats:
 
 * Absolute URLs are passed as-is.
-* Icon names with a `/` character, are relative to the ``STATIC_URL`` (or ``MEDIA_URL`` for Django 1.2).
+* Icon names with a `/` character, are relative to the ``STATIC_URL``.
 * Icon names without any path information, are relative to the current theme folder, e.g. `STATIC_URL`/fluent_dashboard/`themename`/
 
 Organizing the application groups
 ---------------------------------
 
 The ``FLUENT_DASHBOARD_APP_GROUPS`` setting defines which applications are grouped.
-For example::
+For example:
+
+.. code-block:: python
 
     FLUENT_DASHBOARD_APP_GROUPS = (
         (_('CMS'), {
@@ -147,7 +147,9 @@ which can display cache statistics. It can be installed using::
 
     pip install dashboardmods
 
-The application requires the cache backends to be configured, for example::
+The application requires the cache backends to be configured, for example:
+
+.. code-block:: python
 
     INSTALLED_APPS += (
         'dashboardmods',

@@ -5,6 +5,7 @@ Changes in 1.0 (2018-01-22)
 ---------------------------
 
 * Added Django 2.0 support.
+* Removed Django 1.5 / 1.6 compatibility.
 * Use new icons from www.flaticon.com
 
 **Backwards incompatible:** The icon defaults have changed to use flat icons.
