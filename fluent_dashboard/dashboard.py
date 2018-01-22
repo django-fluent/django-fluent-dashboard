@@ -45,6 +45,7 @@ class FluentIndexDashboard(Dashboard):
     the :func:`__init__` method, or the :func:`init_with_context` method.
     For more information, see the `django-admin-tools` documentation.
     """
+
     class Media:
         if LooseVersion(admin_tools.VERSION) < LooseVersion('0.6'):
             # Older versions of django-admin-tools used an incorrect format for media.
