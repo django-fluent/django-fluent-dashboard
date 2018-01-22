@@ -88,7 +88,7 @@ class FluentIndexDashboard(Dashboard):
         modules = []
         appgroups = get_application_groups()
         for title, kwargs in appgroups:
-            AppListClass = get_class(kwargs.pop('module'))  #e.g. CmsAppIconlist, AppIconlist, Applist
+            AppListClass = get_class(kwargs.pop('module'))  # e.g. CmsAppIconlist, AppIconlist, Applist
             modules.append(AppListClass(title, **kwargs))
         return modules
 

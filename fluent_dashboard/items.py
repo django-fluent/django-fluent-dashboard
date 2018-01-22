@@ -35,11 +35,11 @@ class CmsModelList(items.ModelList):
         # Convert to a similar data structure like the dashboard icons have.
         # This allows sorting the items identically.
         models = [
-            { 'name': get_meta_model_name(model._meta),
-              'app_name': model._meta.app_label,
-              'title': capfirst(model._meta.verbose_name_plural),
-              'url': self._get_admin_change_url(model, context)
-            }
+            {'name': get_meta_model_name(model._meta),
+             'app_name': model._meta.app_label,
+             'title': capfirst(model._meta.verbose_name_plural),
+             'url': self._get_admin_change_url(model, context)
+             }
             for model, perms in listitems if self.is_item_visible(model, perms)
         ]
 

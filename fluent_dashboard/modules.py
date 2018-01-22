@@ -189,8 +189,8 @@ class AppIconList(modules.AppList):
         * Otherwise, it's relative to the theme url folder.
         """
         if not icon.startswith('/') \
-        and not icon.startswith('http://') \
-        and not icon.startswith('https://'):
+                and not icon.startswith('http://') \
+                and not icon.startswith('https://'):
             if '/' in icon:
                 return self.icon_static_root + icon
             else:
@@ -217,7 +217,7 @@ class CmsAppIconList(AppIconList):
         super(CmsAppIconList, self).init_with_context(context)
         apps = self.children
 
-        cms_apps     = [a for a in apps if is_cms_app(a['name'])]
+        cms_apps = [a for a in apps if is_cms_app(a['name'])]
         non_cms_apps = [a for a in apps if a not in cms_apps]
 
         if cms_apps:
