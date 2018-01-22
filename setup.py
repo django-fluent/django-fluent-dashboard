@@ -45,7 +45,7 @@ setup(
     requires=[
         'Django (>=1.5)',
     ],
-    extras_require = {
+    extras_require={
         'cachestatus': ['dashboardmods>=0.2.2', 'feedparser', 'python-varnish'],
     },
 
