@@ -13,7 +13,6 @@ import socket
 import django
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext as _
 from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
@@ -26,6 +25,11 @@ try:
     get_model = apps.get_model
 except ImportError:
     from django.db.models.loading import get_model
+
+try:
+    from django.urls import reverse, NoReverseMatch  # Django 1.10+
+except ImportError:
+    from django.core.urlresolvers import reverse, NoReverseMatch
 
 logger = logging.getLogger("fluent_dashboard.modules")
 

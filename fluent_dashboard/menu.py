@@ -1,12 +1,16 @@
 """
 Custom menu for fluent_dashboard apps.
 """
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from admin_tools.menu import items, Menu
 from admin_tools.utils import get_admin_site_name
 from fluent_dashboard.items import CmsModelList, ReturnToSiteItem
 from fluent_dashboard.appgroups import get_application_groups
+
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 
 class FluentMenu(Menu):

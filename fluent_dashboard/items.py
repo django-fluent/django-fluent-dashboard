@@ -4,13 +4,17 @@ Additional menu items.
 import django
 from admin_tools.menu import items
 from django.contrib.contenttypes.models import ContentType
-from django.core import urlresolvers
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
 from fluent_dashboard.appgroups import sort_cms_models
 from fluent_dashboard.compat import get_meta_model_name
 import re
+
+try:
+    from django import urls  # Django 1.10+
+except ImportError:
+    from django.core import urlresolvers as urls
 
 RE_CHANGE_URL = re.compile("(.+)_([^_]+)_change")
 
@@ -89,7 +93,7 @@ class ReturnToSiteItem(items.MenuItem):
         if edited_model:
             try:
                 url = edited_model.get_absolute_url()
-            except (AttributeError, urlresolvers.NoReverseMatch) as e:
+            except (AttributeError, urls.NoReverseMatch) as e:
                 pass
             else:
                 if url:
@@ -100,7 +104,7 @@ class ReturnToSiteItem(items.MenuItem):
         Return the object which is currently being edited.
         Returns ``None`` if the match could not be made.
         """
-        resolvermatch = urlresolvers.resolve(request.path_info)
+        resolvermatch = urls.resolve(request.path_info)
         if resolvermatch.namespace == 'admin' and resolvermatch.url_name and resolvermatch.url_name.endswith('_change'):
             # In "appname_modelname_change" view of the admin.
             # Extract the appname and model from the url name.
@@ -109,7 +113,12 @@ class ReturnToSiteItem(items.MenuItem):
             if not match:
                 return None
 
-            object_id = resolvermatch.args[0]  # Can be string (e.g. a country code as PK).
+            # object_id can be string (e.g. a country code as PK).
+            try:
+                object_id = resolvermatch.kwargs['object_id']  # Django 2.0+
+            except KeyError:
+                object_id = resolvermatch.args[0]
+
             return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
         return None
 

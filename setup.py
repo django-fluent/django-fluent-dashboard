@@ -39,7 +39,7 @@ setup(
     license='Apache 2.0',
 
     install_requires=[
-        'django-admin-tools>=0.5.2',  # 0.5.2 has proper Django 1.5/1.6 support.
+        'django-admin-tools>=0.5.2',
         'future>=0.12.2',
     ],
     requires=[
