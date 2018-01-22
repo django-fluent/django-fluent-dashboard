@@ -1,14 +1,21 @@
 Changelog
 =========
 
-Changes in 1.0a1 (2016-05-08)
------------------------------
+Changes in 1.0 (2018-01-22)
+---------------------------
 
-* Use new icons, from www.flaticon.com
+* Added Django 2.0 support.
+* Use new icons from www.flaticon.com
 
 **Backwards incompatible:** The icon defaults have changed to use flat icons.
 Please review and update your ``FLUENT_DASHBOARD_APP_ICONS`` settings.
 To keep using the old icon theme, add ``FLUENT_DASHBOARD_ICON_THEME = 'oxygen'`` to your settings.
+
+
+Released as 1.0a1 (2016-05-08)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Use new icons from www.flaticon.com
 
 
 Changes in version 0.6.1 (2016-01-21)
