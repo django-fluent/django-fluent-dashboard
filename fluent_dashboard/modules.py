@@ -11,6 +11,7 @@ This package adds the following classes:
 import logging
 import socket
 import django
+from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext as _
@@ -18,13 +19,6 @@ from admin_tools.utils import get_admin_site_name
 from admin_tools.dashboard import modules
 from fluent_dashboard import appsettings
 from fluent_dashboard.appgroups import is_cms_app, sort_cms_models
-from fluent_dashboard.compat import get_meta_model_name
-
-try:
-    from django.apps import apps  # Django 1.7+
-    get_model = apps.get_model
-except ImportError:
-    from django.db.models.loading import get_model
 
 try:
     from django.urls import reverse, NoReverseMatch  # Django 1.10+
@@ -88,7 +82,7 @@ class PersonalModule(modules.LinkList):
         if self.cms_page_model:
             try:
                 app_label, model_name = self.cms_page_model
-                model = get_model(app_label, model_name)
+                model = apps.get_model(app_label, model_name)
                 pages_title = model._meta.verbose_name_plural.lower()
                 pages_link = reverse('{site}:{app}_{model}_changelist'.format(site=site_name, app=app_label.lower(), model=model_name.lower()))
             except AttributeError:
@@ -98,7 +92,7 @@ class PersonalModule(modules.LinkList):
             else:
                 # Also check if the user has permission to view the module.
                 # TODO: When there are modules that use Django 1.8's has_module_permission, add the support here.
-                permission_name = 'change_{0}'.format(get_meta_model_name(model._meta).lower())
+                permission_name = 'change_{0}'.format(model._meta.model_name.lower())
 
                 if current_user.has_perm('{0}.{1}'.format(model._meta.app_label, permission_name)):
                     self.pages_title = pages_title

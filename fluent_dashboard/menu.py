@@ -8,7 +8,7 @@ from fluent_dashboard.items import CmsModelList, ReturnToSiteItem
 from fluent_dashboard.appgroups import get_application_groups
 
 try:
-    from django.urls import reverse
+    from django.urls import reverse  # Django 1.10+
 except ImportError:
     from django.core.urlresolvers import reverse
 

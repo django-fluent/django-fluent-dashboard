@@ -8,7 +8,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
 from fluent_dashboard.appgroups import sort_cms_models
-from fluent_dashboard.compat import get_meta_model_name
 import re
 
 try:
@@ -35,7 +34,7 @@ class CmsModelList(items.ModelList):
         # Convert to a similar data structure like the dashboard icons have.
         # This allows sorting the items identically.
         models = [
-            {'name': get_meta_model_name(model._meta),
+            {'name': model._meta.model_name,
              'app_name': model._meta.app_label,
              'title': capfirst(model._meta.verbose_name_plural),
              'url': self._get_admin_change_url(model, context)
