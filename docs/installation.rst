@@ -9,8 +9,7 @@ This package can be installed using pip:
 
     pip install django-fluent-dashboard
 
-This should automatically install django-admin-tools_ 0.4.1 as well.
-The 0.4.1 release is required to use Django 1.3.
+This should automatically install django-admin-tools_ as well.
 
 Django configuration
 --------------------
@@ -22,7 +21,7 @@ To enable the dashboard in Django, both the `fluent_dashboard` and the `admin_to
     INSTALLED_APPS += (
         'fluent_dashboard',
 
-        'admin_tools',     # for staticfiles in Django 1.3
+        'admin_tools',
         'admin_tools.theming',
         'admin_tools.menu',
         'admin_tools.dashboard',
