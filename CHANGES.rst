@@ -1,6 +1,14 @@
 Changelog
 =========
 
+Changes in git
+--------------
+
+* Fixed wheel package
+* Fixed setup classifiers
+* Bump django-admin-tools_ to proper minimal version.
+
+
 Changes in 1.0 (2018-01-22)
 ---------------------------
 
