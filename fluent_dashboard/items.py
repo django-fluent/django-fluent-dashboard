@@ -114,9 +114,12 @@ class ReturnToSiteItem(items.MenuItem):
 
             # object_id can be string (e.g. a country code as PK).
             try:
-                object_id = resolvermatch.kwargs['object_id']  # Django 2.0+
+                object_id = resolvermatch.kwargs['object_id']  # Django 2.0
             except KeyError:
-                object_id = resolvermatch.args[0]
+                try:
+                    object_id = resolvermatch.kwargs['id']  # Django 2.1+
+                except KeyError:
+                    object_id = resolvermatch.args[0]
 
             return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
         return None
