@@ -114,11 +114,11 @@ class ReturnToSiteItem(items.MenuItem):
 
             # object_id can be string (e.g. a country code as PK).
             if 'id' in resolvermatch.kwargs:
-                object_id = resolvermatch.kwargs['id']  # Django 2.0+   ; for user passwords
+                object_id = resolvermatch.kwargs['id']          # Django 2.0+   ; for user passwords
             elif 'object_id' in resolvermatch.kwargs:
-                object_id = resolvermatch.kwargs['object_id']  # Django 2.0+  ; for others
+                object_id = resolvermatch.kwargs['object_id']   # Django 2.0+  ; for others
             else:
-                object_id = resolvermatch.args[0]
+                object_id = resolvermatch.args[0]               # Brought forward
             return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
         return None
 
