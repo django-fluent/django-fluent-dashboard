@@ -56,7 +56,8 @@ class CmsModelList(items.ModelList):
         This function can be extended to support "view permissions" for example.
 
         :param model: The model class
-        :param perms: The permissions from :func:`ModelAdmin.get_model_perms()<django.contrib.admin.ModelAdmin.get_model_perms>`.
+        :param perms: The permissions from
+            :func:`ModelAdmin.get_model_perms()<django.contrib.admin.ModelAdmin.get_model_perms>`.
         """
         return perms['change']
 

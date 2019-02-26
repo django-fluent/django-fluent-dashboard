@@ -11,7 +11,6 @@ Off course, you can also extend the classes, and use those names in the settings
 """
 from distutils.version import LooseVersion
 import admin_tools
-from admin_tools.dashboard.modules import Group
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
@@ -116,7 +115,7 @@ class FluentIndexDashboard(Dashboard):
         Instantiate the RSS modules for use in the dashboard.
         This module displays the RSS feeds of the :ref:`dashboardmods` package, if it is installed, and configured.
         """
-        if not 'dashboardmods' in settings.INSTALLED_APPS:
+        if 'dashboardmods' not in settings.INSTALLED_APPS:
             return []
         import dashboardmods
         return dashboardmods.get_rss_dash_modules()
