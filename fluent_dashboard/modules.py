@@ -84,9 +84,12 @@ class PersonalModule(modules.LinkList):
                 app_label, model_name = self.cms_page_model
                 model = apps.get_model(app_label, model_name)
                 pages_title = model._meta.verbose_name_plural.lower()
-                pages_link = reverse('{site}:{app}_{model}_changelist'.format(site=site_name, app=app_label.lower(), model=model_name.lower()))
+                pages_link = reverse('{site}:{app}_{model}_changelist'.format(site=site_name, app=app_label.lower(),
+                                                                              model=model_name.lower()))
             except AttributeError:
-                raise ImproperlyConfigured("The value {0} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting (or cms_page_model value) does not reffer to an existing model.".format(self.cms_page_model))
+                raise ImproperlyConfigured("The value {0} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting "
+                                           "(or cms_page_model value) does not reffer to an existing model.".
+                                           format(self.cms_page_model))
             except NoReverseMatch:
                 pass
             else:
@@ -140,7 +143,8 @@ class AppIconList(modules.AppList):
                 try:
                     model_name = self._get_model_name(model)
                     model['name'] = model_name
-                    model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
+                    model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.\
+                        FLUENT_DASHBOARD_DEFAULT_ICON
                 except ValueError:
                     model['icon'] = appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
 
