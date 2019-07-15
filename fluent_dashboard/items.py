@@ -7,7 +7,7 @@ import django
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import capfirst
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from admin_tools.menu import items
 from fluent_dashboard.appgroups import sort_cms_models
