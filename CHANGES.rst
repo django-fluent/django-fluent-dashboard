@@ -23,7 +23,7 @@ To keep using the old icon theme, add ``FLUENT_DASHBOARD_ICON_THEME = 'oxygen'``
 
 
 Released as 1.0a1 (2016-05-08)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Use new icons from www.flaticon.com
 
