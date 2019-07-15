@@ -5,4 +5,4 @@
 # so the docs root is not used by find_packages()
 
 # Display proper URLs in the docs:
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"

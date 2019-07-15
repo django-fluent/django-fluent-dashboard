@@ -10,15 +10,15 @@ These classes need to be linked in ``settings.py`` to be loaded by `django-admin
 Off course, you can also extend the classes, and use those names in the settings instead.
 """
 from distutils.version import LooseVersion
-import admin_tools
-from admin_tools.dashboard.modules import Group
+
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
-
-from fluent_dashboard.modules import PersonalModule, CacheStatusGroup
+import admin_tools
+from admin_tools.dashboard import AppIndexDashboard, Dashboard, modules
+from admin_tools.dashboard.modules import Group
 from fluent_dashboard.appgroups import get_application_groups, get_class
+from fluent_dashboard.modules import CacheStatusGroup, PersonalModule
 
 
 class FluentIndexDashboard(Dashboard):
@@ -45,14 +45,13 @@ class FluentIndexDashboard(Dashboard):
     the :func:`__init__` method, or the :func:`init_with_context` method.
     For more information, see the `django-admin-tools` documentation.
     """
+
     class Media:
-        if LooseVersion(admin_tools.VERSION) < LooseVersion('0.6'):
+        if LooseVersion(admin_tools.VERSION) < LooseVersion("0.6"):
             # Older versions of django-admin-tools used an incorrect format for media.
             css = ("fluent_dashboard/dashboard.css",)
         else:
-            css = {
-                'all': ("fluent_dashboard/dashboard.css",)
-            }
+            css = {"all": ("fluent_dashboard/dashboard.css",)}
 
     def __init__(self, **kwargs):
         super(FluentIndexDashboard, self).__init__(**kwargs)
@@ -61,8 +60,8 @@ class FluentIndexDashboard(Dashboard):
         self.children.append(self.get_recent_actions_module())
 
     def init_with_context(self, context):
-        request = context['request']
-        if 'dashboardmods' in settings.INSTALLED_APPS:
+        request = context["request"]
+        if "dashboardmods" in settings.INSTALLED_APPS:
             self.children.extend(self.get_rss_modules())
             self.children.extend(self.get_cache_status_modules(request))
 
@@ -71,10 +70,7 @@ class FluentIndexDashboard(Dashboard):
         Instantiate the :class:`~fluent_dashboard.modules.PersonalModule` for use in the dashboard.
         """
         return PersonalModule(
-            layout='inline',
-            draggable=False,
-            deletable=False,
-            collapsible=False,
+            layout="inline", draggable=False, deletable=False, collapsible=False
         )
 
     def get_application_modules(self):
@@ -88,7 +84,9 @@ class FluentIndexDashboard(Dashboard):
         modules = []
         appgroups = get_application_groups()
         for title, kwargs in appgroups:
-            AppListClass = get_class(kwargs.pop('module'))  # e.g. CmsAppIconlist, AppIconlist, Applist
+            AppListClass = get_class(
+                kwargs.pop("module")
+            )  # e.g. CmsAppIconlist, AppIconlist, Applist
             modules.append(AppListClass(title, **kwargs))
         return modules
 
@@ -96,7 +94,9 @@ class FluentIndexDashboard(Dashboard):
         """
         Instantiate the :class:`~admin_tools.dashboard.modules.RecentActions` module for use in the dashboard.
         """
-        return modules.RecentActions(_('Recent Actions'), 5, enabled=False, collapsible=False)
+        return modules.RecentActions(
+            _("Recent Actions"), 5, enabled=False, collapsible=False
+        )
 
     def get_cache_status_modules(self, request):
         """
@@ -116,9 +116,10 @@ class FluentIndexDashboard(Dashboard):
         Instantiate the RSS modules for use in the dashboard.
         This module displays the RSS feeds of the :ref:`dashboardmods` package, if it is installed, and configured.
         """
-        if not 'dashboardmods' in settings.INSTALLED_APPS:
+        if not "dashboardmods" in settings.INSTALLED_APPS:
             return []
         import dashboardmods
+
         return dashboardmods.get_rss_dash_modules()
 
 
@@ -134,7 +135,7 @@ class FluentAppIndexDashboard(AppIndexDashboard):
     """
 
     # disable title because its redundant with the model list module
-    title = ''
+    title = ""
 
     def __init__(self, app_title, models, **kwargs):
         super(FluentAppIndexDashboard, self).__init__(app_title, models, **kwargs)
@@ -156,9 +157,9 @@ class FluentAppIndexDashboard(AppIndexDashboard):
         for use in the appliation index page.
         """
         return modules.RecentActions(
-            _('Recent Actions'),
+            _("Recent Actions"),
             include_list=self.get_app_content_types(),
             limit=5,
             enabled=False,
-            collapsible=False
+            collapsible=False,
         )

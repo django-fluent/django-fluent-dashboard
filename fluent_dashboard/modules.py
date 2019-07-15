@@ -10,13 +10,15 @@ This package adds the following classes:
 """
 import logging
 import socket
+
 import django
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext as _
-from admin_tools.utils import get_admin_site_name
+
 from admin_tools.dashboard import modules
+from admin_tools.utils import get_admin_site_name
 from fluent_dashboard import appsettings
 from fluent_dashboard.appgroups import is_cms_app, sort_cms_models
 
@@ -44,57 +46,70 @@ class PersonalModule(modules.LinkList):
     The :ref:`FLUENT_DASHBOARD_CMS_PAGE_MODEL` setting is used to display a link to the pages module.
     If this setting is not defined, a general text will be displayed instead.
     """
+
     # Set admin_tools defaults
     draggable = False
     deletable = False
     collapsible = False
 
     #: Define the title to display
-    title = _('Welcome,')
+    title = _("Welcome,")
 
     #: The model to use for the CMS pages link.
     cms_page_model = appsettings.FLUENT_DASHBOARD_CMS_PAGE_MODEL
 
     #: Define the template to render
-    template = 'fluent_dashboard/modules/personal.html'
+    template = "fluent_dashboard/modules/personal.html"
 
     def init_with_context(self, context):
         """
         Initializes the link list.
         """
         super(PersonalModule, self).init_with_context(context)
-        current_user = context['request'].user
+        current_user = context["request"].user
         if django.VERSION < (1, 5):
             current_username = current_user.first_name or current_user.username
         else:
-            current_username = current_user.get_short_name() or current_user.get_username()
+            current_username = (
+                current_user.get_short_name() or current_user.get_username()
+            )
         site_name = get_admin_site_name(context)
 
         # Personalize
-        self.title = _('Welcome,') + ' ' + (current_username)
+        self.title = _("Welcome,") + " " + (current_username)
 
         # Expose links
         self.pages_link = None
         self.pages_title = None
-        self.password_link = reverse('{0}:password_change'.format(site_name))
-        self.logout_link = reverse('{0}:logout'.format(site_name))
+        self.password_link = reverse("{0}:password_change".format(site_name))
+        self.logout_link = reverse("{0}:logout".format(site_name))
 
         if self.cms_page_model:
             try:
                 app_label, model_name = self.cms_page_model
                 model = apps.get_model(app_label, model_name)
                 pages_title = model._meta.verbose_name_plural.lower()
-                pages_link = reverse('{site}:{app}_{model}_changelist'.format(site=site_name, app=app_label.lower(), model=model_name.lower()))
+                pages_link = reverse(
+                    "{site}:{app}_{model}_changelist".format(
+                        site=site_name, app=app_label.lower(), model=model_name.lower()
+                    )
+                )
             except AttributeError:
-                raise ImproperlyConfigured("The value {0} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting (or cms_page_model value) does not reffer to an existing model.".format(self.cms_page_model))
+                raise ImproperlyConfigured(
+                    "The value {0} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting (or cms_page_model value) does not reffer to an existing model.".format(
+                        self.cms_page_model
+                    )
+                )
             except NoReverseMatch:
                 pass
             else:
                 # Also check if the user has permission to view the module.
                 # TODO: When there are modules that use Django 1.8's has_module_permission, add the support here.
-                permission_name = 'change_{0}'.format(model._meta.model_name.lower())
+                permission_name = "change_{0}".format(model._meta.model_name.lower())
 
-                if current_user.has_perm('{0}.{1}'.format(model._meta.app_label, permission_name)):
+                if current_user.has_perm(
+                    "{0}.{1}".format(model._meta.app_label, permission_name)
+                ):
                     self.pages_title = pages_title
                     self.pages_link = pages_link
 
@@ -116,12 +131,14 @@ class AppIconList(modules.AppList):
     """
 
     #: Specify the template to render
-    template = 'fluent_dashboard/modules/app_icon_list.html'
+    template = "fluent_dashboard/modules/app_icon_list.html"
 
     #: The current static root (considered read only)
     icon_static_root = settings.STATIC_URL
     #: The current theme folder (considerd read only)
-    icon_theme_root = "{0}fluent_dashboard/{1}/".format(icon_static_root, appsettings.FLUENT_DASHBOARD_ICON_THEME)
+    icon_theme_root = "{0}fluent_dashboard/{1}/".format(
+        icon_static_root, appsettings.FLUENT_DASHBOARD_ICON_THEME
+    )
 
     def init_with_context(self, context):
         """
@@ -134,34 +151,41 @@ class AppIconList(modules.AppList):
         # Restore the app_name and name, so icons can be matched.
         for app in apps:
             app_name = self._get_app_name(app)
-            app['name'] = app_name
+            app["name"] = app_name
 
-            for model in app['models']:
+            for model in app["models"]:
                 try:
                     model_name = self._get_model_name(model)
-                    model['name'] = model_name
-                    model['icon'] = self.get_icon_for_model(app_name, model_name) or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
+                    model["name"] = model_name
+                    model["icon"] = (
+                        self.get_icon_for_model(app_name, model_name)
+                        or appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
+                    )
                 except ValueError:
-                    model['icon'] = appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
+                    model["icon"] = appsettings.FLUENT_DASHBOARD_DEFAULT_ICON
 
                 # Automatically add STATIC_URL before relative icon paths.
-                model['icon'] = self.get_icon_url(model['icon'])
-                model['app_name'] = app_name
+                model["icon"] = self.get_icon_url(model["icon"])
+                model["app_name"] = app_name
 
     def _get_app_name(self, appdata):
         """
         Extract the app name from the ``appdata`` that *django-admin-tools* provides.
         """
-        return appdata['url'].strip('/').split('/')[-1]   # /foo/admin/appname/
+        return appdata["url"].strip("/").split("/")[-1]  # /foo/admin/appname/
 
     def _get_model_name(self, modeldata):
         """
         Extract the model name from the ``modeldata`` that *django-admin-tools* provides.
         """
-        if 'change_url' in modeldata:
-            return modeldata['change_url'].strip('/').split('/')[-1]   # /foo/admin/appname/modelname
-        elif 'add_url' in modeldata:
-            return modeldata['add_url'].strip('/').split('/')[-2]      # /foo/admin/appname/modelname/add
+        if "change_url" in modeldata:
+            return (
+                modeldata["change_url"].strip("/").split("/")[-1]
+            )  # /foo/admin/appname/modelname
+        elif "add_url" in modeldata:
+            return (
+                modeldata["add_url"].strip("/").split("/")[-2]
+            )  # /foo/admin/appname/modelname/add
         else:
             raise ValueError("Missing attributes in modeldata to find the model name!")
 
@@ -181,10 +205,12 @@ class AppIconList(modules.AppList):
         * When the icon contains a slash, it is relative from the ``STATIC_URL``.
         * Otherwise, it's relative to the theme url folder.
         """
-        if not icon.startswith('/') \
-                and not icon.startswith('http://') \
-                and not icon.startswith('https://'):
-            if '/' in icon:
+        if (
+            not icon.startswith("/")
+            and not icon.startswith("http://")
+            and not icon.startswith("https://")
+        ):
+            if "/" in icon:
                 return self.icon_static_root + icon
             else:
                 return self.icon_theme_root + icon
@@ -210,17 +236,22 @@ class CmsAppIconList(AppIconList):
         super(CmsAppIconList, self).init_with_context(context)
         apps = self.children
 
-        cms_apps = [a for a in apps if is_cms_app(a['name'])]
+        cms_apps = [a for a in apps if is_cms_app(a["name"])]
         non_cms_apps = [a for a in apps if a not in cms_apps]
 
         if cms_apps:
             # Group the models of all CMS apps in one group.
             cms_models = []
             for app in cms_apps:
-                cms_models += app['models']
+                cms_models += app["models"]
 
             sort_cms_models(cms_models)
-            single_cms_app = {'name': "Modules", 'title': "Modules", 'url': "", 'models': cms_models}
+            single_cms_app = {
+                "name": "Modules",
+                "title": "Modules",
+                "url": "",
+                "models": cms_models,
+            }
 
             # Put remaining groups after the first CMS group.
             self.children = [single_cms_app] + non_cms_apps
@@ -253,8 +284,9 @@ class CacheStatusGroup(modules.Group):
         """
         super(CacheStatusGroup, self).init_with_context(context)
 
-        if 'dashboardmods' in settings.INSTALLED_APPS:
+        if "dashboardmods" in settings.INSTALLED_APPS:
             import dashboardmods
+
             memcache_mods = dashboardmods.get_memcache_dash_modules()
 
             try:

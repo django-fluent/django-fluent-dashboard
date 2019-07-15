@@ -1,14 +1,16 @@
 """
 Additional menu items.
 """
+import re
+
 import django
-from admin_tools.menu import items
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import capfirst
 from django.utils.translation import ugettext as _
+
+from admin_tools.menu import items
 from fluent_dashboard.appgroups import sort_cms_models
-import re
 
 try:
     from django import urls  # Django 1.10+
@@ -29,17 +31,19 @@ class CmsModelList(items.ModelList):
         Initialize the menu.
         """
         # Apply the include/exclude patterns:
-        listitems = self._visible_models(context['request'])
+        listitems = self._visible_models(context["request"])
 
         # Convert to a similar data structure like the dashboard icons have.
         # This allows sorting the items identically.
         models = [
-            {'name': model._meta.model_name,
-             'app_name': model._meta.app_label,
-             'title': capfirst(model._meta.verbose_name_plural),
-             'url': self._get_admin_change_url(model, context)
-             }
-            for model, perms in listitems if self.is_item_visible(model, perms)
+            {
+                "name": model._meta.model_name,
+                "app_name": model._meta.app_label,
+                "title": capfirst(model._meta.verbose_name_plural),
+                "url": self._get_admin_change_url(model, context),
+            }
+            for model, perms in listitems
+            if self.is_item_visible(model, perms)
         ]
 
         # Sort models.
@@ -47,7 +51,7 @@ class CmsModelList(items.ModelList):
 
         # Convert to items
         for model in models:
-            self.children.append(items.MenuItem(title=model['title'], url=model['url']))
+            self.children.append(items.MenuItem(title=model["title"], url=model["url"]))
 
     def is_item_visible(self, model, perms):
         """
@@ -58,7 +62,7 @@ class CmsModelList(items.ModelList):
         :param model: The model class
         :param perms: The permissions from :func:`ModelAdmin.get_model_perms()<django.contrib.admin.ModelAdmin.get_model_perms>`.
         """
-        return perms['change']
+        return perms["change"]
 
 
 class ReturnToSiteItem(items.MenuItem):
@@ -72,12 +76,13 @@ class ReturnToSiteItem(items.MenuItem):
 
     The menu item has a custom ``returntosite`` CSS class to be distinguishable between the other menu items.
     """
+
     #: Set the default title
-    title = _('Return to site')
+    title = _("Return to site")
     #: Set the default URL
-    url = '/'
+    url = "/"
     # Make the item distinguishable between the other menu items
-    css_classes = ['returntosite']
+    css_classes = ["returntosite"]
 
     def init_with_context(self, context):
         """
@@ -88,7 +93,7 @@ class ReturnToSiteItem(items.MenuItem):
         super(ReturnToSiteItem, self).init_with_context(context)
 
         # See if the current page is being edited, update URL accordingly.
-        edited_model = self.get_edited_object(context['request'])
+        edited_model = self.get_edited_object(context["request"])
         if edited_model:
             try:
                 url = edited_model.get_absolute_url()
@@ -104,7 +109,11 @@ class ReturnToSiteItem(items.MenuItem):
         Returns ``None`` if the match could not be made.
         """
         resolvermatch = urls.resolve(request.path_info)
-        if resolvermatch.namespace == 'admin' and resolvermatch.url_name and resolvermatch.url_name.endswith('_change'):
+        if (
+            resolvermatch.namespace == "admin"
+            and resolvermatch.url_name
+            and resolvermatch.url_name.endswith("_change")
+        ):
             # In "appname_modelname_change" view of the admin.
             # Extract the appname and model from the url name.
             # For some custom views, url_name might not be filled in (e.g. django-polymorphic's subclass_view)
@@ -114,13 +123,15 @@ class ReturnToSiteItem(items.MenuItem):
 
             # object_id can be string (e.g. a country code as PK).
             try:
-                object_id = resolvermatch.kwargs['object_id']  # Django 2.0+
+                object_id = resolvermatch.kwargs["object_id"]  # Django 2.0+
             except KeyError:
                 if not resolvermatch.args:
                     return None
                 object_id = resolvermatch.args[0]
 
-            return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
+            return self.get_object_by_natural_key(
+                match.group(1), match.group(2), object_id
+            )
         return None
 
     def get_object_by_natural_key(self, app_label, model_name, object_id):
@@ -136,7 +147,7 @@ class ReturnToSiteItem(items.MenuItem):
         # Pointless to fetch the object, if there is no URL to generate
         # Avoid another database query.
         ModelClass = model_type.model_class()
-        if not hasattr(ModelClass, 'get_absolute_url'):
+        if not hasattr(ModelClass, "get_absolute_url"):
             return None
 
         try:

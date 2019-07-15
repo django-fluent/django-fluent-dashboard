@@ -2,25 +2,28 @@
 Splitting and organizing applications and models into groups.
 This module is mostly meant for internal use.
 """
-from fnmatch import fnmatch
-from future.utils import iteritems
-from importlib import import_module
-from django.core.exceptions import ImproperlyConfigured
-from fluent_dashboard import appsettings
 import itertools
+from fnmatch import fnmatch
+from importlib import import_module
 
+from django.core.exceptions import ImproperlyConfigured
+from future.utils import iteritems
 
-_groups = [groupdict['models'] for _, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS]
+from fluent_dashboard import appsettings
+
+_groups = [
+    groupdict["models"] for _, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS
+]
 
 ALL_KNOWN_APPS = list(itertools.chain(*_groups))
-if '*' in ALL_KNOWN_APPS:
-    ALL_KNOWN_APPS.remove('*')  # Default for CMS group, but not useful here.
+if "*" in ALL_KNOWN_APPS:
+    ALL_KNOWN_APPS.remove("*")  # Default for CMS group, but not useful here.
 
 MODULE_ALIASES = {
-    'AppList': 'admin_tools.dashboard.modules.AppList',
-    'ModelList': 'admin_tools.dashboard.modules.ModelList',
-    'AppIconList': 'fluent_dashboard.modules.AppIconList',
-    'CmsAppIconList': 'fluent_dashboard.modules.CmsAppIconList',
+    "AppList": "admin_tools.dashboard.modules.AppList",
+    "ModelList": "admin_tools.dashboard.modules.ModelList",
+    "AppIconList": "fluent_dashboard.modules.AppIconList",
+    "CmsAppIconList": "fluent_dashboard.modules.CmsAppIconList",
 }
 
 
@@ -38,19 +41,21 @@ def get_application_groups():
         module_kwargs = groupdict.copy()
 
         # However, the 'models' is treated special, to have catch-all support.
-        if '*' in groupdict['models']:
+        if "*" in groupdict["models"]:
             default_module = appsettings.FLUENT_DASHBOARD_DEFAULT_MODULE
-            module_kwargs['exclude'] = ALL_KNOWN_APPS + list(module_kwargs.get('exclude', []))
-            del module_kwargs['models']
+            module_kwargs["exclude"] = ALL_KNOWN_APPS + list(
+                module_kwargs.get("exclude", [])
+            )
+            del module_kwargs["models"]
         else:
-            default_module = 'CmsAppIconList'
+            default_module = "CmsAppIconList"
 
         # Get module to display, can be a alias for known variations.
-        module = groupdict.get('module', default_module)
+        module = groupdict.get("module", default_module)
         if module in MODULE_ALIASES:
             module = MODULE_ALIASES[module]
-        module_kwargs['module'] = module
-        groups.append((title, module_kwargs),)
+        module_kwargs["module"] = module
+        groups.append((title, module_kwargs))
 
     return groups
 
@@ -59,11 +64,15 @@ def sort_cms_models(cms_models):
     """
     Sort a set of CMS-related models in a custom (predefined) order.
     """
-    cms_models.sort(key=lambda model: (
-        get_cms_model_order(model['name']) if is_cms_app(model['app_name']) else 999,
-        model['app_name'],
-        model['title']
-    ))
+    cms_models.sort(
+        key=lambda model: (
+            get_cms_model_order(model["name"])
+            if is_cms_app(model["app_name"])
+            else 999,
+            model["app_name"],
+            model["title"],
+        )
+    )
 
 
 def is_cms_app(app_name):
@@ -95,17 +104,21 @@ def get_class(import_path):
     # Copyright (c) 2009, Samuel Luescher, BSD licensed
 
     try:
-        dot = import_path.rindex('.')
+        dot = import_path.rindex(".")
     except ValueError:
         raise ImproperlyConfigured("{0} isn't a Python path.".format(import_path))
 
-    module, classname = import_path[:dot], import_path[dot + 1:]
+    module, classname = import_path[:dot], import_path[dot + 1 :]
     try:
         mod = import_module(module)
     except ImportError as e:
-        raise ImproperlyConfigured('Error importing module {0}: "{1}"'.format(module, e))
+        raise ImproperlyConfigured(
+            'Error importing module {0}: "{1}"'.format(module, e)
+        )
 
     try:
         return getattr(mod, classname)
     except AttributeError:
-        raise ImproperlyConfigured('Module "{0}" does not define a "{1}" class.'.format(module, classname))
+        raise ImproperlyConfigured(
+            'Module "{0}" does not define a "{1}" class.'.format(module, classname)
+        )
