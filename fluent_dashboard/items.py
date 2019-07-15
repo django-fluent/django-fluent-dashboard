@@ -116,6 +116,8 @@ class ReturnToSiteItem(items.MenuItem):
             try:
                 object_id = resolvermatch.kwargs['object_id']  # Django 2.0+
             except KeyError:
+                if not resolvermatch.args:
+                    return None
                 object_id = resolvermatch.args[0]
 
             return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
