@@ -1,12 +1,16 @@
 Changelog
 =========
 
-Changes in git
---------------
+Changes in 1.0.1 (2019-07-15)
+-----------------------------
 
-* Fixed wheel package
-* Fixed setup classifiers
+* Fixed crash in ``ReturnToSiteItem`` when visiting the admin password change form.
+* Fixed early gettext calls on module loading.
+* Fixed wheel package.
+* Fixed setup classifiers.
+* Fixed building docs.
 * Bump django-admin-tools_ to proper minimal version.
+* Reformat code with isort and black.
 
 
 Changes in 1.0 (2018-01-22)
