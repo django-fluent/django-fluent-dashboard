@@ -3,7 +3,7 @@
 Configuration
 =============
 
-A quick overvivew of the available settings:
+A quick overview of the available settings:
 
 .. code-block:: python
 
