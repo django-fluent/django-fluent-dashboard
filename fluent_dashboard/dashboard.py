@@ -54,7 +54,7 @@ class FluentIndexDashboard(Dashboard):
             css = {"all": ("fluent_dashboard/dashboard.css",)}
 
     def __init__(self, **kwargs):
-        super(FluentIndexDashboard, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.children.append(self.get_personal_module())
         self.children.extend(self.get_application_modules())
         self.children.append(self.get_recent_actions_module())
@@ -138,7 +138,7 @@ class FluentAppIndexDashboard(AppIndexDashboard):
     title = ""
 
     def __init__(self, app_title, models, **kwargs):
-        super(FluentAppIndexDashboard, self).__init__(app_title, models, **kwargs)
+        super().__init__(app_title, models, **kwargs)
         self.children += (
             self.get_model_list_module(),
             self.get_recent_actions_module(),

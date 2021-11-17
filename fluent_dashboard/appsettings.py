@@ -137,7 +137,7 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(
             {
                 # Mainly apps that produce an page + URL at the site.
                 "models": [
-                    "{0}.*".format(app) for app in FLUENT_DASHBOARD_CMS_APP_NAMES
+                    f"{app}.*" for app in FLUENT_DASHBOARD_CMS_APP_NAMES
                 ],
                 "exclude": [
                     # Show in other sections:

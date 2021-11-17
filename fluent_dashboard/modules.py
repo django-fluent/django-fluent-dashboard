@@ -61,7 +61,7 @@ class PersonalModule(modules.LinkList):
         """
         Initializes the link list.
         """
-        super(PersonalModule, self).init_with_context(context)
+        super().init_with_context(context)
         current_user = context["request"].user
         current_username = (
             current_user.get_short_name() or current_user.get_username()
@@ -74,8 +74,8 @@ class PersonalModule(modules.LinkList):
         # Expose links
         self.pages_link = None
         self.pages_title = None
-        self.password_link = reverse("{0}:password_change".format(site_name))
-        self.logout_link = reverse("{0}:logout".format(site_name))
+        self.password_link = reverse(f"{site_name}:password_change")
+        self.logout_link = reverse(f"{site_name}:logout")
 
         if self.cms_page_model:
             try:
@@ -89,7 +89,7 @@ class PersonalModule(modules.LinkList):
                 )
             except AttributeError:
                 raise ImproperlyConfigured(
-                    "The value {0} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting (or cms_page_model value) does not reffer to an existing model.".format(
+                    "The value {} of FLUENT_DASHBOARD_CMS_PAGE_MODEL setting (or cms_page_model value) does not reffer to an existing model.".format(
                         self.cms_page_model
                     )
                 )
@@ -98,10 +98,10 @@ class PersonalModule(modules.LinkList):
             else:
                 # Also check if the user has permission to view the module.
                 # TODO: When there are modules that use Django 1.8's has_module_permission, add the support here.
-                permission_name = "change_{0}".format(model._meta.model_name.lower())
+                permission_name = f"change_{model._meta.model_name.lower()}"
 
                 if current_user.has_perm(
-                    "{0}.{1}".format(model._meta.app_label, permission_name)
+                    f"{model._meta.app_label}.{permission_name}"
                 ):
                     self.pages_title = pages_title
                     self.pages_link = pages_link
@@ -129,7 +129,7 @@ class AppIconList(modules.AppList):
     #: The current static root (considered read only)
     icon_static_root = settings.STATIC_URL
     #: The current theme folder (considerd read only)
-    icon_theme_root = "{0}fluent_dashboard/{1}/".format(
+    icon_theme_root = "{}fluent_dashboard/{}/".format(
         icon_static_root, appsettings.FLUENT_DASHBOARD_ICON_THEME
     )
 
@@ -137,7 +137,7 @@ class AppIconList(modules.AppList):
         """
         Initializes the icon list.
         """
-        super(AppIconList, self).init_with_context(context)
+        super().init_with_context(context)
         apps = self.children
 
         # Standard model only has a title, change_url and add_url.
@@ -187,7 +187,7 @@ class AppIconList(modules.AppList):
         Return the icon for the given model.
         It reads the :ref:`FLUENT_DASHBOARD_APP_ICONS` setting.
         """
-        key = "{0}/{1}".format(app_name, model_name)
+        key = f"{app_name}/{model_name}"
         return appsettings.FLUENT_DASHBOARD_APP_ICONS.get(key, default)
 
     def get_icon_url(self, icon):
@@ -226,7 +226,7 @@ class CmsAppIconList(AppIconList):
         """
         Initializes the icon list.
         """
-        super(CmsAppIconList, self).init_with_context(context)
+        super().init_with_context(context)
         apps = self.children
 
         cms_apps = [a for a in apps if is_cms_app(a["name"])]
@@ -275,7 +275,7 @@ class CacheStatusGroup(modules.Group):
         """
         Initializes the status list.
         """
-        super(CacheStatusGroup, self).init_with_context(context)
+        super().init_with_context(context)
 
         if "dashboardmods" in settings.INSTALLED_APPS:
             import dashboardmods
@@ -284,10 +284,10 @@ class CacheStatusGroup(modules.Group):
 
             try:
                 varnish_mods = dashboardmods.get_varnish_dash_modules()
-            except (socket.error, KeyError) as e:
+            except (OSError, KeyError) as e:
                 # dashboardmods 2.2 throws KeyError for 'cache_misses' when the Varnish cache is empty.
                 # Socket errors are also ignored, to work similar to the memcache stats.
-                logger.exception("Unable to request Varnish stats: {0}".format(str(e)))
+                logger.exception(f"Unable to request Varnish stats: {str(e)}")
                 varnish_mods = []
             except ImportError:
                 varnish_mods = []

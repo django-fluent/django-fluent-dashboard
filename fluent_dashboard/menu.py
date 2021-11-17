@@ -32,7 +32,7 @@ class FluentMenu(Menu):
         site_name = get_admin_site_name(context)
 
         self.children += [
-            items.MenuItem(_("Dashboard"), reverse("{0}:index".format(site_name))),
+            items.MenuItem(_("Dashboard"), reverse(f"{site_name}:index")),
             items.Bookmarks(),
         ]
 

@@ -106,19 +106,19 @@ def get_class(import_path):
     try:
         dot = import_path.rindex(".")
     except ValueError:
-        raise ImproperlyConfigured("{0} isn't a Python path.".format(import_path))
+        raise ImproperlyConfigured(f"{import_path} isn't a Python path.")
 
     module, classname = import_path[:dot], import_path[dot + 1 :]
     try:
         mod = import_module(module)
     except ImportError as e:
         raise ImproperlyConfigured(
-            'Error importing module {0}: "{1}"'.format(module, e)
+            f'Error importing module {module}: "{e}"'
         )
 
     try:
         return getattr(mod, classname)
     except AttributeError:
         raise ImproperlyConfigured(
-            'Module "{0}" does not define a "{1}" class.'.format(module, classname)
+            f'Module "{module}" does not define a "{classname}" class.'
         )

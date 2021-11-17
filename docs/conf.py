@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # django-fluent-dashboard documentation build configuration file, created by
 # sphinx-quickstart on Tue Nov 15 18:45:19 2011.
@@ -48,8 +47,8 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = u"django-fluent-dashboard"
-copyright = u"2011-2013, Edoburu"
+project = "django-fluent-dashboard"
+copyright = "2011-2021, Edoburu"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -193,8 +192,8 @@ latex_documents = [
     (
         "index",
         "django-fluent-dashboard.tex",
-        u"django-fluent-dashboard Documentation",
-        u"Diederik van der Boor",
+        "django-fluent-dashboard Documentation",
+        "Diederik van der Boor",
         "manual",
     )
 ]
@@ -228,8 +227,8 @@ man_pages = [
     (
         "index",
         "django-fluent-dashboard",
-        u"django-fluent-dashboard Documentation",
-        [u"Diederik van der Boor"],
+        "django-fluent-dashboard Documentation",
+        ["Diederik van der Boor"],
         1,
     )
 ]
@@ -247,8 +246,8 @@ texinfo_documents = [
     (
         "index",
         "django-fluent-dashboard",
-        u"django-fluent-dashboard Documentation",
-        u"Diederik van der Boor",
+        "django-fluent-dashboard Documentation",
+        "Diederik van der Boor",
         "django-fluent-dashboard",
         "One line description of project.",
         "Miscellaneous",

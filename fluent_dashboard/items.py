@@ -86,7 +86,7 @@ class ReturnToSiteItem(items.MenuItem):
         It uses :func:`get_edited_object` to find the model,
         and calls ``get_absolute_url()`` to get the frontend URL.
         """
-        super(ReturnToSiteItem, self).init_with_context(context)
+        super().init_with_context(context)
 
         # See if the current page is being edited, update URL accordingly.
         edited_model = self.get_edited_object(context["request"])
