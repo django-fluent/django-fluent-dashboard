@@ -11,17 +11,16 @@ This package adds the following classes:
 import logging
 import socket
 
+from admin_tools.dashboard import modules
+from admin_tools.utils import get_admin_site_name
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from django.urls import reverse, NoReverseMatch
+from django.urls import NoReverseMatch, reverse
 from django.utils.translation import gettext_lazy as _
 
-from admin_tools.dashboard import modules
-from admin_tools.utils import get_admin_site_name
 from fluent_dashboard import appsettings
 from fluent_dashboard.appgroups import is_cms_app, sort_cms_models
-
 
 logger = logging.getLogger("fluent_dashboard.modules")
 
@@ -63,9 +62,7 @@ class PersonalModule(modules.LinkList):
         """
         super().init_with_context(context)
         current_user = context["request"].user
-        current_username = (
-            current_user.get_short_name() or current_user.get_username()
-        )
+        current_username = current_user.get_short_name() or current_user.get_username()
         site_name = get_admin_site_name(context)
 
         # Personalize
@@ -100,9 +97,7 @@ class PersonalModule(modules.LinkList):
                 # TODO: When there are modules that use Django 1.8's has_module_permission, add the support here.
                 permission_name = f"change_{model._meta.model_name.lower()}"
 
-                if current_user.has_perm(
-                    f"{model._meta.app_label}.{permission_name}"
-                ):
+                if current_user.has_perm(f"{model._meta.app_label}.{permission_name}"):
                     self.pages_title = pages_title
                     self.pages_link = pages_link
 

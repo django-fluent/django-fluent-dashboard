@@ -1,11 +1,11 @@
 """
 Custom menu for fluent_dashboard apps.
 """
-from django.utils.translation import gettext_lazy as _
-
 from admin_tools.menu import Menu, items
 from admin_tools.utils import get_admin_site_name
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+
 from fluent_dashboard.appgroups import get_application_groups
 from fluent_dashboard.items import CmsModelList, ReturnToSiteItem
 

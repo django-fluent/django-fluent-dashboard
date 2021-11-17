@@ -4,13 +4,13 @@ Additional menu items.
 import re
 
 import django
-from django.urls import NoReverseMatch, resolve
+from admin_tools.menu import items
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import capfirst
+from django.urls import NoReverseMatch, resolve
 from django.utils.translation import gettext_lazy as _
 
-from admin_tools.menu import items
 from fluent_dashboard.appgroups import sort_cms_models
 
 RE_CHANGE_URL = re.compile("(.+)_([^_]+)_change")
@@ -125,9 +125,7 @@ class ReturnToSiteItem(items.MenuItem):
                     return None
                 object_id = resolvermatch.args[0]
 
-            return self.get_object_by_natural_key(
-                match.group(1), match.group(2), object_id
-            )
+            return self.get_object_by_natural_key(match.group(1), match.group(2), object_id)
         return None
 
     def get_object_by_natural_key(self, app_label, model_name, object_id):

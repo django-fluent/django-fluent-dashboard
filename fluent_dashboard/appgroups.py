@@ -11,9 +11,7 @@ from future.utils import iteritems
 
 from fluent_dashboard import appsettings
 
-_groups = [
-    groupdict["models"] for _, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS
-]
+_groups = [groupdict["models"] for _, groupdict in appsettings.FLUENT_DASHBOARD_APP_GROUPS]
 
 ALL_KNOWN_APPS = list(itertools.chain(*_groups))
 if "*" in ALL_KNOWN_APPS:
@@ -43,9 +41,7 @@ def get_application_groups():
         # However, the 'models' is treated special, to have catch-all support.
         if "*" in groupdict["models"]:
             default_module = appsettings.FLUENT_DASHBOARD_DEFAULT_MODULE
-            module_kwargs["exclude"] = ALL_KNOWN_APPS + list(
-                module_kwargs.get("exclude", [])
-            )
+            module_kwargs["exclude"] = ALL_KNOWN_APPS + list(module_kwargs.get("exclude", []))
             del module_kwargs["models"]
         else:
             default_module = "CmsAppIconList"
@@ -66,9 +62,7 @@ def sort_cms_models(cms_models):
     """
     cms_models.sort(
         key=lambda model: (
-            get_cms_model_order(model["name"])
-            if is_cms_app(model["app_name"])
-            else 999,
+            get_cms_model_order(model["name"]) if is_cms_app(model["app_name"]) else 999,
             model["app_name"],
             model["title"],
         )
@@ -112,13 +106,9 @@ def get_class(import_path):
     try:
         mod = import_module(module)
     except ImportError as e:
-        raise ImproperlyConfigured(
-            f'Error importing module {module}: "{e}"'
-        )
+        raise ImproperlyConfigured(f'Error importing module {module}: "{e}"')
 
     try:
         return getattr(mod, classname)
     except AttributeError:
-        raise ImproperlyConfigured(
-            f'Module "{module}" does not define a "{classname}" class.'
-        )
+        raise ImproperlyConfigured(f'Module "{module}" does not define a "{classname}" class.')

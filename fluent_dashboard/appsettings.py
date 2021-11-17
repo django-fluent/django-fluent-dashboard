@@ -4,9 +4,7 @@ Overview of all settings which can be customized.
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
-FLUENT_DASHBOARD_ICON_THEME = getattr(
-    settings, "FLUENT_DASHBOARD_ICON_THEME", "flaticons"
-)
+FLUENT_DASHBOARD_ICON_THEME = getattr(settings, "FLUENT_DASHBOARD_ICON_THEME", "flaticons")
 
 # The icon names are somewhat Oxygen specific,
 # yet based on the Freedesktop Naming Naming Specification.
@@ -86,9 +84,7 @@ else:
         settings, "FLUENT_DASHBOARD_DEFAULT_ICON", "unknown.png"
     )
 
-FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(
-    settings, "FLUENT_DASHBOARD_CMS_PAGE_MODEL", None
-)
+FLUENT_DASHBOARD_CMS_PAGE_MODEL = getattr(settings, "FLUENT_DASHBOARD_CMS_PAGE_MODEL", None)
 
 FLUENT_DASHBOARD_CMS_APP_NAMES = getattr(
     settings,
@@ -136,9 +132,7 @@ FLUENT_DASHBOARD_APP_GROUPS = getattr(
             _("CMS"),
             {
                 # Mainly apps that produce an page + URL at the site.
-                "models": [
-                    f"{app}.*" for app in FLUENT_DASHBOARD_CMS_APP_NAMES
-                ],
+                "models": [f"{app}.*" for app in FLUENT_DASHBOARD_CMS_APP_NAMES],
                 "exclude": [
                     # Show in other sections:
                     "fluent_comments.*",

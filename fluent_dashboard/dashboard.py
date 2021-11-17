@@ -11,12 +11,12 @@ Off course, you can also extend the classes, and use those names in the settings
 """
 from distutils.version import LooseVersion
 
-from django.conf import settings
-from django.utils.translation import gettext_lazy as _
-
 import admin_tools
 from admin_tools.dashboard import AppIndexDashboard, Dashboard, modules
 from admin_tools.dashboard.modules import Group
+from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+
 from fluent_dashboard.appgroups import get_application_groups, get_class
 from fluent_dashboard.modules import CacheStatusGroup, PersonalModule
 
@@ -69,9 +69,7 @@ class FluentIndexDashboard(Dashboard):
         """
         Instantiate the :class:`~fluent_dashboard.modules.PersonalModule` for use in the dashboard.
         """
-        return PersonalModule(
-            layout="inline", draggable=False, deletable=False, collapsible=False
-        )
+        return PersonalModule(layout="inline", draggable=False, deletable=False, collapsible=False)
 
     def get_application_modules(self):
         """
@@ -94,9 +92,7 @@ class FluentIndexDashboard(Dashboard):
         """
         Instantiate the :class:`~admin_tools.dashboard.modules.RecentActions` module for use in the dashboard.
         """
-        return modules.RecentActions(
-            _("Recent Actions"), 5, enabled=False, collapsible=False
-        )
+        return modules.RecentActions(_("Recent Actions"), 5, enabled=False, collapsible=False)
 
     def get_cache_status_modules(self, request):
         """
