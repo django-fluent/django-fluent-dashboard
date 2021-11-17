@@ -5,13 +5,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from admin_tools.menu import Menu, items
 from admin_tools.utils import get_admin_site_name
+from django.urls import reverse
 from fluent_dashboard.appgroups import get_application_groups
 from fluent_dashboard.items import CmsModelList, ReturnToSiteItem
-
-try:
-    from django.urls import reverse  # Django 1.10+
-except ImportError:
-    from django.core.urlresolvers import reverse
 
 
 class FluentMenu(Menu):

@@ -4,6 +4,7 @@ Additional menu items.
 import re
 
 import django
+from django.urls import NoReverseMatch, resolve
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import capfirst
@@ -11,11 +12,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from admin_tools.menu import items
 from fluent_dashboard.appgroups import sort_cms_models
-
-try:
-    from django import urls  # Django 1.10+
-except ImportError:
-    from django.core import urlresolvers as urls
 
 RE_CHANGE_URL = re.compile("(.+)_([^_]+)_change")
 
@@ -97,7 +93,7 @@ class ReturnToSiteItem(items.MenuItem):
         if edited_model:
             try:
                 url = edited_model.get_absolute_url()
-            except (AttributeError, urls.NoReverseMatch) as e:
+            except (AttributeError, NoReverseMatch) as e:
                 pass
             else:
                 if url:
@@ -108,7 +104,7 @@ class ReturnToSiteItem(items.MenuItem):
         Return the object which is currently being edited.
         Returns ``None`` if the match could not be made.
         """
-        resolvermatch = urls.resolve(request.path_info)
+        resolvermatch = resolve(request.path_info)
         if (
             resolvermatch.namespace == "admin"
             and resolvermatch.url_name

@@ -11,10 +11,10 @@ This package adds the following classes:
 import logging
 import socket
 
-import django
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.urls import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
 
 from admin_tools.dashboard import modules
@@ -22,10 +22,6 @@ from admin_tools.utils import get_admin_site_name
 from fluent_dashboard import appsettings
 from fluent_dashboard.appgroups import is_cms_app, sort_cms_models
 
-try:
-    from django.urls import reverse, NoReverseMatch  # Django 1.10+
-except ImportError:
-    from django.core.urlresolvers import reverse, NoReverseMatch
 
 logger = logging.getLogger("fluent_dashboard.modules")
 
@@ -67,12 +63,9 @@ class PersonalModule(modules.LinkList):
         """
         super(PersonalModule, self).init_with_context(context)
         current_user = context["request"].user
-        if django.VERSION < (1, 5):
-            current_username = current_user.first_name or current_user.username
-        else:
-            current_username = (
-                current_user.get_short_name() or current_user.get_username()
-            )
+        current_username = (
+            current_user.get_short_name() or current_user.get_username()
+        )
         site_name = get_admin_site_name(context)
 
         # Personalize
