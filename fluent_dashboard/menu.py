@@ -1,7 +1,7 @@
 """
 Custom menu for fluent_dashboard apps.
 """
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from admin_tools.menu import Menu, items
 from admin_tools.utils import get_admin_site_name

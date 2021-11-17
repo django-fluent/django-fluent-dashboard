@@ -2,7 +2,7 @@
 Overview of all settings which can be customized.
 """
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 FLUENT_DASHBOARD_ICON_THEME = getattr(
     settings, "FLUENT_DASHBOARD_ICON_THEME", "flaticons"

@@ -12,7 +12,7 @@ Off course, you can also extend the classes, and use those names in the settings
 from distutils.version import LooseVersion
 
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 import admin_tools
 from admin_tools.dashboard import AppIndexDashboard, Dashboard, modules

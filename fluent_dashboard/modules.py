@@ -15,7 +15,7 @@ from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse, NoReverseMatch
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from admin_tools.dashboard import modules
 from admin_tools.utils import get_admin_site_name
