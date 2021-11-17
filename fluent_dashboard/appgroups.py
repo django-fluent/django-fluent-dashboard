@@ -7,7 +7,6 @@ from fnmatch import fnmatch
 from importlib import import_module
 
 from django.core.exceptions import ImproperlyConfigured
-from future.utils import iteritems
 
 from fluent_dashboard import appsettings
 
@@ -84,7 +83,7 @@ def get_cms_model_order(model_name):
     """
     Return a numeric ordering for a model name.
     """
-    for (name, order) in iteritems(appsettings.FLUENT_DASHBOARD_CMS_MODEL_ORDER):
+    for name, order in appsettings.FLUENT_DASHBOARD_CMS_MODEL_ORDER.items():
         if name in model_name:
             return order
     return 999
