@@ -38,7 +38,7 @@ setup(
     name="django-fluent-dashboard",
     version=find_version("fluent_dashboard", "__init__.py"),
     license="Apache 2.0",
-    install_requires=["django-admin-tools>=0.7.2"],
+    install_requires=["django-admin-tools>=0.9.1"],
     requires=["Django (>=1.7)"],
     extras_require={"cachestatus": ["dashboardmods>=0.2.2", "feedparser", "python-varnish"]},
     description="An improved django-admin-tools dashboard for Django projects",
