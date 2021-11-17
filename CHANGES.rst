@@ -1,6 +1,14 @@
 Changelog
 =========
 
+Changes in 2.0 (2021-11-17)
+---------------------------
+
+* Added Django 4.0 support.
+* Dropped Django 1.11 support.
+* Dropped Python 2.7 - 3.5 support.
+
+
 Changes in 1.0.1 (2019-07-15)
 -----------------------------
 
