@@ -1,5 +1,5 @@
 # for readthedocs
-Django==3.2.9
+Django==3.2.18
 django-admin-tools==0.9.1
 dashboardmods==1.0
 sphinxcontrib-django==0.5.1
